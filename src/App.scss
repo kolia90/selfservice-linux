@@ -1,0 +1,95 @@
+@font-face {
+  font-family: "MuseoSansCyrl";
+  src: url("../src/fonts/Museo/MuseoSansCyrl_100.otf");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "MuseoSansCyrl";
+  src: url("../src/fonts/Museo/MuseoSansCyrl_300.otf");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "MuseoSansCyrl";
+  src: url("../src/fonts/Museo/MuseoSansCyrl_500.otf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "MuseoSansCyrl";
+  src: url("../src/fonts/Museo/MuseoSansCyrl_700.otf");
+  font-weight: 700;
+}
+
+* {
+  font-family: "MuseoSansCyrl";
+}
+
+body {
+  position: relative;
+  height: 100vh;
+  background-color: #fff;
+  overflow-y: hidden;
+  margin: 0;
+  user-select: none;
+}
+
+h2 {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+  color: #000;
+}
+
+h3 {
+  margin-top: 73px;
+  height: 54px;
+  font-size: 45px;
+  font-weight: 300;
+  text-align: center;
+  color: #4a4a4a;
+}
+
+p {
+  font-size: 24px;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: white;
+  opacity: 0.75;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.float-l {
+  float: left;
+}
+
+.float-r {
+  float: right;
+}
+
+.d-inline {
+  display: inline;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+@media screen and (max-width:1900px) {
+  h3 {
+    margin-top: 30px;
+    font-size: 32px;
+  }
+}

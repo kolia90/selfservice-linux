@@ -1,0 +1,150 @@
+.order-block {
+  width: 630px;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 30px 30px 30px 40px;
+  margin: 0 auto;
+
+  .order-number {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #4a4a4a;
+  }
+
+  .wrapper-order-total {
+    height: 29px;
+    margin-top: 20px;
+    margin-bottom: 19px;
+  }
+
+  .wrapper-order-status {
+    margin-top: 20px;
+
+    .status {
+      margin-top: 19px;
+    }
+  }
+
+  .order-status,
+  .order-payment-status {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: #00d26a;
+  }
+
+  .separator {
+    width: 630px;
+    height: 2px;
+    background-color: #ededed;
+    margin-left: -40px;
+    padding-right: 70px;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 40px;
+    border-collapse: collapse;
+
+    thead {
+      width: 79px;
+      height: 24px;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.33px;
+      color: #9b9b9b;
+    }
+
+    tbody {
+      border-top: 15px solid white;
+      border-bottom: 95px solid white;
+    }
+    tr {
+      vertical-align: top;
+    }
+    .description {
+      letter-spacing: -0.33px;
+      color: #9b9b9b;
+      font-size: 20px;
+      font-weight: 300;
+    }
+    .additionally {
+      letter-spacing: -0.33px;
+      color: #4a4a4a;
+      font-size: 18px;
+      font-weight: 300;
+    }
+  }
+
+  .primary {
+    height: 29px;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -0.4px;
+    color: #4a4a4a;
+
+    .single,
+    .description,
+    .additionally {
+      width: 190px;
+      padding-bottom: 10px;
+    }
+  }
+
+  .bold {
+    font-weight: 700;
+  }
+
+  .text-aling {
+    &-l {
+      text-align: left;
+    }
+    &-c {
+      text-align: center;
+    }
+    &-r {
+      text-align: right;
+    }
+  }
+}
+@media screen and (max-width:1900px) {
+  .order-block {
+    width: 416px;
+    padding: 30px 48px 20px 48px;
+    .wrapper-order-total {
+      height: 22px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    .primary {
+      font-size: 18px;
+
+    }
+    .order-number {
+      font-size: 20px;
+    }
+    .order-status,
+    .order-payment-status {
+      font-size: 18px;
+    }
+    table {
+      margin-top: 30px;
+      thead {
+        font-size: 14px;
+      }
+      .description {
+        font-size: 14px;
+      }
+      tbody {
+        border-top: 0;
+        border-bottom: 0;
+      }
+    }
+    .separator {
+      width: 443px;
+      margin-left: -48px;
+    }
+  }
+}

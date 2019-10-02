@@ -1,0 +1,130 @@
+.single-wrapper {
+  margin: 0 80px 40px 80px;
+
+  img {
+    display: inline-block;
+    width: 144px;
+    height: 144px;
+    margin-right: 32px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, 0.07);
+    background-color: #ffffff;
+  }
+
+  hr {
+    margin: 0 0 45px 0;
+    height: 2px;
+    border: none;
+    background-color: #f2f2f2;
+  }
+
+  h3 {
+    display: inline-block;
+    font-size: 29px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    color: #4a4a4a;
+    vertical-align: top;
+    margin: 0;
+    height: unset;
+    padding-bottom: 13px;
+  }
+
+  span {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: -0.33px;
+    color: #929292;
+  }
+
+  .description {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .single-price {
+    font-size: 29px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    color: #4a4a4a;
+    padding-bottom: 16px;
+  }
+
+  .setting {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 150px;
+    text-align: center;
+
+    img {
+      margin: 0;
+      box-shadow: unset;
+      width: 80px;
+      height: 160px;
+    }
+
+    h3 {
+      display: block;
+      padding-bottom: 25px;
+    }
+
+    .price {
+      line-height: normal;
+      letter-spacing: 0.4px;
+      color: #00d26a;
+      font-size: 28px;
+      font-weight: bold;
+      padding-top: 20px;
+    }
+
+    .counter {
+      display: inline-block;
+      text-align: center;
+      box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+      border-radius: 40px;
+      font-size: 29px;
+      font-weight: bold;
+      padding: 20px;
+
+      span {
+        font-size: 29px;
+        font-weight: bold;
+        color: #4a4a4a;
+        padding: 0 8px;
+      }
+    }
+
+    .minus,
+    .plus {
+      display: inline-block;
+      opacity: 0.5;
+      font-weight: 100;
+      vertical-align: middle;
+
+      img {
+        width: 70px;
+        height: unset;
+      }
+    }
+  }
+}
+@media screen and (max-width:1900px) {
+  .single-wrapper {
+    margin: 0 48px 32px 48px;
+    hr {
+      margin: 0 0 32px 0;
+    }
+    h3 {
+      font-size: 26px;
+    }
+    .single-price {
+      font-size: 26px;
+    }
+    .setting {
+      padding-left: 80px;
+    }
+  }
+}

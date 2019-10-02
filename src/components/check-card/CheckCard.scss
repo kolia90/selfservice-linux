@@ -1,0 +1,45 @@
+.wrapper-check-card {
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  padding-top: 115px;
+
+  h1 {
+    margin-bottom: 60px;
+    font-weight: 700;
+  }
+
+  .img-1 {
+    margin-top: 117px;
+    padding-bottom: 32px;
+  }
+
+  .img-2 {
+    margin-top: 117px;
+    padding-bottom: 16px;
+  }
+
+  .button {
+    height: 20px;
+  }
+
+  .rectangle{
+    margin: 0!important;
+  }
+}
+
+@media screen and (max-width:1900px) {
+  .wrapper-check-card {
+    padding-top: 32px;
+
+    h1 {
+      margin-bottom: 48px;
+      height: auto;
+    }
+
+    .d-inline{
+      padding: 0 45px;
+    }
+  }
+}
+

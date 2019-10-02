@@ -1,0 +1,17 @@
+{
+  "HOME": "/",
+  "CHECK_CARD": "/check-card",
+  "SCAN": "/scan",
+  "REGISTER_CARD": "/register-card",
+  "REGISTER_CARD_FINISH": "/register-card-finish",
+  "OFFER_CARD": "/offer-card",
+  "SERVICE": "/service",
+  "FUEL_PURCHASE": "/fuel-purchase",
+  "CATALOG": "/catalog",
+  "PRODUCT": "/product/:id",
+  "SELECT_PAYMENT": "/select-payment",
+  "TYPE_PAYMENT": "/type-payment",
+  "BASKET": "/basket",
+  "PAYMENT_CHECK_CATALOG": "/payment-check-catalog",
+  "PAYMENT_CASH": "/payment-cash"
+}

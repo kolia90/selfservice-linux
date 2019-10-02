@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="108" height="131" viewBox="0 0 108 131">
+    <g fill="none" fill-rule="evenodd">
+        <path stroke="#424242" stroke-linecap="round" stroke-width="2" d="M9.5 13C15.299 13 20 17.75 20 23.61V73"/>
+        <path stroke="#424242" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 13h76.022C92.622 13 98 19.364 98 27.228v102.72H20.005V70.977"/>
+        <path fill="#4A4A4A" fill-rule="nonzero" d="M55.265 83.695l-.211-2.963V63.695h2.374v20h-2.163zm5.98 0l-.229-2.926V63.695h2.392v20h-2.163zm4.766-2.722c-8.618 0-9.374-10.963-14.88-10.963-1-.055-1.976.343-2.681 1.092a3.816 3.816 0 0 0-1.012 2.834c.035 2.068 1.06 3.978 2.726 5.074l-2.515 2.148c-2.367-1.64-3.794-4.423-3.799-7.407-.117-2.1.619-4.153 2.025-5.648 1.406-1.494 3.349-2.289 5.344-2.185 7.933 0 8.795 10.962 15.003 10.962 1.144.06 2.254-.418 3.029-1.305a4.197 4.197 0 0 0 .981-3.287c-.162-2.442-1.292-4.7-3.113-6.222l2.955-1.852c2.284 2.017 3.651 4.956 3.764 8.092 0 5.39-2.955 8.741-7.827 8.741v-.074z"/>
+        <path stroke="#4A4A4A" stroke-linecap="round" stroke-width="2" d="M51.838 101.695v-7"/>
+        <path stroke="#4A4A4A" stroke-linecap="round" d="M59.838 101.695v-7"/>
+        <path stroke="#4A4A4A" stroke-linecap="round" stroke-width="2" d="M51.838 55.695v-7"/>
+        <path stroke="#4A4A4A" stroke-linecap="round" d="M59.838 55.695v-7"/>
+        <path stroke="#424242" stroke-linecap="round" stroke-width="3" d="M19.653 24.017H9.108a7.26 7.26 0 0 1-7.26-7.39V9.108a7.279 7.279 0 0 1 7.26-7.26h89.25a7.279 7.279 0 0 1 7.261 7.26v7.52a7.26 7.26 0 0 1-7.26 7.389"/>
+    </g>
+</svg>

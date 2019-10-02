@@ -1,0 +1,26 @@
+.bg {
+  width: 384px;
+  background-image: linear-gradient(to right, #efefef, #f9f9f9);
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+
+  div {
+    margin: 30px auto 0;
+  }
+
+  h2 {
+    padding-top: 30px;
+  }
+}
+@media screen and (max-width:1900px) {
+  .bg {
+    width: 240px;
+    h2 {
+      font-size: 22px;
+    }
+    div {
+      margin: 16px auto 0;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+.wrapper-payment-cash {
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  padding-top: 115px;
+
+  h1 {
+    margin: 0px auto 90px;
+    width: 100%;
+    height: 100%;
+    font-size: 45px;
+    font-weight: 500;
+    color: #4a4a4a;
+  }
+
+  h3 {
+    margin: 0 auto;
+    width: 201px;
+    height: 108px;
+    font-weight: 500;
+  }
+
+  .img-card {
+    margin-top: 117px;
+    padding-bottom: 32px;
+  }
+
+  .img-cash {
+    margin-top: 117px;
+    padding-bottom: 16px;
+  }
+
+  .button {
+    height: 20;
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-payment-cash {
+    padding-top: 32px;
+    h1 {
+      font-size: 32px;
+      margin: 0px auto 48px;
+    }
+  }
+}

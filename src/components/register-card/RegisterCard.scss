@@ -1,0 +1,111 @@
+.wrapper-register {
+  .wrapper-form {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+
+    h1 {
+      margin: 0 auto 60px;
+      width: 599px;
+      height: 108px;
+      font-size: 45px;
+      font-weight: 500;
+      color: #4a4a4a;
+    }
+
+    h2 {
+      padding-top: 115px;
+    }
+
+    h3 {
+      margin-top: 196px;
+      height: 54px;
+      font-size: 45px;
+      font-weight: 300;
+      text-align: center;
+      color: #4a4a4a;
+    }
+
+    .wrapper-input-phone {
+      resize: both;
+      overflow: auto;
+      height: 56px;
+      margin-top: 30px;
+
+      span {
+        height: 56px;
+        font-size: 45px;
+        font-weight: bold;
+        letter-spacing: 0.62px;
+        text-align: center;
+        color: #e6e6e6;
+        padding-right: 5px;
+      }
+
+      input {
+        height: 56px;
+        font-size: 45px;
+        font-weight: bold;
+        letter-spacing: 0.74px;
+        text-align: center;
+        color: #4a4a4a;
+      }
+    }
+
+    .wrapper-input-password {
+      margin-top: 30px;
+
+      input {
+        width: 100%;
+        letter-spacing: 58px;
+      }
+    }
+
+    input {
+      padding: 0;
+      outline: none;
+      border: none;
+      width: auto;
+      height: 56px;
+      font-size: 45px;
+      font-weight: bold;
+      letter-spacing: 0.62px;
+      text-align: center;
+      color: #4a4a4a;
+      @media screen and (max-width: 1900px) {
+        font-size: 40px;
+        height: 48px;
+      }
+
+      &:active {
+        width: 1px;
+      }
+    }
+  }
+
+  .button {
+    height: 20;
+  }
+
+  .wrapper-button {
+    margin-top: 117px;
+    text-align: center;
+  }
+
+  .wrapper-keyboard {
+    margin: 30px 19px 0;
+  }
+}
+@media screen and (max-width: 1900px) {
+  .wrapper-register {
+    .wrapper-form {
+      h2 {
+        padding-top: 32px;
+      }
+    }
+    .wrapper-button {
+      margin-top: 40px;
+    }
+  }
+}

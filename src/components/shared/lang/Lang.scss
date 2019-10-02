@@ -1,0 +1,22 @@
+.wrapper-lang {
+  .lang {
+    display: inline-block;
+    margin-left: 60px;
+    letter-spacing: 0.33px;
+    color: #e6e6e6;
+    padding-top: 49px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .active {
+    color: #4a4a4a;
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-lang {
+    .lang {
+      padding-top: 31px;
+    }
+  }
+}

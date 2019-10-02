@@ -1,0 +1,34 @@
+.wrapper-screen-7 {
+  h1 {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  h2 {
+    height: 100%;
+  }
+
+  .wrapper-buttons {
+    position: absolute;
+    bottom: 30px;
+    left: 310px;
+
+    button:first-of-type {
+      margin-right: 60px;
+    }
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-screen-7 {
+    h1, h2 {
+      font-size: 24px;
+      height: auto;
+    }
+    h1 {
+      margin-bottom: 57px;
+    }
+    .wrapper-buttons {
+      left: 133px;
+    }
+  }
+}

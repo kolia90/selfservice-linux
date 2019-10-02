@@ -1,0 +1,31 @@
+.wrapper-payment-check {
+  h2 {
+    width: 892px;
+    font-weight: 300;
+    color: #c1c1c1;
+  }
+
+  .wrapper-order {
+    margin-top: 49px;
+  }
+
+  .wrapper-buttons {
+    position: absolute;
+    bottom: 30px;
+    left: 310px;
+
+    button:first-of-type {
+      margin-right: 60px;
+    }
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-payment-check {
+    h2 {
+      font-size: 24px;
+    }
+    .wrapper-buttons {
+      left: 133px;
+    }
+  }
+}

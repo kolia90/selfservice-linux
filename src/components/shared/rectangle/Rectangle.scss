@@ -1,0 +1,21 @@
+.rectangle {
+  display: inline-block;
+  width: 50%;
+  max-width: 720px;
+  height: 450px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.05);
+  border: solid 1px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  margin: 0 45px;
+
+  &:active {
+    box-shadow: none;
+  }
+}
+@media screen and (max-width:1900px) {
+  .rectangle {
+    max-width: 550px;
+    height: 390px;
+  }
+}

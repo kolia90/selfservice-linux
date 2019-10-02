@@ -1,0 +1,123 @@
+.wrapper-card-item {
+  display: inline-block;
+
+  .rectangle {
+    border: none;
+    position: relative;
+    margin: 45px;
+    width: 630px;
+    height: 228px;
+    border-radius: 25px;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+
+    img {
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      padding: 10px;
+      width: 160px;
+      height: 160px;
+      border-radius: 20.1px;
+      box-shadow: 4px 4px 12px 0 rgba(0, 0, 0, 0.07);
+      background-color: #ffffff;
+    }
+
+    button {
+      width: max-content;
+      font-family: "MuseoSansCyrl";
+      height: auto;
+      position: absolute;
+      padding: 28px 60px;
+      border-radius: 40px;
+      bottom: 27px;
+      left: 450px;
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  .description {
+    position: absolute;
+    left: 195px;
+    top: 45px;
+    width: 371px;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 0.41px;
+    color: #4a4a4a;
+
+    div {
+      padding-top: 30px;
+      letter-spacing: normal;
+      color: #00d26a;
+      font-weight: bold;
+    }
+  }
+
+  .next {
+    position: absolute;
+    top: 26px;
+    left: 590px;
+    border-radius: 40px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+
+    img {
+      width: 13px;
+      transform: rotate(-180deg);
+      height: 22px;
+      position: unset;
+      top: -15px;
+      left: -15px;
+      opacity: 0.5;
+      padding: 29px;
+      border-radius: 20.1px;
+      box-shadow: unset;
+      background-color: #ffffff;
+    }
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-card-item {
+    .rectangle{
+      width: 464px;
+      height: 166px;
+      img {
+        width: 116px;
+        height: 116px;
+      }
+      button {
+        left: 342px;
+        bottom: 20px;
+        padding: 20px 40px;
+        font-size: 16px;
+      }
+    }
+    .description {
+      top: 24px;
+      font-size: 22px;
+      width: 270px;
+      left: 144px;
+      div {
+        padding-top: 24px;
+      }
+    }
+    .next {
+      left: 439px;
+      top: 12px;
+      width: 63px;
+      height: 63px;
+      img {
+        width: 10px;
+        height: unset;
+        padding: unset;
+        margin: 23px;
+      }
+    }
+  }
+}

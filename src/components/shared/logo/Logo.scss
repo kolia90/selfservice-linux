@@ -1,0 +1,14 @@
+.wrapper-logo {
+  width: 100%;
+  height: 56px;
+  margin-top: 31px;
+
+  .img-logo {
+    height: 100%;
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-logo {
+    margin-top: 17px;
+  }
+}

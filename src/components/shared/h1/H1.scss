@@ -1,0 +1,14 @@
+h1 {
+  margin: 0 auto 60px;
+  width: 599px;
+  height: 108px;
+  font-size: 45px;
+  font-weight: 500;
+  color: #4a4a4a;
+}
+@media screen and (max-width:1900px) {
+  h1 {
+    font-size: 32px;
+    margin: 0 auto;
+  }
+}

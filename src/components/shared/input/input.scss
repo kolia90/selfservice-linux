@@ -1,0 +1,26 @@
+.wrapper-input {
+  text-align: center;
+  margin-top: 78px;
+
+  .input {
+    border: none;
+    height: 54px;
+    font-size: 45px;
+    font-weight: bold;
+    letter-spacing: 0.62px;
+    text-align: center;
+    color: #4a4a4a;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-input {
+    margin-top: 40px;
+    .input {
+      height: 45px;
+    }
+  }
+}

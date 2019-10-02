@@ -1,0 +1,41 @@
+.wrapper-offer-card {
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  padding-top: 115px;
+
+  h1 {
+    margin: 0 auto 60px;
+    width: 599px;
+    height: 108px;
+    font-weight: 700;
+    color: #4a4a4a;
+  }
+
+  h3 {
+    margin-top: 196px;
+    height: 54px;
+    font-size: 45px;
+    font-weight: 300;
+    text-align: center;
+    color: #4a4a4a;
+  }
+
+  .button {
+    height: 20;
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-offer-card {
+    padding-top: 32px;
+    h1 {
+      width: 1000px;
+      height: unset;
+      padding-bottom: 48px;
+      margin: 0 auto;
+    }
+    h3 {
+      margin-top: 168px;
+    }
+  }
+}

@@ -1,0 +1,114 @@
+.wrapper-slick-slider {
+  margin: 251px auto 0;
+
+  .slider {
+    background: repeating-linear-gradient(
+        90deg,
+        #777,
+        #777 1px,
+        transparent 1px,
+        transparent 100px
+      )
+      no-repeat 50% 50%;
+    background-position-x: -1px;
+    background-size: 1000px 30px;
+    -webkit-appearance: none;
+    width: 1000px;
+    outline: none;
+    padding: 0;
+    border: none;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 90px;
+    height: 90px;
+    margin-right: -90px;
+    background-image: url("../../images/fuel-purchase/group.png");
+    cursor: pointer;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 90px;
+    height: 90px;
+    background-image: url("../../images/fuel-purchase/group.svg");
+    cursor: pointer;
+  }
+
+  .BrainhubCarousel__trackContainer {
+    margin: 0 auto;
+    width: 710px;
+  }
+
+  li.BrainhubCarouselItem--active {
+    width: 220px !important;
+    height: 220px !important;
+    border: solid 0.7px #c1c1c1;
+    border-radius: 50%;
+
+    .item {
+      width: 100% !important;
+      height: 100% !important;
+      border: none;
+
+      .h3 {
+        margin: 54px auto 0;
+        width: 71px;
+        height: 144px;
+        font-size: 96px;
+        font-weight: bold;
+        letter-spacing: 1.66px;
+        text-align: center;
+        color: #000000;
+        opacity: 1;
+      }
+    }
+  }
+
+  .BrainhubCarouselItem {
+    .item {
+      width: 143.3px !important;
+      height: 143.3px !important;
+      border: solid 0.7px #c1c1c1;
+      border-radius: 50%;
+
+      .h3 {
+        margin: 39px auto 0;
+        width: 41px;
+        height: 65px;
+        opacity: 0.5;
+        font-size: 56px;
+        font-weight: bold;
+        letter-spacing: 0.97px;
+        text-align: center;
+        color: #4a4a4a;
+      }
+    }
+  }
+
+  .BrainhubCarousel__arrows {
+    background: #fff;
+  }
+
+  .BrainhubCarousel {
+    width: 760px;
+    margin: 0 auto;
+
+    .arrow-left {
+      width: 27px;
+      height: 44px;
+    }
+
+    .arrow-right {
+      width: 27px;
+      height: 44px;
+      transform: rotate(-180deg);
+    }
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-slick-slider {
+    margin: 96px auto 0;
+  }
+}

@@ -1,0 +1,145 @@
+.wrapper-register-finish {
+  width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 50px;
+
+  .level-card {
+    width: 543.9px;
+    height: 284.7px;
+    border-radius: 20px;
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 29.7px 39.5px;
+    box-shadow: 0 15px 22px 0 rgba(0, 0, 0, 0.1);
+
+    .wrapper-header {
+      height: 48px;
+      @media screen and (max-width:1900px) {
+        height: 29px;
+      }
+      .name {
+        font-size: 23.7px;
+        font-weight: 300;
+        letter-spacing: 4.45px;
+        color: #4a4a4a;
+        @media screen and (max-width:1900px) {
+          font-size: 18px;
+        }
+      }
+
+      .wrapper-logo {
+        margin-top: 0;
+
+        .img-logo {
+          height: 48px;
+          @media screen and (max-width:1900px) {
+            height: 35px;
+          }
+        }
+      }
+    }
+
+    .barcode {
+      margin-top: 49.1px;
+      text-align: left;
+      @media screen and (max-width:1900px) {
+        margin-top: 8px;
+        img{
+          width: 270px;
+          border-radius: 5px;
+          box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.1);
+          background-color: #ffffff;
+          padding: 10px 20px;
+          float: left;
+        }
+      }
+    }
+
+    .number {
+      height: 28px;
+      font-size: 23.7px;
+      font-weight: 100;
+      letter-spacing: -0.4px;
+      text-align: left;
+      color: #4a4a4a;
+    }
+
+    .wrapper-balance {
+      margin-top: 55.4px;
+      text-align: left;
+      @media screen and (max-width:1900px) {
+        margin-top: 90px;
+      }
+
+      .balance {
+        font-size: 23.7px;
+        font-weight: 300;
+        letter-spacing: -0.4px;
+        color: #929292;
+        display: inline;
+
+        span {
+          font-size: 39.5px;
+          height: 47px;
+          font-weight: 500;
+          letter-spacing: -0.49px;
+          color: #4a4a4a;
+          @media screen and (max-width:1900px) {
+            font-size: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  h2 {
+    margin-top: 65.9px;
+    width: 991px;
+    height: 120px;
+    font-size: 45px;
+    font-weight: 300;
+    line-height: 1.33;
+    letter-spacing: 0.62px;
+    text-align: center;
+    color: #4a4a4a;
+    @media screen and (max-width:1900px) {
+      margin-top: 48px;
+      height: 76px;
+      font-size: 32px;
+      font-weight: 300;
+      line-height: 1.33;
+      letter-spacing: 0.62px;
+      text-align: center;
+      color: #929292;
+      width: 725px;
+    }
+  }
+
+  .wrapper-mobile-app {
+    margin-top: 62px;
+    margin-bottom: 69.5px;
+    height: 110px;
+    @media screen and (max-width:1900px) {
+      margin: 48px auto 31px;
+      height: 78px;
+      width: 740px;
+    }
+
+    img {
+      height: 108.6px;
+      @media screen and (max-width:1900px) {
+        height: 78px;
+      }
+    }
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-register-finish {
+    .level-card {
+      width: 536px;
+      height: 186px;
+      padding: 24px 32px;
+    }
+  }
+}

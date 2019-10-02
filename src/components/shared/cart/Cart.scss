@@ -1,0 +1,30 @@
+.cart-wrapper {
+  img {
+    width: 9px;
+    display: inline-block;
+    margin-right: 17px;
+    transform: rotate(-90deg);
+  }
+  h1 {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.33px;
+    color: #4a4a4a;
+    width: unset;
+    height: unset;
+    padding-top: 53px;
+    margin: 0;
+    span {
+      font-weight: 500;
+    }
+  }
+}
+@media screen and (max-width:1900px) {
+  .cart-wrapper{
+    h1 {
+      padding-top: 30px;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.menu-item {
+  width: 224px;
+  height: 224px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+
+  img {
+    width: 124px;
+    padding-top: 17px;
+    height: unset;
+  }
+
+  h2 {
+    width: unset;
+    padding-top: 30px;
+  }
+
+  span {
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: -0.33px;
+    color: #929292;
+  }
+}
+@media screen and (max-width:1900px) {
+  .menu-item {
+    width: 160px;
+    height: 160px;
+    img {
+      width: unset;
+      height: 80px;
+      padding-top: 10px;
+    }
+    h2 {
+      padding-top: 0;
+      font-size: 22px;
+    }
+    span {
+      font-size: 15px;
+    }
+  }
+}

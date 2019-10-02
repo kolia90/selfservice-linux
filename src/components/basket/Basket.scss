@@ -1,0 +1,14 @@
+.wrapper-basket {
+  .to-cart {
+    position: absolute;
+    left: 660px;
+    bottom: 30px;
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-basket {
+    .to-cart {
+      left: 423px;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.wrapper-catalog {
+  display: inline-block;
+  position: absolute;
+
+  .catalog {
+    display: inline-block;
+    width: 1440px;
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-catalog {
+    .catalog {
+      width: 1110px;
+    }
+  }
+}
