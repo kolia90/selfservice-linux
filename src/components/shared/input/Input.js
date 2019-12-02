@@ -5,7 +5,7 @@ const Input = ({ handleChange, value, type = "text", placeholder = "" }) => {
   return (
     <div className="wrapper-input">
       <input
-        autofocus
+        autoFocus
         className="input"
         type={type}
         onChange={handleChange}

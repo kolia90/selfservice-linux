@@ -1,28 +1,47 @@
 {
   "name": "socar-selfservice",
+  "description": "Socar selfservice application",
   "version": "0.1.0",
   "private": true,
-  "main": "main.js",
+  "main": "public/electron.js",
   "homepage": "./",
   "dependencies": {
+    "axios": "^0.19.0",
+    "bwip-js": "^1.7.3",
+    "dotenv": "^8.1.0",
     "electron-is-dev": "^1.1.0",
+    "electron-log": "^3.0.9",
+    "electron-updater": "^4.2.0",
+    "format-string-by-pattern": "^1.1.1",
+    "luxon": "^1.19.3",
     "query-string": "^6.8.2",
     "react": "^16.8.6",
+    "react-confirm-alert": "^2.4.1",
     "react-dom": "^16.8.6",
+    "react-loader-spinner": "^3.1.4",
+    "react-redux": "^7.1.1",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "react-simple-keyboard": "^1.24.2",
-    "styled-components": "^4.3.2"
+    "react-simple-keyboard": "1.26.0",
+    "react-spring": "^8.0.27",
+    "redux": "^4.0.4",
+    "styled-components": "^4.3.2",
+    "toasted-notes": "^3.0.0",
+    "ws": "^7.2.0",
+    "yargs": "^15.0.1"
   },
   "scripts": {
     "start": "rescripts start",
     "build": "rescripts build",
     "test": "rescripts test",
+    "server": "node server/app.js",
+    "web-dev": "concurrently \"yarn start --web\" \"node server/app.js\"",
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "preelectron-pack": "yarn build",
-    "electron-pack": "build -mw"
+    "electron-pack": "electron-builder",
+    "publish-app": "electron-builder -p always"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -54,8 +73,7 @@
     "style-loader": "^0.23.1",
     "typescript": "^3.6.3",
     "url-loader": "^2.0.1",
-    "wait-on": "^3.3.0",
-    "yargs": "^14.0.0"
+    "wait-on": "^3.3.0"
   },
   "author": {
     "name": "TMA Dev",
@@ -68,10 +86,19 @@
     "copyright": "Copyright © 2019 ${author}",
     "files": [
       "build/**/*",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      "server/**/*",
+      "src/settings/**/*"
     ],
     "directories": {
       "buildResources": "assets"
-    }
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "gasique",
+        "repo": "SelfService"
+      }
+    ]
   }
 }

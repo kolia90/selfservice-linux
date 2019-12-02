@@ -7,7 +7,7 @@ import routes from "../../constants/routes";
 
 const FuelPurchaseScreen3 = ({ history, setScreen }) => {
   return (
-    <>
+    <div className="wrapper-screen-3">
       <div className="wrapper-type-payment">
         <H1 text="Выберите формат оплаты" />
         <div>
@@ -49,7 +49,7 @@ const FuelPurchaseScreen3 = ({ history, setScreen }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -16,7 +16,7 @@ const OfferCard = ({ history }) => {
           <div
             className="d-inline"
             onClick={() => {
-              history.push(`${routes.REGISTER_CARD}`);
+              history.push(`${routes.REGISTER_PHONE}`);
             }}
           >
             <Rectangle>

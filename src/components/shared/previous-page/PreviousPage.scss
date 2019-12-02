@@ -1,8 +1,14 @@
 .wrapper-previous-icon {
-  margin-top: 48px;
+  margin-top: 28px;
+
+  img.previous{
+    padding: 20px;
+    margin-left: -20px;
+  }
 }
+
 @media screen and (max-width:1900px) {
   .wrapper-previous-icon {
-    margin-top: 30px;
+    margin-top: 10px;
   }
 }

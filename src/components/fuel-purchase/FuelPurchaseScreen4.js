@@ -6,7 +6,7 @@ import "./FuelPurchaseScreen4.scss";
 
 const FuelPurchaseScreen4 = ({ setScreen, screen, setShowModal }) => {
   return (
-    <>
+    <div className="wrapper-screen-4">
       <H2 text="Выберите параметр топливо/сумма и потяните ползунок до необходимых значений" />
 
       <div className="wrapper-img">
@@ -36,7 +36,7 @@ const FuelPurchaseScreen4 = ({ setScreen, screen, setShowModal }) => {
           onClick={() => setShowModal(true)}
         />
       </div>
-    </>
+    </div>
   );
 };
 

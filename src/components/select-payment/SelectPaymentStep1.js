@@ -3,15 +3,83 @@ import styles from "./SelectPaymentStep1.module.scss";
 import PaymentLevel from "./PaymentLevel";
 import PaymentVisa from "./PaymentVisa";
 import PaymentMastercard from "./PaymentMastercard";
+import {connect} from "react-redux";
+import {withRouter} from "react-router";
+import APIService from "../../services/APIService";
 
-const SelectPaymentStep1 = ({ onSelectPayment }) => {
-  return (
-    <div className="container">
-      <PaymentLevel styles={styles} onSelectPayment={onSelectPayment} />
-      <PaymentMastercard styles={styles} onSelectPayment={onSelectPayment} />
-      <PaymentVisa styles={styles} onSelectPayment={onSelectPayment} />
-    </div>
-  );
-};
 
-export default SelectPaymentStep1;
+class SelectPaymentStep1 extends React.Component{
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      level: null,
+      cards: [],
+    }
+  }
+
+  componentDidMount() {
+    APIService.getLevel(this.props.auth_token, {
+      onSuccess: (response) => {
+        this.setState({
+          level: {
+            number: response.data.number,
+            balance: response.data.balance,
+          }
+        })
+      }
+    });
+
+    APIService.getCards(this.props.auth_token, {
+      onSuccess: (response) => {
+        this.setState({
+          cards: response.data.results || []
+        })
+      }
+    })
+  }
+
+  onSelectLevel = (type) => {
+    this.props.onSelectPayment(type, this.state.level.number, this.state.level.balance)
+  };
+
+  onSelectCard = (type, number, id) => {
+    this.props.onSelectPayment(type, number, null, id)
+  };
+
+  toNumber = (card_pan) => {
+    const lastNumbers = card_pan.slice(-4);
+    return `**** **** **** ${lastNumbers}`
+  };
+
+  render(){
+    return (
+      <div className="container">
+        {this.state.level && (
+          <PaymentLevel styles={styles} onSelect={this.onSelectLevel} balance={this.state.level.balance} />
+        )}
+        {this.state.cards.map(i => {
+          return (
+            <div key={i.id}>
+              {(i.card_type === 'visa') ? (
+                <PaymentVisa styles={styles} onSelect={(type, number) => this.onSelectCard(type, number, i)} number={this.toNumber(i.card_pan)} />
+              ) : (
+                <PaymentMastercard styles={styles} onSelect={(type, number) => this.onSelectCard(type, number, i)} number={this.toNumber(i.card_pan)} />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  // auth_token: state.tokenState,
+  auth_token: '5bc8045e4910cceaf1803923f8d2d47ccaaf06f9',
+});
+
+export default connect(
+    mapStateToProps,
+)(withRouter(SelectPaymentStep1))

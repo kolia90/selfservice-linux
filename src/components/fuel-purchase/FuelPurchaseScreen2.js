@@ -6,7 +6,7 @@ import "./FuelPurchaseScreen2.scss";
 
 const FuelPurchaseScreen2 = ({ setScreen, screen }) => {
   return (
-    <>
+    <div className="wrapper-screen-2">
       <div className="wrapper-img">
         <img src={require("../../images/fuel-purchase/image-2.png")} alt="" />
       </div>
@@ -18,7 +18,7 @@ const FuelPurchaseScreen2 = ({ setScreen, screen }) => {
       <div className="wrapper-button">
         <Button title="Далее" onClick={() => setScreen(screen + 1)} />
       </div>
-    </>
+    </div>
   );
 };
 

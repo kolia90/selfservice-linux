@@ -10,7 +10,7 @@ const FuelPurchaseScreen5 = ({ setScreen, screen, setShowModal }) => {
   const [activeTab, setActiveTab] = useState(1);
 
   return (
-    <>
+    <div className="wrapper-screen-5">
       <H2 text="Выберите параметр топливо/сумма и потяните ползунок до необходимых значений" />
 
       <div className="wrapper-img">
@@ -131,7 +131,7 @@ const FuelPurchaseScreen5 = ({ setScreen, screen, setShowModal }) => {
           onClick={() => setShowModal(true)}
         />
       </div>
-    </>
+    </div>
   );
 };
 

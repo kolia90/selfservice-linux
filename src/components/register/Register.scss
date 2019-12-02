@@ -48,7 +48,8 @@
         font-size: 45px;
         font-weight: bold;
         letter-spacing: 0.74px;
-        text-align: center;
+        text-align: left;
+        margin-left: 10px;
         color: #4a4a4a;
       }
     }
@@ -82,10 +83,6 @@
         width: 1px;
       }
     }
-  }
-
-  .button {
-    height: 20;
   }
 
   .wrapper-button {

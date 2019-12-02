@@ -61,7 +61,7 @@
 
       .sum {
         text-align: left;
-        width: 162px;
+        width: 50%;
         height: 54px;
         font-size: 45px;
         font-weight: 500;
@@ -74,7 +74,7 @@
 
       .grade {
         text-align: right;
-        width: 118px;
+        width: 50%;
         height: 36px;
         font-size: 30px;
         font-weight: 300;
@@ -122,11 +122,17 @@
         }
 
         .volume {
+          width: 60px;
+          text-align: left;
           height: 36px;
           font-size: 30px;
           font-weight: 300;
           color: #9b9b9b;
           display: inline-block;
+
+          &.total{
+            text-align: right;
+          }
         }
       }
 

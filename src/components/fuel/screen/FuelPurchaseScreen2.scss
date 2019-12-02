@@ -1,0 +1,35 @@
+.wrapper-screen-2 {
+  margin-top: 78px;
+
+  .wrapper-h2 {
+    height: 144px;
+
+    h2 {
+      margin-top: 60px;
+      width: 1357px;
+      height: 144px;
+      font-size: 60px;
+      font-weight: 300;
+      letter-spacing: 0.83px;
+      text-align: center;
+      color: #929292;
+    }
+  }
+
+  .wrapper-button {
+    margin-top: 90px;
+  }
+}
+@media screen and (max-width:1900px) {
+  .wrapper-screen-2 {
+    margin-top: 48px;
+    .wrapper-h2 {
+      h2 {
+        font-size: 32px;
+        width: 1072px;
+      }
+    }
+  }
+
+
+}

@@ -9,7 +9,7 @@ import Button from "../shared/button/Button";
 import "./Keyboard.scss";
 import Keyboard from "../shared/keyboard/Keyboard";
 
-const SelectPaymentStep2 = ({ paymentType, handleButton }) => {
+const SelectPaymentStep2 = ({ paymentType, cardData, handleButton }) => {
   const [pin, setPin] = useState("");
   const [securePin, setSecurePin] = useState("");
 
@@ -21,13 +21,13 @@ const SelectPaymentStep2 = ({ paymentType, handleButton }) => {
   return (
     <div className={styles.container}>
       {paymentType === "level" && (
-        <PaymentLevel styles={styles} onSelectPayment={null} />
+        <PaymentLevel styles={styles} onSelect={null} balance={cardData.balance} />
       )}
       {paymentType === "mastercard" && (
-        <PaymentMastercard styles={styles} onSelectPayment={null} />
+        <PaymentMastercard styles={styles} onSelect={null} number={cardData.number} />
       )}
       {paymentType === "visa" && (
-        <PaymentVisa styles={styles} onSelectPayment={null} />
+        <PaymentVisa styles={styles} onSelect={null} number={cardData.number} />
       )}
       <div className={styles.wrapper}>
         <H2 text="Введите PIN-код" />
@@ -51,11 +51,4 @@ const SelectPaymentStep2 = ({ paymentType, handleButton }) => {
   );
 };
 
-// {
-//   margin: 0 auto;
-//   display: block;
-//   font-size: 40px;
-//   outline: none;
-//   letter-spacing: 64px;
-// }
 export default SelectPaymentStep2;

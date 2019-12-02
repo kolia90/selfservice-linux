@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { Switch, Route } from "react-router";
 import routes from "./constants/routes";
 import App from "./containers/App";
@@ -7,7 +7,14 @@ import HomePage from "./containers/HomePage";
 import CheckCardPage from "./containers/CheckCardPage";
 import ScanPage from "./containers/Scan";
 import OfferCardPage from "./containers/OfferCardPage";
-import RegisterCardPage from "./containers/RegisterCardPage";
+import RegisterPhonePage from "./containers/RegisterPhonePage";
+import RegisterCodePage from "./containers/RegisterCodePage";
+import RegisterFirstNamePage from "./containers/RegisterFirstNamePage";
+import RegisterLastNamePage from "./containers/RegisterLastNamePage";
+import RegisterEmailPage from "./containers/RegisterEmailPage";
+import RegisterCityPage from "./containers/RegisterCityPage";
+import RegisterBirthdayPage from "./containers/RegisterBirthdayPage";
+import RegisterFinishPage from "./containers/RegisterFinishPage";
 import ServicePage from "./containers/ServicePage";
 import FuelPurchasePage from "./containers/FuelPurchasePage";
 import SelectPaymentPage from "./containers/SelectPaymentPage";
@@ -16,19 +23,25 @@ import ProductPage from "./containers/ProductPage";
 import TypePaymentPage from "./containers/TypePaymentPage";
 import BasketPage from "./containers/BasketPage";
 import PaymentCheckCatalogPage from "./containers/PaymentCheckCatalogPage";
-import RegisterCardFinishPage from "./containers/RegisterCardFinishPage";
 import PaymentCashPage from "./containers/PaymentCashPage";
+import Loader from "./components/shared/loader/Loader";
 
 export default () => (
-  <BrowserRouter>
+  <HashRouter>
     <App>
       <Switch>
         <Route path={routes.HOME} exact={true} component={HomePage} />
         <Route path={routes.CHECK_CARD} component={CheckCardPage} />
         <Route path={routes.SCAN} component={ScanPage} />
         <Route path={routes.OFFER_CARD} component={OfferCardPage} />
-        <Route path={routes.REGISTER_CARD} component={RegisterCardPage} />
-        <Route path={routes.REGISTER_CARD_FINISH} component={RegisterCardFinishPage} />
+        <Route path={routes.REGISTER_PHONE} component={RegisterPhonePage} />
+        <Route path={routes.REGISTER_CODE} component={RegisterCodePage} />
+        <Route path={routes.REGISTER_FIRST_NAME} component={RegisterFirstNamePage} />
+        <Route path={routes.REGISTER_LAST_NAME} component={RegisterLastNamePage} />
+        <Route path={routes.REGISTER_BIRTHDAY} component={RegisterBirthdayPage} />
+        <Route path={routes.REGISTER_CITY} component={RegisterCityPage} />
+        <Route path={routes.REGISTER_EMAIL} component={RegisterEmailPage} />
+        <Route path={routes.REGISTER_FINISH} component={RegisterFinishPage} />
         <Route path={routes.SERVICE} component={ServicePage} />
         <Route path={routes.FUEL_PURCHASE} component={FuelPurchasePage} />
         <Route path={routes.SELECT_PAYMENT} component={SelectPaymentPage} />
@@ -39,6 +52,7 @@ export default () => (
         <Route path={routes.BASKET} component={BasketPage} />
         <Route path={routes.PAYMENT_CHECK_CATALOG} component={PaymentCheckCatalogPage} />
       </Switch>
+      <Loader />
     </App>
-  </BrowserRouter>
+  </HashRouter>
 );

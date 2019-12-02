@@ -8,8 +8,9 @@ import { withRouter } from "react-router-dom";
 import PreviousPage from "../shared/previous-page/PreviousPage";
 
 const SelectPayment = ({ history }) => {
-  const [currentStep, setCureentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(1);
   const [paymentType, setPaymentType] = useState("");
+  const [cardData, setCardData] = useState(null);
 
   const handleButton = () => {
     if (
@@ -25,14 +26,19 @@ const SelectPayment = ({ history }) => {
     }
   };
 
-  const handleSelectPayment = paymentType => {
+  const handleSelectPayment = (paymentType, number, balance, card_id) => {
     setPaymentType(paymentType);
-    setCureentStep(2);
+    setCardData({
+      number: number || null,
+      balance: balance || null,
+      card_id: card_id || null
+    });
+    setCurrentStep(2);
   };
 
   const navPrev = () => {
     if (currentStep === 2) {
-      setCureentStep(1);
+      setCurrentStep(1);
     } else {
       if (
         history &&
@@ -65,6 +71,7 @@ const SelectPayment = ({ history }) => {
           <SelectPaymentStep2
             styles={styles}
             paymentType={paymentType}
+            cardData={cardData}
             handleButton={handleButton}
           />
         )}

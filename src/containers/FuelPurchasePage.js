@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import FuelPurchase from "../components/fuel-purchase/FuelPurchase";
+import FuelPurchase from "../components/fuel/FuelPurchase";
 
-export default class СheckСardPage extends Component {
+export default class FuelPurchasePage extends Component {
   render() {
     return <FuelPurchase />;
   }

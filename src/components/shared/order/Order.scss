@@ -33,6 +33,10 @@
     font-weight: 700;
     letter-spacing: -0.4px;
     color: #00d26a;
+
+    &.error{
+      color: #d2361e;
+    }
   }
 
   .separator {

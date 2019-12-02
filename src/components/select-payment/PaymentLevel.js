@@ -1,10 +1,10 @@
 import React from "react";
 
-const PaymentLevel = ({ styles, onSelectPayment }) => {
+const PaymentLevel = ({ styles, onSelect, balance }) => {
   return (
     <div
       className={`${styles.rectangle}`}
-      onClick={() => onSelectPayment("level")}
+      onClick={() => onSelect("level")}
     >
       <img
         className={`${styles.paymentLevel}`}
@@ -13,7 +13,7 @@ const PaymentLevel = ({ styles, onSelectPayment }) => {
       />
       <div className={styles.wrapperInfoLevel}>
         <div className={styles.text}>Бонусные баллы:</div>
-        <div className={`${styles.text} ${styles.textSum}`}>10 грн</div>
+        <div className={`${styles.text} ${styles.textSum}`}>{balance} грн</div>
       </div>
       <div className={styles.wrapperImg}>
         <img

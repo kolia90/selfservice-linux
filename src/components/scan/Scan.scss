@@ -5,32 +5,7 @@
   backdrop-filter: blur(13.7px);
   background-color: #bdbdbd;
   padding-top: 204px;
-
-  .tl {
-    position: absolute;
-    top: 322px;
-    left: 700px;
-  }
-
-  .tr {
-    position: absolute;
-    top: 322px;
-    left: 1131px;
-    transform: rotate(90deg);
-  }
-  .bl {
-    position: absolute;
-    top: 754px;
-    left: 700px;
-    transform: rotate(-90deg);
-  }
-
-  .br {
-    position: absolute;
-    top: 754px;
-    left: 1131px;
-    transform: rotate(180deg);
-  }
+  position: relative;
 
   .qr {
     margin: 0 auto;
@@ -41,26 +16,49 @@
     backdrop-filter: blur(13.7px);
     background-color: #ffffff;
   }
+  .square{
+    position: absolute;
+    top: 204px;
+    left: 50%;
+    margin-left: -251px;
+    width: 502px;
+    height: 502px;
+
+    img{
+      width: 90px;
+      height: 90px;
+      position: absolute;
+    }
+
+    .tl {
+      top: 0;
+      left: 0;
+    }
+    .tr {
+      top: 0;
+      right: 0;
+      transform: rotate(90deg);
+    }
+
+    .bl {
+      bottom: 0;
+      left: 0;
+      transform: rotate(-90deg);
+    }
+    .br {
+      bottom: 0;
+      right: 0;
+      transform: rotate(180deg);
+    }
+
+  }
 }
 @media screen and (max-width:1900px) {
   .scan {
     padding-top: 120px;
-    .tl {
-      top: 198px;
-      left: 422px;
-    }
-    .tr {
-      top: 198px;
-      left: 854px;
-    }
-    .bl {
-      top: 630px;
-      left: 422px;
-    }
-    .br {
-      top: 630px;
-      left: 854px;
-    }
 
+    .square {
+      top: 120px;
+    }
   }
 }

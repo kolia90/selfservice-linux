@@ -26,7 +26,7 @@ export default class FuelPurchaseScreen1 extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="wrapper-screen-1">
         <H2 text="Нажимайте на стрелочки чтобы выбрать номер вашей колонки" />
         <div className="wrapper-slick-slider">
           <Carousel
@@ -74,7 +74,7 @@ export default class FuelPurchaseScreen1 extends React.Component {
             onClick={() => this.props.setScreen(this.props.screen + 1)}
           />
         </div>
-      </>
+      </div>
     );
   }
 }

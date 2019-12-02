@@ -7,7 +7,7 @@ import Rectangle from "../shared/rectangle/Rectangle";
 
 const FuelPurchaseScreen6 = ({ setScreen }) => {
   return (
-    <>
+    <div className="wrapper-screen-6">
       <H1 text="Как желаете получить сдачу?" />
       <div>
         <div
@@ -45,7 +45,7 @@ const FuelPurchaseScreen6 = ({ setScreen }) => {
           </Rectangle>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

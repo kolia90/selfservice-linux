@@ -1,12 +1,12 @@
 import React from "react";
 
-const PaymentVisa = ({ styles, onSelectPayment }) => {
+const PaymentVisa = ({ styles, onSelect, number }) => {
   return (
     <div
       className={`${styles.rectangle} ${styles.paymentVisa}`}
-      onClick={() => onSelectPayment("visa")}
+      onClick={() => onSelect("visa", number)}
     >
-      <div className={styles.cardNumber}>**** **** **** 5819</div>
+      <div className={styles.cardNumber}>{number}</div>
       <div className={styles.wrapperImg}>
         <img
           className={styles.imgVisa}

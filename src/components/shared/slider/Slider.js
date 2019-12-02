@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import {NavLink} from "react-router-dom";
 import "./Slider.scss";
+import routes from "../../../constants/routes";
 
 export default class Slider extends Component {
   state = { index: 0 };
@@ -28,14 +30,15 @@ export default class Slider extends Component {
   render() {
     return (
       <div className="slider-container">
-        <div
-          className="slider-inner-container"
-          style={{ left: -100 * this.state.index + "%" }}
-        >
-          {this.props.children.map((child, index) => (
-            <div key={index}>{child}</div>
-          ))}
-        </div>
+        <NavLink to={routes.CHECK_CARD}>
+          <div
+            className="slider-inner-container"
+            style={{ left: -100 * this.state.index + "%" }}>
+            {this.props.children.map((child, index) => (
+              <div key={index}>{child}</div>
+            ))}
+          </div>
+        </NavLink>
         <div className="slider-dots">
           {this.props.children.map((child, index) => (
             <div

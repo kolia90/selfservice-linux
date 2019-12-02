@@ -8,6 +8,7 @@ const PreviousPage = ({ onClick }) => {
       <img
         src={require("../../../images/fuel-purchase/previous-icon.svg")}
         alt="previous icon"
+        className={'previous'}
         onClick={() => onClick()}
       />
     </div>
