@@ -1,7 +1,7 @@
 {
   "name": "socar-selfservice",
   "description": "Socar selfservice application",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",
@@ -97,7 +97,9 @@
       {
         "provider": "github",
         "owner": "gasique",
-        "repo": "SelfService"
+        "repo": "SelfService",
+        "private": true,
+        "token": "170108e30692c59a48be3cbd68cadf8e8cbfd970"
       }
     ]
   }
