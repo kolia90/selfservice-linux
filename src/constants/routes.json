@@ -19,5 +19,6 @@
   "TYPE_PAYMENT": "/type-payment",
   "BASKET": "/basket",
   "PAYMENT_CHECK_CATALOG": "/payment-check-catalog",
-  "PAYMENT_CASH": "/payment-cash"
+  "PAYMENT_CASH": "/payment-cash",
+  "CASH_PROCESS": "/cash-process"
 }

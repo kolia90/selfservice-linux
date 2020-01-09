@@ -76,8 +76,7 @@ class SelectPaymentStep1 extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  // auth_token: state.tokenState,
-  auth_token: '5bc8045e4910cceaf1803923f8d2d47ccaaf06f9',
+  auth_token: state.tokenState,
 });
 
 export default connect(

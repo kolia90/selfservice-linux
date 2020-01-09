@@ -1,0 +1,39 @@
+.wrapper-cash-process {
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  padding-top: 115px;
+
+  h1 {
+    margin-bottom: 90px;
+    width: 900px;
+    height: 54px;
+    font-size: 45px;
+    font-weight: bold;
+  }
+
+  .wrapper-img-cash-process{
+    padding-top: 40px;
+  }
+
+  .wrapper-button {
+    text-align: center;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    margin-left: -260px;
+  }
+
+}
+
+@media screen and (max-width:1900px) {
+  .wrapper-cash-process {
+    padding-top: 32px;
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 48px;
+      height: auto;
+    }
+  }
+}

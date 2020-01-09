@@ -24,6 +24,7 @@ import TypePaymentPage from "./containers/TypePaymentPage";
 import BasketPage from "./containers/BasketPage";
 import PaymentCheckCatalogPage from "./containers/PaymentCheckCatalogPage";
 import PaymentCashPage from "./containers/PaymentCashPage";
+import CashProcessPage from "./containers/CashProcessPage";
 import Loader from "./components/shared/loader/Loader";
 
 export default () => (
@@ -51,6 +52,7 @@ export default () => (
         <Route path={routes.PAYMENT_CASH} component={PaymentCashPage} />
         <Route path={routes.BASKET} component={BasketPage} />
         <Route path={routes.PAYMENT_CHECK_CATALOG} component={PaymentCheckCatalogPage} />
+        <Route path={routes.CASH_PROCESS} component={CashProcessPage} />
       </Switch>
       <Loader />
     </App>
