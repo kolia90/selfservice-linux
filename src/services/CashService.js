@@ -1,4 +1,5 @@
 import WSClient from "./WSClient";
+import Toast from "../components/shared/toast/Toast";
 
 const constants = require('./constants');
 const config = require('../settings/config');
@@ -31,9 +32,10 @@ export class CashService {
     }, this.handler(...args), this.timeout(...args));
   }
 
-  start(...args){
+  start(max_sum, ...args){
     return cash.send({
       Command: constants.CA_START,
+      MaxSum: max_sum
     }, this.handler(...args), this.timeout(...args));
   }
 

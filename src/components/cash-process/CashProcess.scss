@@ -24,6 +24,52 @@
     margin-left: -260px;
   }
 
+  .wrapper-toggle {
+    margin: 0 auto;
+    width: 450px;
+
+    h4 {
+      font-weight: 500;
+      margin-top: 61.5px;
+      margin-bottom: 0;
+    }
+
+    .wrapper-sum {
+      padding-top: 10px;
+
+      h4 {
+        margin-top: 30px;
+        height: 36px;
+        font-size: 30px;
+        letter-spacing: 0.41px;
+        color: #c1c1c1;
+        @media screen and (max-width:1900px) {
+          margin-top: 0;
+          font-size: 24px;
+        }
+
+        &:first-of-type {
+          text-align: left;
+        }
+      }
+    }
+
+    h4 {
+      height: 48px;
+      font-size: 40px;
+      letter-spacing: 0.55px;
+      color: #4a4a4a;
+      @media screen and (max-width:1900px) {
+        font-size: 32px;
+        width: auto;
+      }
+
+      &:last-of-type {
+        text-align: right;
+      }
+    }
+  }
+
 }
 
 @media screen and (max-width:1900px) {
