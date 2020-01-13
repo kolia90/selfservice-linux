@@ -3,15 +3,8 @@ import { withRouter } from "react-router-dom";
 import H1 from "../../shared/h1/H1";
 import "./FuelPurchaseScreen6.scss";
 import Rectangle from "../../shared/rectangle/Rectangle";
-import routes from "../../../constants/routes";
 
 const FuelPurchaseScreen6 = ({ history, setScreen }) => {
-
-  const handle = () => {
-    history.push(`${routes.CASH_PROCESS}`, {
-      route: routes.FUEL_PURCHASE
-    });
-  };
 
   return (
     <div className="wrapper-screen-6">
@@ -19,10 +12,9 @@ const FuelPurchaseScreen6 = ({ history, setScreen }) => {
       <div>
         <div
           className="d-inline"
-          onClick={handle}
-          // onClick={() => {
-          //   setScreen(5);
-          // }}
+          onClick={() => {
+            setScreen(5);
+          }}
         >
           <Rectangle>
             <div>
@@ -37,10 +29,9 @@ const FuelPurchaseScreen6 = ({ history, setScreen }) => {
         </div>
         <div
           className="d-inline"
-          onClick={handle}
-            // onClick={() => {
-          //   setScreen(5);
-          // }}
+          onClick={() => {
+            setScreen(5);
+          }}
         >
           <Rectangle>
             <div>

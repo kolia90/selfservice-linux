@@ -7,6 +7,7 @@ import ConfirmAlert from "../../shared/confirm-alert/ConfirmAlert";
 import MPosService from "../../../services/MPosService";
 import { setLoading } from "../../../store/actions";
 import "./FuelPurchaseScreen5.scss";
+import routes from "../../../constants/routes";
 
 const config = require('../../../settings/config').configure();
 
@@ -69,7 +70,17 @@ class FuelPurchaseScreen5 extends React.Component {
     }
   }
 
+  processPayByCash = () => {
+    this.props.history.push(`${routes.CASH_PROCESS}`, {
+      route: routes.FUEL_PURCHASE,
+      screen: 5,
+      pay: true
+    });
+  };
+
   pay = () => {
+    this.props.dispatch(setLoading(true));
+
     MPosService.getBasketData({
       onSuccess: (data) => {
         // TODO: check
@@ -112,7 +123,7 @@ class FuelPurchaseScreen5 extends React.Component {
               price: this.price
             }
           });
-          this.pay();
+          this.processPayByCash();
         }, onError: () => {
           this.props.dispatch(setLoading(false));
         }
@@ -132,6 +143,9 @@ class FuelPurchaseScreen5 extends React.Component {
   };
 
   componentDidMount() {
+    const isPay = this.props.history.location.state && this.props.history.location.state.pay;
+    isPay && this.pay();
+
     MPosService.getFuelByShort(this.tank['FuelShortName'],{
       notifyDisabled: true,
       onSuccess: (response) => {
