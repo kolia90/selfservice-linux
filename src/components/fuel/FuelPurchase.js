@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import {connect} from "react-redux";
 import Modal from "react-modal";
 import FuelPurchaseScreen1 from "./screen/FuelPurchaseScreen1";
 import FuelPurchaseScreen2 from "./screen/FuelPurchaseScreen2";
@@ -13,6 +14,8 @@ import FuelStep from "./FuelStep";
 import MPosService from "../../services/MPosService";
 import mPosHelper from "../../helpers/mPosHelper";
 import "./FuelPurchase.scss";
+import CashProcess from "../cash-process/CashProcess";
+import {setLoading} from "../../store/actions";
 
 Modal.setAppElement("#root");
 
@@ -28,36 +31,41 @@ class FuelPurchase extends Component {
       fuel: null,
       order: null,
       spilled: {},
-      finished: false
+      finished: false,
+      amount: null
     }
   }
 
-  setScreen = (value) => {
-    this.setState({screen: value})
+  setScreen = (value, ...args) => {
+    this.setState({screen: value}, ...args)
   };
 
-  setNumber = (value) => {
-    this.setState({number: value})
+  setNumber = (value, ...args) => {
+    this.setState({number: value}, ...args)
   };
 
-  setFuel = (value) => {
-    this.setState({fuel: value})
+  setFuel = (value, ...args) => {
+    this.setState({fuel: value}, ...args)
   };
 
-  setOrder = (value) => {
-    this.setState({order: value})
+  setOrder = (value, ...args) => {
+    this.setState({order: value}, ...args)
   };
 
-  setShowModal = (value) => {
-    this.setState({showModal: value})
+  setShowModal = (value, ...args) => {
+    this.setState({showModal: value}, ...args)
   };
 
-  setSpilled = (value) => {
-    this.setState({spilled: value})
+  setSpilled = (value, ...args) => {
+    this.setState({spilled: value}, ...args)
   };
 
-  setFinished = (value) => {
-    this.setState({finished: value})
+  setFinished = (value, ...args) => {
+    this.setState({finished: value}, ...args)
+  };
+
+  setAmount = (value, ...args) => {
+    this.setState({amount: value}, ...args)
   };
 
   checkProcess(){
@@ -80,11 +88,34 @@ class FuelPurchase extends Component {
     })
   }
 
-  componentDidUpdate(prevProps, prevState){
-    if (!prevState.showModal && this.state.showModal){
-      this.checkProcess()
-    }
-  }
+  pay = (amount) => {
+    this.setAmount(amount, () => {
+      this.setScreen(8)
+    });
+  };
+
+  finish = () => {
+    this.props.dispatch(setLoading(true));
+
+    MPosService.getBasketData({
+      onSuccess: (data) => {
+        // TODO: check
+        const sum = data.FuelData.TotalSum;
+
+        MPosService.fiscalCheck(data, sum, {
+          onSuccess: (data) => {
+            this.props.dispatch(setLoading(false));
+            // START check process
+            this.checkProcess()
+          }, onError: () => {
+            this.props.dispatch(setLoading(false));
+          }
+        })
+      }, onError: () => {
+        this.props.dispatch(setLoading(false));
+      }
+    })
+  };
 
   render(){
     return (
@@ -119,7 +150,7 @@ class FuelPurchase extends Component {
               <FuelStep setScreen={this.setScreen} screen={this.state.screen}>
                 <FuelPurchaseScreen5
                     setScreen={this.setScreen} number={this.state.number} fuel={this.state.fuel}
-                    setOrder={this.setOrder} setShowModal={this.setShowModal}
+                    setOrder={this.setOrder} pay={this.pay}
                 />
               </FuelStep>
           )}
@@ -133,7 +164,9 @@ class FuelPurchase extends Component {
                 <FuelPurchaseScreen7 order={this.state.order} spilled={this.state.spilled} />
               </FuelStep>
           )}
-
+          {this.state.screen === 8 && (
+              <CashProcess onFinish={this.finish} amount={this.state.amount} />
+          )}
           {this.state.showModal && !this.state.finished && (
               <Modal
                   ariaHideApp={false}
@@ -150,4 +183,4 @@ class FuelPurchase extends Component {
   }
 }
 
-export default withRouter(FuelPurchase);
+export default connect()(withRouter(FuelPurchase));

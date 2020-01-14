@@ -70,36 +70,6 @@ class FuelPurchaseScreen5 extends React.Component {
     }
   }
 
-  processPayByCash = () => {
-    this.props.history.push(`${routes.CASH_PROCESS}`, {
-      route: routes.FUEL_PURCHASE,
-      screen: 5,
-      pay: true
-    });
-  };
-
-  pay = () => {
-    this.props.dispatch(setLoading(true));
-
-    MPosService.getBasketData({
-      onSuccess: (data) => {
-        // TODO: check
-        const sum = data.FuelData.TotalSum;
-
-        MPosService.fiscalCheck(data, sum, {
-          onSuccess: (data) => {
-            this.props.dispatch(setLoading(false));
-            this.props.setShowModal(true);
-          }, onError: () => {
-            this.props.dispatch(setLoading(false));
-          }
-        })
-      }, onError: () => {
-        this.props.dispatch(setLoading(false));
-      }
-    })
-  };
-
   submit = (volume, amount, full_tank) => {
     this.props.dispatch(setLoading(true));
 
@@ -123,7 +93,7 @@ class FuelPurchaseScreen5 extends React.Component {
               price: this.price
             }
           });
-          this.processPayByCash();
+          this.props.pay(amount);
         }, onError: () => {
           this.props.dispatch(setLoading(false));
         }

@@ -43,7 +43,7 @@ const SelectPayment = ({ history }) => {
       if (
         history &&
         history.location.state &&
-        history.location.state.route === "/fuel-purchase"
+        history.location.state.route === routes.FUEL_PURCHASE
       ) {
         history.push(`${routes.FUEL_PURCHASE}`, {
           screen: 3

@@ -1,5 +1,4 @@
 import WSClient from "./WSClient";
-import Toast from "../components/shared/toast/Toast";
 
 const constants = require('./constants');
 const config = require('../settings/config');
