@@ -130,4 +130,4 @@ export class MPosService {
 
 }
 
-export default new MPosService()
+export default MPosService.default()

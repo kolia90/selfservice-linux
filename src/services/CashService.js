@@ -51,4 +51,4 @@ export class CashService {
   }
 }
 
-export default new CashService()
+export default CashService.default()
