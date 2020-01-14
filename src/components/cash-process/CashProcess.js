@@ -18,7 +18,7 @@ class CashProcess extends React.Component {
     this.statusIntervalId = null;
     this.state = {
       ready: false,
-      amount: this.props.amount,
+      amount: this.props.amount || 0,
       sum: 0,
     };
   }
