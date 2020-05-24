@@ -13,8 +13,8 @@ class RegisterStepProfile extends Component {
   constructor(props){
     super(props);
 
-    if(!this.props.auth_token){
-      console.log('User token is lost');
+    if(!this.props.user){
+      console.log('User not found');
       this.props.history.push(`${routes.HOME}`)
     }
   }
@@ -25,7 +25,7 @@ class RegisterStepProfile extends Component {
     let params = {};
     params[this.props.attr] = value;
 
-    APIService.registerProfile(params, this.props.auth_token, {
+    APIService.registerProfile(params, this.props.user.token, {
       onSuccess: (response) => {
         this.props.dispatch(setLoading(false));
         this.props.history.push(this.props.next)
@@ -64,10 +64,7 @@ RegisterStepProfile.propTypes = {
 };
 
 
-const mapStateToProps = state => ({
-  auth_token: state.tokenState
-});
-
+const mapStateToProps = state => ({user: state.userState});
 
 export default connect(
     mapStateToProps,

@@ -60,13 +60,14 @@ class WSClient{
         console.log(`Request ${this.name} timeout`);
         typeof timeout == 'function' && timeout();
       }catch (e) {}
+      this.blocked = false;
       this.next()
     }, this.timeout * 1000)
   }
 
   next(){
     const item = this.queue.shift();
-    item && this.run(item.data, item.callback)
+    item && this.run(item.data, item.callback, item.timeout)
   }
 
   process (data, callback, timeout) {

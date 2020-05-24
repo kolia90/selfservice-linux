@@ -8,9 +8,9 @@ const config = require('../settings/config');
 export class MPosService {
   static _client = null;
 
-  static client = (params) => {
+  static client = () => {
     if(MPosService._client === null){
-      MPosService._client = new WSClient(config.mPosWsUrl, {name: 'mPos', ...params})
+      MPosService._client = new WSClient(config.mPosWsUrl, {name: 'mPos', ...MPosService.clientParams})
     }
     return MPosService._client;
   };
@@ -21,13 +21,18 @@ export class MPosService {
     ru: 2
   };
 
-  static default(){
-    return new MPosService()
+  PAY_TYPE_MONEY = 0;
+  PAY_TYPE_CARD = 1;
+
+  static default(...args){
+    return new MPosService(...args)
   }
 
-  constructor(operatorId, lang){
-    this.operatorId = operatorId || '1001';
-    this.lang = this.LANG_MAP[lang] || this.LANG_MAP.ru;
+  constructor(params){
+    params = params || {};
+    this.operatorId = params.operatorId || '1001';
+    this.lang = this.LANG_MAP[params.lang] || this.LANG_MAP.ru;
+    MPosService.clientParams = params.clientParams;
   }
 
   configure(operatorId, lang){
@@ -50,7 +55,7 @@ export class MPosService {
         config && config.onSuccess && config.onSuccess(data)
       }else{
         config && config.onError && config.onError(data);
-        !(config && config.notifyDisabled) && Toast((config && config.notifyMessage) || (
+        !(config && config.notifyDisabled) && Toast((config && config.onErrorMessage) || (
             data['ResultMessage'] || 'Сталася помилка :('
         ));
       }
@@ -90,6 +95,14 @@ export class MPosService {
     }, this.handler(...args), this.timeout(...args));
   }
 
+  setBasketParams(level, pay_type, ...args){
+    return MPosService.client().send({
+      Command: constants.POS_BASKET_SET_PARAMS,
+      ClientLoyaltyCard: level,
+      PayTypeId: pay_type
+    }, this.handler(...args), this.timeout(...args));
+  }
+
   getBasketData(...args){
     return MPosService.client().send({
       Command: constants.POS_BASKET_GET_DATA,
@@ -107,6 +120,12 @@ export class MPosService {
       Value: value,
       OperatorId: this.operatorId,
       Lang: this.lang
+    }, this.handler(...args), this.timeout(...args));
+  }
+
+  basketClear(...args){
+    return MPosService.client().send({
+      Command: constants.POS_BASKET_CLEAR
     }, this.handler(...args), this.timeout(...args));
   }
 
@@ -130,4 +149,4 @@ export class MPosService {
 
 }
 
-export default MPosService.default()
+export default MPosService.default({clientParams: {timeout: 5}})

@@ -41,7 +41,8 @@ class RegisterPhone extends Component {
   };
 
   render() {
-    const inputSizePhoneNumber = this.props.dataState.value.length;
+    const value = this.props.dataState.value;
+    const inputSizePhoneNumber = value ? value.length : 0;
 
     return (
         <RegisterStep

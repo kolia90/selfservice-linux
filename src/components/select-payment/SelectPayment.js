@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from "./SelectPayment.module.scss";
 import Header from "../shared/header/Header";
 import SelectPaymentStep1 from "./SelectPaymentStep1";
 import SelectPaymentStep2 from "./SelectPaymentStep2";
@@ -64,12 +63,10 @@ const SelectPayment = ({ history }) => {
       <div>
         {currentStep === 1 ? (
           <SelectPaymentStep1
-            styles={styles}
             onSelectPayment={handleSelectPayment}
           />
         ) : (
           <SelectPaymentStep2
-            styles={styles}
             paymentType={paymentType}
             cardData={cardData}
             handleButton={handleButton}

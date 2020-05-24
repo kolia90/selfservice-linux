@@ -24,3 +24,16 @@
     margin: 0 auto;
   }
 }
+
+@media screen and (max-width:1900px) {
+  .react-simple-keyboard {
+    .hg-row {
+      .hg-button {
+        height: 63px;
+        span {
+          font-size: 25px;
+        }
+      }
+    }
+  }
+}

@@ -11,7 +11,7 @@ const Order = ({order, spilled}) => {
   return (
     <div className="order-block">
       <div>
-        <span className="order-number">Заказ №{order.id}</span>
+        <span className="order-number">Заказ №{order.id || '------'}</span>
         <span className="float-r order-payment-status">Оплачен</span>
       </div>
       <div>

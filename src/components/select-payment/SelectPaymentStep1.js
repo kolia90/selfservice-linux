@@ -20,7 +20,7 @@ class SelectPaymentStep1 extends React.Component{
   }
 
   componentDidMount() {
-    APIService.getLevel(this.props.auth_token, {
+    APIService.getLevel(this.props.user.token, {
       onSuccess: (response) => {
         this.setState({
           level: {
@@ -31,7 +31,7 @@ class SelectPaymentStep1 extends React.Component{
       }
     });
 
-    APIService.getCards(this.props.auth_token, {
+    APIService.getCards(this.props.user.token, {
       onSuccess: (response) => {
         this.setState({
           cards: response.data.results || []
@@ -75,9 +75,7 @@ class SelectPaymentStep1 extends React.Component{
   }
 }
 
-const mapStateToProps = state => ({
-  auth_token: state.tokenState,
-});
+const mapStateToProps = state => ({user: state.userState});
 
 export default connect(
     mapStateToProps,

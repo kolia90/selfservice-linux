@@ -23,16 +23,16 @@ class RegisterFinish extends Component {
       balance: null
     };
 
-    if(!this.props.auth_token){
+    if(!this.props.user){
       this.props.history.push(`${routes.HOME}`)
     }
   }
 
   componentDidMount = () => {
-    if(!this.props.auth_token) return;
+    if(!this.props.user) return;
     this.props.dispatch(setLoading(true));
 
-    APIService.getLevel(this.props.auth_token, {
+    APIService.getLevel(this.props.user.token, {
       onSuccess: (response) => {
         this.props.dispatch(setLoading(false));
 
@@ -110,10 +110,7 @@ class RegisterFinish extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth_token: state.tokenState
-});
-
+const mapStateToProps = state => ({user: state.userState});
 
 export default connect(
     mapStateToProps,

@@ -1,0 +1,134 @@
+.rectangle {
+  width: 1000px;
+  height: 180px;
+  border-radius: 20px;
+  margin: 0 auto;
+  position: relative;
+  @media screen and (max-width:1900px) {
+    width: 760px;
+    height: 140px;
+    overflow: hidden;
+    img {
+      margin-top: 0;
+    }
+  }
+
+  .cardNumber {
+    width: 461px;
+    height: 60px;
+    font-size: 50px;
+    font-weight: 500;
+    letter-spacing: 0.69px;
+    color: #ffffff;
+    padding: 60px;
+    @media screen and (max-width:1900px) {
+      padding: 48px;
+      font-size: 40px;
+    }
+  }
+
+  .wrapperInfoLevel {
+    position: absolute;
+    left: 60px;
+    top: 40px;
+    height: 100px;
+    @media screen and (max-width:1900px) {
+      top: 29px;
+    }
+
+    .text {
+      color: #fff;
+      font-size: 40px;
+      font-weight: 300;
+      @media screen and (max-width:1900px) {
+        font-size: 32px;
+      }
+    }
+
+    .textSum {
+      font-size: 50px;
+      font-weight: 500;
+      @media screen and (max-width:1900px) {
+        font-size: 40px;
+      }
+    }
+  }
+}
+
+.paymentLevel {
+  display: block;
+  box-shadow: 0 15px 22px 0 rgba(35, 47, 114, 0.2);
+  background-image: radial-gradient(circle at 0 0, #000000, #2e3f98);
+  margin-top: 60px;
+  border-radius: 20px;
+}
+
+.paymentTerminal {
+  display: block;
+  box-shadow: 0 15px 22px 0 rgba(35, 47, 114, 0.2);
+  background-image: radial-gradient(circle at 0 0, #00000090, #00000050);
+  margin-top: 30px;
+  border-radius: 20px;
+  margin-bottom: 60px;
+}
+
+.paymentMastercard {
+  box-shadow: 0 15px 22px 0 rgba(243, 100, 32, 0.2);
+  background-image: radial-gradient(circle at 0 0, #f13c17, #fac036);
+  margin-top: 61px;
+}
+
+.paymentVisa {
+  box-shadow: 0 15px 22px 0 rgba(32, 101, 168, 0.2);
+  background-image: radial-gradient(circle at 0 0, #1b599a, #2c81c6);
+  margin-top: 60px;
+}
+
+.wrapperImg {
+  position: absolute;
+  right: 20px;
+  top: 40px;
+  background-color: #fff;
+  width: 148px;
+  height: 100px;
+  border-radius: 23.1px;
+  @media screen and (max-width:1900px) {
+    width: 120px;
+    height: 80px;
+    top: 30px;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .imgLevel {
+    margin-top: 39px;
+    @media screen and (max-width:1900px) {
+      margin-top: 30px;
+      width: 80px;
+    }
+  }
+
+  .imgVisa {
+    margin-top: 33px;
+    @media screen and (max-width:1900px) {
+      margin-top: 30px;
+      width: 80px;
+    }
+  }
+
+  .imgMastercard {
+    margin-top: 17px;
+    @media screen and (max-width:1900px) {
+      margin-top: 15px;
+      width: 80px;
+    }
+  }
+}
+@media screen and (max-width:1900px) {
+  .container {
+    margin-top: 50px;
+  }
+}

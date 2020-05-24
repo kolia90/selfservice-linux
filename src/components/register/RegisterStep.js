@@ -12,6 +12,7 @@ import InputMask from "react-input-mask";
 import Toast from "../shared/toast/Toast";
 import { setDataValue } from '../../store/actions'
 import "./Register.scss";
+import "../shared/input/Input.scss";
 
 
 class RegisterStep extends Component {
@@ -25,6 +26,7 @@ class RegisterStep extends Component {
       value: '',
     };
     this.inputRef = null;
+    this.keyboardRef = null;
   }
 
   changeValue = value => {
@@ -33,6 +35,10 @@ class RegisterStep extends Component {
       this.keyboardRef.keyboard.setInput(v);
       this.props.dispatch(setDataValue(v));
     });
+  };
+
+  componentDidMount = () => {
+    this.props.dispatch(setDataValue(null));
   };
 
   handleValue = value => {
@@ -59,7 +65,7 @@ class RegisterStep extends Component {
   onSubmit = () => {
     let value = this.props.dataState.value;
 
-    if (!value.length){
+    if (!value || !value.length){
       Toast(this.props.messageEmpty || this.props.title);
       return
     }
@@ -101,7 +107,7 @@ class RegisterStep extends Component {
             {this.props.label && (
                 <H2 text={this.props.label} />
             )}
-            <div className={this.props.inputWrapClassName}>
+            <div className={this.props.inputWrapClassName || 'wrapper-input'}>
               {this.props.preInput}
               <InputMask
                   size={this.props.inputSize}

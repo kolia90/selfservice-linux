@@ -6,7 +6,6 @@ import PaymentVisa from "./PaymentVisa";
 import H2 from "../shared/h2/H2";
 import InputMask from "react-input-mask";
 import Button from "../shared/button/Button";
-import "./Keyboard.scss";
 import Keyboard from "../shared/keyboard/Keyboard";
 
 const SelectPaymentStep2 = ({ paymentType, cardData, handleButton }) => {

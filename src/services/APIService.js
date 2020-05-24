@@ -1,7 +1,7 @@
 import axios from "axios";
 import Toast from "../components/shared/toast/Toast";
 
-const config = require('../settings/config').configure();
+const config = require('../settings/config');
 
 class APIService {
 
@@ -47,7 +47,7 @@ class APIService {
       config && config.onSuccess && config.onSuccess(response)
     }).catch((e) => {
       config && config.onError && config.onError(e);
-      !(config && config.notifyDisabled) && Toast((config && config.notifyMessage) || (
+      !(config && config.notifyDisabled) && Toast((config && config.onErrorMessage) || (
           (e.response && this.getErrorMessage(e.response.data)) || 'Сталася помилка :('
       ));
     });
@@ -79,6 +79,10 @@ class APIService {
 
   static getCards(auth_token, ...args){
     return this.process(this.user_client(auth_token).get('/wayforpay/wallet/cards'), ...args)
+  }
+
+  static checkoutOrder(params, auth_token, ...args){
+    return this.process(this.user_client(auth_token).post('/wayforpay/payments/checkout', params), ...args)
   }
 
   /* SELF-Service methods */

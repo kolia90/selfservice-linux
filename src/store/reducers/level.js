@@ -1,12 +1,11 @@
 import { Actions} from "../actions";
 
 
-const levelReducer = function(state = false, action) {
-  switch (action.type) {
-    case Actions.SET_LEVEL_NUMBER:
-      return action.value;
-    default:
-      return state
+const levelReducer = function(state = null, action) {
+  if (action.type === Actions.SET_LEVEL_NUMBER) {
+    return action.value;
+  } else {
+    return state
   }
 };
 

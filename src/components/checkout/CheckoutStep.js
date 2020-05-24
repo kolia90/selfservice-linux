@@ -2,15 +2,14 @@ import React from "react";
 import Header from "../shared/header/Header";
 import { withRouter } from "react-router-dom";
 import PreviousPage from "../shared/previous-page/PreviousPage";
-import "./FuelStep.scss";
 
-class FuelStep extends React.Component {
+class CheckoutStep extends React.Component {
 
   navPrev = () => {
-    if (this.props.screen === 1 || this.props.screen === 5) {
+    if(this.props.navPrev){
+      this.props.navPrev()
+    }else{
       this.props.history.goBack();
-    } else {
-      this.props.setScreen(this.props.screen - 1);
     }
   };
 
@@ -19,15 +18,13 @@ class FuelStep extends React.Component {
         <>
           <Header
               left={<PreviousPage onClick={() => this.navPrev()} />}
-              center={<div>{this.props.title || 'Покупка топлива'}</div>}
+              center={<div>{this.props.title || 'Выберите способ оплаты'}</div>}
               right={null}
           />
-          <div className="wrapper-fuel-purchase" data-tid="container">
-            {this.props.children}
-          </div>
+          <div className="wrapper-checkout">{this.props.children}</div>
         </>
     );
   }
 }
 
-export default withRouter(FuelStep);
+export default withRouter(CheckoutStep);

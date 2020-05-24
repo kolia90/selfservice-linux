@@ -114,7 +114,7 @@ autoUpdater.on('update-not-available', (info) => {
 });
 autoUpdater.on('error', (err) => {
   sendStatusToWindow('Error in auto-updater. ' + err);
-  dialog.showErrorBox('Error: ', err == null ? "unknown" : (err.stack || err).toString())
+  // dialog.showErrorBox('Error: ', err == null ? "unknown" : (err.stack || err).toString())
 });
 autoUpdater.on('download-progress', (progressObj) => {
   updateStatus = STATUS.PROCESS;

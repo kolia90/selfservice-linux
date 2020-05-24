@@ -18,9 +18,5 @@ function rewrite(obj, isProd){
   }
   return obj
 }
-
-configs.configure = function (isDev) {
-  return rewrite(this, isDev !== undefined ? !isDev : process.env.NODE_ENV === 'production');
-};
-
-module.exports = configs;
+const finalConfig = rewrite(configs, process.env.NODE_ENV === 'production');
+module.exports = finalConfig;

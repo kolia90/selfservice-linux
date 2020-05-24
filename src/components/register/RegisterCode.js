@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import routes from "../../constants/routes";
 import { withRouter } from "react-router-dom";
 import RegisterStep from "./RegisterStep";
-import {setLevelNumber, setLoading, setUserToken} from "../../store/actions";
+import {setLevelNumber, setLoading, setUserData} from "../../store/actions";
 import APIService from "../../services/APIService";
 
 
@@ -34,7 +34,10 @@ class RegisterCode extends Component {
     APIService.registerConfirm(this.phone, code, {
       onSuccess: (response) => {
         this.props.dispatch(setLoading(false));
-        this.props.dispatch(setUserToken(response.data.auth_token));
+        this.props.dispatch(setUserData({
+          token: response.data.auth_token,
+          data: null
+        }));
         this.props.dispatch(setLevelNumber(response.data.user.level_card_number));
 
         this.props.history.push(`${routes.REGISTER_FIRST_NAME}`)

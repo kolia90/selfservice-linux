@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import "./Scan.scss";
 import Toast from "../shared/toast/Toast";
 import APIService from "../../services/APIService";
-import {setDataUser, setLevelNumber, setLoading, setUserToken} from "../../store/actions";
+import {setUserData, setLevelNumber, setLoading} from "../../store/actions";
 
 
 class Scan extends React.Component {
@@ -37,8 +37,10 @@ class Scan extends React.Component {
         this.props.dispatch(setLoading(false));
         const data = response.data;
         this.props.dispatch(setLevelNumber(data.number));
-        data.user_data && this.props.dispatch(setUserToken(data.user_data.auth_token));
-        data.user_data && this.props.dispatch(setDataUser(data.user_data.user));
+        data.user_data && this.props.dispatch(setUserData({
+          token: data.user_data.auth_token,
+          data: data.user_data.user
+        }));
 
         this.props.history.push(`${routes.SERVICE}`)
       }, onError: () => {

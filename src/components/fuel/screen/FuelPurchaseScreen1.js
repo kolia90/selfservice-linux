@@ -30,7 +30,7 @@ class FuelPurchaseScreen1 extends React.Component {
           disabled: false,
         })
       }, onTimeout: () => {
-        Toast("Сервер не відповідає")
+        Toast("Сервер не отвечает")
       }
     })
   }
@@ -53,6 +53,9 @@ class FuelPurchaseScreen1 extends React.Component {
       }, onError: () => {
         this.props.dispatch(setLoading(false));
         this.props.setScreen(2);
+      }, onTimeout: () => {
+        this.props.dispatch(setLoading(false));
+        Toast("Сервер не отвечает")
       }
     })
   };
@@ -62,7 +65,6 @@ class FuelPurchaseScreen1 extends React.Component {
     this.setState({
       activeValue: nextValue
     });
-
     this.props.setNumber(nextValue + 1)
   };
 

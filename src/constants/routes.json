@@ -20,5 +20,6 @@
   "BASKET": "/basket",
   "PAYMENT_CHECK_CATALOG": "/payment-check-catalog",
   "PAYMENT_CASH": "/payment-cash",
-  "CASH_PROCESS": "/cash-process"
+  "CASH_PROCESS": "/cash-process",
+  "CHECKOUT": "/checkout"
 }
