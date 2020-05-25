@@ -15,21 +15,32 @@ class FuelPurchaseScreen1 extends React.Component {
   constructor(props) {
     super(props);
 
+    const getDispenser = number => {
+      return {
+        DispenserNumber: number
+      }
+    };
+
     this.state = {
       activeValue: this.props.number - 1,
-      dispensers: [],
+      dispensers: [getDispenser(1), getDispenser(2), getDispenser(3)],
       disabled: true
     };
   }
 
   componentDidMount() {
+    this.props.dispatch(setLoading(true));
     MPosService.getFuelConfig({
       onSuccess: (data) => {
+        this.props.dispatch(setLoading(false));
         this.setState({
           dispensers: data['Dispensers'],
           disabled: false,
         })
+      }, onError: () => {
+        this.props.dispatch(setLoading(false));
       }, onTimeout: () => {
+        this.props.dispatch(setLoading(false));
         Toast("Сервер не отвечает")
       }
     })
@@ -72,7 +83,7 @@ class FuelPurchaseScreen1 extends React.Component {
     return (
       <div className="wrapper-screen-1">
         <H2 text="Нажимайте на стрелочки чтобы выбрать номер вашей колонки" />
-        <div className="wrapper-slick-slider">
+        <div className={`wrapper-slick-slider ${this.state.disabled ? 'disabled': ''}`}>
           <Carousel
             value={this.state.activeValue}
             onChange={this.onChange}

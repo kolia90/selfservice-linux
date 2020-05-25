@@ -104,6 +104,13 @@
       transform: rotate(-180deg);
     }
   }
+
+  &.disabled{
+    .BrainhubCarousel__trackContainer{
+      opacity: 0.3;
+    }
+  }
+
 }
 @media screen and (max-width:1900px) {
   .wrapper-slick-slider {
