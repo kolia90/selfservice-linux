@@ -54,6 +54,7 @@ class WSClient{
     this.callback = callback || null;
 
     this.ws.send(JSON.stringify(data));
+    console.log(`Send to ${this.name}`, JSON.stringify(data));
 
     this.id = setTimeout(() => {
       try {

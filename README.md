@@ -11,6 +11,10 @@ In the project directory, you can run:
 
 #### `yarn start --web`
 
+Or
+
+#### `yarn start --dev`
+
 #### Run development electron app
 
 #### `yarn electron-dev`
