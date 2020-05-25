@@ -36,7 +36,7 @@ function notifyInstall() {
   notify(mainWindow, {
     type: 'info',
     title: 'Установка обновления',
-    message: 'Оновление готово. Вы подтверждаете установку?',
+    message: 'Обновление готово. Вы подтверждаете установку?',
     buttons: ['Yes', 'No']
   }, (buttonIndex) => {
     if (buttonIndex === 0) {

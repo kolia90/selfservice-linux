@@ -87,9 +87,7 @@
     "copyright": "Copyright © 2019 ${author}",
     "files": [
       "build/**/*",
-      "node_modules/**/*",
-      "server/**/*",
-      "src/settings/**/*"
+      "node_modules/**/*"
     ],
     "directories": {
       "buildResources": "assets"
