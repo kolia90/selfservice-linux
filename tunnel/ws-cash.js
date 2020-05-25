@@ -1,8 +1,5 @@
 const WebSocket = require('ws');
-const argv = require('yargs').argv;
-
-const address = argv.address || 'ws://socar.themakeapp.com/tunnel/cash';
-console.log('Address: ', address);
+const address = 'ws://194.9.71.87/tunnel/cash';
 
 let ws;
 let wsCash;

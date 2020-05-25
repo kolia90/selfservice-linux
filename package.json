@@ -28,7 +28,7 @@
     "redux": "^4.0.4",
     "styled-components": "^4.3.2",
     "toasted-notes": "^3.0.0",
-    "ws": "^7.2.0",
+    "ws": "^7.3.0",
     "yargs": "^15.0.1"
   },
   "scripts": {
@@ -87,7 +87,8 @@
     "copyright": "Copyright © 2019 ${author}",
     "files": [
       "build/**/*",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      "tunnel/**/*"
     ],
     "directories": {
       "buildResources": "assets"

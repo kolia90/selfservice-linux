@@ -10,6 +10,11 @@ autoUpdater.logger.transports.file.level = 'info';
 autoUpdater.autoDownload = false;
 log.info('App starting...');
 
+// TODO: temp proxy scripts
+require('../tunnel/ws-mpos');
+require('../tunnel/ws-cash');
+// TODO: End temp proxy scripts
+
 
 let STATUS = {
   NONE: 0,

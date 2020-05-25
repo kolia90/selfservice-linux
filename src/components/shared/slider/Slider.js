@@ -7,7 +7,7 @@ export default class Slider extends Component {
   state = { index: 0 };
 
   componentDidMount() {
-    var intervalId = setInterval(this.timer, 3000);
+    var intervalId = setInterval(this.timer, 5000);
     this.setState({ intervalId: intervalId });
   }
 
