@@ -33,14 +33,22 @@ class FuelPurchaseScreen3 extends React.Component {
   }
 
   setVolume = (value) => {
+    let volume = parseInt(value);
+    let sum = this.round(volume * this.price);
+
     this.setState({
-      volume: value
+      volume: volume,
+      sum: sum
     })
   };
 
   setSum = (value) => {
+    let sum = parseInt(value);
+    let volume = this.round(sum / this.price);
+
     this.setState({
-      sum: value
+      sum: sum,
+      volume: volume
     })
   };
 
@@ -53,24 +61,6 @@ class FuelPurchaseScreen3 extends React.Component {
   round = (v) => {
     return Math.round(v * 100) / 100
   };
-
-  componentDidUpdate(prevProps, prevState){
-    const changedSum = prevState.sum !== this.state.sum;
-    const changedVolume = prevState.volume !== this.state.volume;
-    const changedTab = prevState.activeTab !== this.state.activeTab;
-
-    if (changedSum || changedVolume || changedTab){
-      switch (this.state.activeTab) {
-        case 1: {
-          this.setVolume(parseInt(this.state.volume));
-          break
-        }
-        default: {
-          this.setSum(parseInt(this.state.sum));
-        }
-      }
-    }
-  }
 
   submit = (volume, amount, full_tank) => {
     this.props.dispatch(setLoading(true));
