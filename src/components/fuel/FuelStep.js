@@ -7,10 +7,14 @@ import "./FuelStep.scss";
 class FuelStep extends React.Component {
 
   navPrev = () => {
-    if (this.props.screen === 1 || this.props.screen === 5) {
-      this.props.history.goBack();
-    } else {
-      this.props.setScreen(this.props.screen - 1);
+    if(this.props.navPrev){
+      this.props.navPrev()
+    }else{
+      if (this.props.screen === 1) {
+        this.props.history.goBack();
+      } else {
+        this.props.setScreen(this.props.screen - 1);
+      }
     }
   };
 

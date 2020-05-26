@@ -193,7 +193,7 @@ class FuelPurchase extends Component {
               </FuelStep>
           )}
           {this.state.screen === 3 && (
-              <FuelStep setScreen={this.setScreen} screen={this.state.screen}>
+              <FuelStep setScreen={this.setScreen} screen={this.state.screen} navPrev={() => {this.setScreen(1)}}>
                 <FuelPurchaseScreen3
                     setScreen={this.setScreen} number={this.state.number} fuel={this.state.fuel}
                     setOrder={this.setOrder} pay={this.pay}
@@ -201,7 +201,7 @@ class FuelPurchase extends Component {
               </FuelStep>
           )}
           {this.state.screen === 4 && (
-              <FuelStep setScreen={this.setScreen} screen={this.state.screen} title={'Топливо оплачено'}>
+              <FuelStep setScreen={this.setScreen} screen={this.state.screen} title={'Топливо оплачено'} navPrev={() => {this.setScreen(1)}}>
                 <FuelPurchaseScreen4 order={this.state.order} spilled={this.state.spilled} />
               </FuelStep>
           )}
