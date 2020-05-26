@@ -53,9 +53,10 @@ class FuelPurchaseScreen1 extends React.Component {
       onSuccess: (data) => {
         this.props.dispatch(setLoading(false));
         mPosHelper.handleGetStatus(data, {
-          setFuel: this.props.setFuel,
-          onUp: () => {
-            this.props.setScreen(3);
+          onUp: (fuelData) => {
+            this.props.setFuel(fuelData, () => {
+              this.props.setScreen(3);
+            })
           },
           onDown: () => {
             this.props.setScreen(2);

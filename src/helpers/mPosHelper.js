@@ -24,10 +24,8 @@ class mPosHelper {
       Toast('Ошибка связи с ТРК');
       return;
     }
-
     if (data['NozzleUp']){
-      params.onUp && params.onUp();
-      params.setFuel && params.setFuel(this.getCurrentNozzle(data))
+      params.onUp && params.onUp(this.getCurrentNozzle(data));
     }else{
       params.onDown && params.onDown()
     }

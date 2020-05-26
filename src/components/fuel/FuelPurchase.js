@@ -13,10 +13,8 @@ import mPosHelper from "../../helpers/mPosHelper";
 import {setLoading} from "../../store/actions";
 import Checkout from "../checkout/Checkout";
 import pay_const from "../checkout/constants";
-import Button from "../shared/button/Button";
 import APIService from "../../services/APIService";
 import constants from "./constants";
-import Toast from "../shared/toast/Toast";
 
 Modal.setAppElement("#root");
 
@@ -170,18 +168,10 @@ class FuelPurchase extends Component {
     if(payType === pay_const.pay_types.CARD && cardData.type !== pay_const.cards.TERMINAL) {
       this.finishByBackend(cardData, confirmPin)
     }else {
+      this.setShowModal(true);
       this.finishByLocal();
     }
   };
-
-  // test = () => {
-  //   this.setOrder({
-  //     by: constants.by.AMOUNT,
-  //     amount: 100,
-  //     volume: 10,
-  //   });
-  //   this.setState({amount: 10}, () => {this.setScreen(5)})
-  // };
 
   render(){
     return (

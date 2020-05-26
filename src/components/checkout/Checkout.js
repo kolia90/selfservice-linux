@@ -42,6 +42,10 @@ class Checkout extends React.Component {
   processCheckout = () => {
     const isByCard = (this.state.payType === constants.pay_types.CARD);
 
+    // FIXME: сначало запрос на установить тип оплаты
+    this.complete();
+    return;
+
     if(isByCard && this.state.cardData.type !== constants.cards.TERMINAL){
       this.complete()
     }else{

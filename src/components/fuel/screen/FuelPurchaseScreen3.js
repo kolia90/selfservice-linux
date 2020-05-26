@@ -8,6 +8,7 @@ import MPosService from "../../../services/MPosService";
 import { setLoading } from "../../../store/actions";
 import "./FuelPurchaseScreen3.scss";
 import constants from '../constants'
+import APIService from "../../../services/APIService";
 
 const config = require('../../../settings/config');
 
@@ -75,23 +76,23 @@ class FuelPurchaseScreen3 extends React.Component {
     this.props.dispatch(setLoading(true));
 
     let by;
-
     full_tank && (by = constants.by.FULL_TANK);
     volume && (by = constants.by.VOLUME);
     amount && (by = constants.by.AMOUNT);
 
     if(full_tank) volume = config.fullTankVolume;
-    const value = amount ? amount * 100 : volume * 100;
+    let value = amount ? amount * 100 : volume * 100;
 
-    let params = {
-      number: this.props.number,
-      nozzle_number: this.props.fuel['NozzleNumber'],
-      value: value,
-      is_money: !!amount
-    };
+    let number = this.props.number;
+    let nozzle_number = this.props.fuel['NozzleNumber'];
+    let is_money = !!amount;
 
-    MPosService.addFuelToBasket(...params, {
+    console.log(this.state);
+
+    MPosService.addFuelToBasket(number, nozzle_number, is_money, value, {
         onSuccess: (data) => {
+          this.props.dispatch(setLoading(false));
+
           this.props.setOrder({
             by: by,
             amount: this.state.sum,
@@ -100,8 +101,9 @@ class FuelPurchaseScreen3 extends React.Component {
               name: this.tank['FuelName'],
               price: this.price
             }
+          }, () => {
+            this.props.pay(this.state.sum);
           });
-          this.props.pay(amount);
         }, onError: () => {
           this.props.dispatch(setLoading(false));
         }
@@ -124,7 +126,7 @@ class FuelPurchaseScreen3 extends React.Component {
     const isPay = this.props.history.location.state && this.props.history.location.state.pay;
     isPay && this.pay();
 
-    MPosService.getFuelByShort(this.tank['FuelShortName'],{
+    APIService.getFuelByShort(this.tank['FuelShortName'],{
       notifyDisabled: true,
       onSuccess: (response) => {
         this.setState({
