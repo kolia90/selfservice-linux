@@ -7,7 +7,6 @@ import "@brainhubeu/react-carousel/lib/style.css";
 import "./FuelPurchaseScreen1.scss";
 import MPosService from "../../../services/MPosService";
 import mPosHelper from "../../../helpers/mPosHelper";
-import { setLoading } from "../../../store/actions";
 import Toast from "../../shared/toast/Toast";
 
 
@@ -29,29 +28,24 @@ class FuelPurchaseScreen1 extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(setLoading(true));
     MPosService.getFuelConfig({
+      context: this.props,
       onSuccess: (data) => {
-        this.props.dispatch(setLoading(false));
         this.setState({
           dispensers: data['Dispensers'],
           disabled: false,
         })
-      }, onError: () => {
-        this.props.dispatch(setLoading(false));
       }, onTimeout: () => {
-        this.props.dispatch(setLoading(false));
         Toast("Сервер не отвечает")
       }
     })
   }
 
   onSubmit = () => {
-    this.props.dispatch(setLoading(true));
     MPosService.getDispenserStatus(this.props.number, {
+      context: this.props,
       notifyDisabled: true,
       onSuccess: (data) => {
-        this.props.dispatch(setLoading(false));
         mPosHelper.handleGetStatus(data, {
           onUp: (fuelData) => {
             this.props.setFuel(fuelData, () => {
@@ -63,10 +57,8 @@ class FuelPurchaseScreen1 extends React.Component {
           }
         });
       }, onError: () => {
-        this.props.dispatch(setLoading(false));
         this.props.setScreen(2);
       }, onTimeout: () => {
-        this.props.dispatch(setLoading(false));
         Toast("Сервер не отвечает")
       }
     })

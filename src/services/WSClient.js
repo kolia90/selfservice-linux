@@ -1,9 +1,13 @@
+import {DateTime} from "luxon";
+
 class WSClient{
   constructor(url, params){
     this.params = params || {};
     this.name = this.params.name || 'WS';
     this.timeout = this.params.timeout || 3;
     this.retry = this.params.retry || 1;
+
+    this.handler = this.params.handler || null;
 
     this.ws = null;
     this.url = url;
@@ -16,19 +20,23 @@ class WSClient{
     this.id = null;
   }
 
+  getTime(){
+    return DateTime.fromJSDate(new Date()).toFormat('HH:mm:ss')
+  }
+
   initWs(onopen) {
     this.ws = new WebSocket(this.url);
     this.ws.onopen = () => {
       this.ready = true;
-      console.log(`${this.name} client connected`, Date.now());
+      console.log(`${this.name} client connected`, this.getTime());
       if (typeof onopen == 'function') onopen();
       !this.blocked && this.next();
     };
     this.ws.onerror = () => {
-      console.log(`${this.name} connect error`, Date.now());
+      console.log(`${this.name} connect error`, this.getTime());
     };
     this.ws.onclose = () => {
-      console.log(`${this.name} client disconnected`, Date.now());
+      console.log(`${this.name} client disconnected`, this.getTime());
 
       setTimeout(() => {
         this.initWs();
@@ -36,14 +44,20 @@ class WSClient{
       this.ready = false;
     };
 
-    this.ws.onmessage = (data) => {
-      console.log(`${this.name} message`, Date.now(), data);
+    this.ws.onmessage = (message) => {
+      const data = JSON.parse(message.data);
+      console.log(`${this.name} message`, this.getTime(), data);
+
       try {
-        typeof this.callback == 'function' && this.callback(data);
+        this.callback && this.callback(data);
       }catch (e) {}
 
       this.blocked = false;
       clearTimeout(this.id);
+
+      try {
+        this.handler && this.handler(data);
+      }catch (e) {}
 
       this.next();
     };
@@ -54,7 +68,7 @@ class WSClient{
     this.callback = callback || null;
 
     this.ws.send(JSON.stringify(data));
-    console.log(`Send to ${this.name}`, JSON.stringify(data));
+    console.log(`Send to ${this.name}`, this.getTime(), data);
 
     this.id = setTimeout(() => {
       try {
@@ -63,7 +77,7 @@ class WSClient{
       }catch (e) {}
       this.blocked = false;
       this.next()
-    }, this.timeout * 1000)
+    },this.timeout * 1000)
   }
 
   next(){

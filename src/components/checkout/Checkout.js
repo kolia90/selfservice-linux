@@ -49,17 +49,13 @@ class Checkout extends React.Component {
     if(isByCard && this.state.cardData.type !== constants.cards.TERMINAL){
       this.complete()
     }else{
-      const basketPayType = isByCard ? MPosService.PAY_TYPE_CARD : MPosService.PAY_TYPE_MONEY;
+      const basketPayType = isByCard ? MPosService.CONST.PAY_TYPE_CARD : MPosService.CONST.PAY_TYPE_MONEY;
 
-      this.props.dispatch(setLoading(true));
       MPosService.setBasketParams(null, basketPayType, {
+        context: this.props,
         onSuccess: (data) => {
-          this.props.dispatch(setLoading(false));
           this.complete()
-        }, onError: () => {
-          this.props.dispatch(setLoading(false));
         }, onTimeout: () => {
-          this.props.dispatch(setLoading(false));
           Toast("Сервер не отвечает")
         }
       });

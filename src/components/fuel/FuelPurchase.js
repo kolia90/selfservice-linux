@@ -69,6 +69,7 @@ class FuelPurchase extends Component {
 
   checkProcess(){
     MPosService.getDispenserStatus(this.state.number, {
+      loading: false,
       onSuccess: (data) => {
         const result = mPosHelper.handleSpillProcess(data);
         if (result.is_ended){
@@ -94,29 +95,24 @@ class FuelPurchase extends Component {
   };
 
   finishByLocal = () => {
-    this.props.dispatch(setLoading(true));
-
     MPosService.getBasketData({
+      context: this.props,
       onSuccess: (data) => {
         // TODO: check
         const sum = data.FuelData.TotalSum;
 
         MPosService.fiscalCheck(data, sum, {
+          context: this.props,
           onSuccess: (data) => {
-            this.props.dispatch(setLoading(false));
             // START check process
             this.checkProcess()
-          }, onError: () => {
-            this.props.dispatch(setLoading(false));
-          }, onTimeout: () => {
-            this.props.dispatch(setLoading(false));
-          }
+          },
+          onError: () => {},
+          onTimeout: () => {}
         })
-      }, onError: () => {
-        this.props.dispatch(setLoading(false));
-      }, onTimeout: () => {
-        this.props.dispatch(setLoading(false));
-      }
+      },
+      onError: () => {},
+      onTimeout: () => {}
     })
   };
 

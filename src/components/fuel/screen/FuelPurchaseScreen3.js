@@ -5,7 +5,6 @@ import H2 from "../../shared/h2/H2";
 import Button from "../../shared/button/Button";
 import ConfirmAlert from "../../shared/confirm-alert/ConfirmAlert";
 import MPosService from "../../../services/MPosService";
-import { setLoading } from "../../../store/actions";
 import "./FuelPurchaseScreen3.scss";
 import constants from '../constants'
 import APIService from "../../../services/APIService";
@@ -63,8 +62,6 @@ class FuelPurchaseScreen3 extends React.Component {
   };
 
   submit = (volume, amount, full_tank) => {
-    this.props.dispatch(setLoading(true));
-
     let by;
     full_tank && (by = constants.by.FULL_TANK);
     volume && (by = constants.by.VOLUME);
@@ -77,12 +74,9 @@ class FuelPurchaseScreen3 extends React.Component {
     let nozzle_number = this.props.fuel['NozzleNumber'];
     let is_money = !!amount;
 
-    console.log(this.state);
-
     MPosService.addFuelToBasket(number, nozzle_number, is_money, value, {
+        context: this.props,
         onSuccess: (data) => {
-          this.props.dispatch(setLoading(false));
-
           this.props.setOrder({
             by: by,
             amount: this.state.sum,
@@ -94,9 +88,7 @@ class FuelPurchaseScreen3 extends React.Component {
           }, () => {
             this.props.pay(this.state.sum);
           });
-        }, onError: () => {
-          this.props.dispatch(setLoading(false));
-        }
+        }, onError: () => {}
     })
   };
 

@@ -1,5 +1,6 @@
 import Toast from "../components/shared/toast/Toast";
 import WSClient from "./WSClient";
+import {setLoading} from "../store/actions";
 
 const constants = require('./constants');
 const config = require('../settings/config');
@@ -8,9 +9,16 @@ const config = require('../settings/config');
 export class MPosService {
   static _client = null;
 
-  static client = () => {
+  handlerMessage = (message) => {};
+
+  getClient = () => {
     if(MPosService._client === null){
-      MPosService._client = new WSClient(config.mPosWsUrl, {name: 'mPos', ...MPosService.clientParams})
+      let params = {
+        name: 'mPos',
+        handler: this.handlerMessage,
+        ...this.clientParams
+      };
+      MPosService._client = new WSClient(config.mPosWsUrl, params)
     }
     return MPosService._client;
   };
@@ -21,18 +29,28 @@ export class MPosService {
     ru: 2
   };
 
-  PAY_TYPE_MONEY = 0;
-  PAY_TYPE_CARD = 1;
+  CONST = {
+    TRUE: 1,
+    FALSE: 0,
 
-  static default(...args){
-    return new MPosService(...args)
+    PAY_TYPE_MONEY: 0,
+    PAY_TYPE_CARD: 1,
+
+    CHECK_NONE: 0,
+    CHECK_PRINT_QUEUE: 1,
+    CHECK_IN_PROCESS: 2,
+    CHECK_COMPLETED: 3,
+  };
+
+  static default(config){
+    return new MPosService(config)
   }
 
-  constructor(params){
-    params = params || {};
-    this.operatorId = params.operatorId || '1001';
-    this.lang = this.LANG_MAP[params.lang] || this.LANG_MAP.ru;
-    MPosService.clientParams = params.clientParams;
+  constructor(config){
+    config = config || {};
+    this.operatorId = config.operatorId || '1001';
+    this.lang = this.LANG_MAP[config.lang] || this.LANG_MAP.ru;
+    this.clientParams = config.clientParams;
   }
 
   configure(operatorId, lang){
@@ -48,71 +66,85 @@ export class MPosService {
     this.lang = this.LANG_MAP[lang];
   }
 
-  handler = (config) => {
-    return (message) => {
-      const data = JSON.parse(message.data);
+  setLoading(params, value){
+    if(params.loading === false || params.loading === null) return;
+    try{
+      params.context && params.context.dispatch(setLoading(value))
+    }catch (e) {}
+  }
+
+  getHandler = (params) => {
+    return (data) => {
+      this.setLoading(params, false);
+
       if(data['ResultCode'] === 0){
-        config && config.onSuccess && config.onSuccess(data)
+        params && params.onSuccess && params.onSuccess(data)
       }else{
-        config && config.onError && config.onError(data);
-        !(config && config.notifyDisabled) && Toast((config && config.onErrorMessage) || (
+        params && params.onError && params.onError(data);
+        !(params && params.notifyDisabled) && Toast((params && params.onErrorMessage) || (
             data['ResultMessage'] || 'Сталася помилка :('
         ));
       }
     }
   };
 
-  timeout = (config) => {
+  getTimeout = (params) => {
     return () => {
-      config && config.onTimeout && config.onTimeout();
+      this.setLoading(params, false);
+      params && params.onTimeout && params.onTimeout();
     }
+  };
+
+  send = (data, params) => {
+    this.setLoading(params, true);
+    this.getClient().send(data, this.getHandler(params), this.getTimeout(params));
   };
 
   /* MPOS methods */
 
-  checkConnect(...args){
-    return MPosService.client().send({
+  checkConnect(params){
+    this.send({
       Command: constants.POS_CONNECT,
       OperatorId: this.operatorId,
       Lang: this.lang
-    }, this.handler(...args), this.timeout(...args));
+    }, params)
   }
 
-  getFuelConfig(...args){
-    return MPosService.client().send({
+  getFuelConfig(params){
+    this.send({
       Command: constants.POS_GET_FUEL_CONFIG,
       OperatorId: this.operatorId,
       Lang: this.lang
-    }, this.handler(...args), this.timeout(...args));
+    }, params)
   }
 
-  getDispenserStatus(number, ...args){
-    return MPosService.client().send({
+  getDispenserStatus(number, params){
+    this.send({
       Command: constants.POS_GET_DISPENSER_STATUS,
       DispenserNumber: number,
       OperatorId: this.operatorId,
       Lang: this.lang
-    }, this.handler(...args), this.timeout(...args));
+    }, params)
   }
 
-  setBasketParams(level, pay_type, ...args){
-    return MPosService.client().send({
+  setBasketParams(level, pay_type, params){
+    this.send({
       Command: constants.POS_BASKET_SET_PARAMS,
       ClientLoyaltyCard: level,
       PayTypeId: pay_type
-    }, this.handler(...args), this.timeout(...args));
+    }, params)
   }
 
-  getBasketData(...args){
-    return MPosService.client().send({
+  getBasketData(params){
+    this.send({
       Command: constants.POS_BASKET_GET_DATA,
       OperatorId: this.operatorId,
       Lang: this.lang
-    }, this.handler(...args), this.timeout(...args));
+    }, params)
   }
 
-  addFuelToBasket(number, nozzle_number, is_money, value, ...args){
-    return MPosService.client().send({
+  addFuelToBasket(number, nozzle_number, is_money, value, params){
+    this.send({
       Command: constants.POS_BASKET_FUEL_ADD,
       DispenserNumber: number,
       NozzleNumber: nozzle_number,
@@ -120,31 +152,31 @@ export class MPosService {
       Value: value,
       OperatorId: this.operatorId,
       Lang: this.lang
-    }, this.handler(...args), this.timeout(...args));
+    }, params)
   }
 
-  basketClear(...args){
-    return MPosService.client().send({
+  basketClear(params){
+    this.send({
       Command: constants.POS_BASKET_CLEAR
-    }, this.handler(...args), this.timeout(...args));
+    }, params)
   }
 
-  fiscalCheck(data, sum, ...args){
-    return MPosService.client().send({
+  fiscalCheck(data, sum, params){
+    this.send({
       Command: constants.POS_FISCAL_CHECK,
       CheckData: data,
       PayTypeCommonSum: sum,
       OperatorId: this.operatorId,
       Lang: this.lang
-    }, this.handler(...args), this.timeout(...args));
+    }, params)
   }
 
-  copyCheck(data, sum, ...args){
-    return MPosService.client().send({
+  copyCheck(data, sum, params){
+    this.send({
       Command: constants.POS_COPY_CHECK,
       OperatorId: this.operatorId,
       Lang: this.lang
-    }, this.handler(...args), this.timeout(...args));
+    }, params);
   }
 
 }

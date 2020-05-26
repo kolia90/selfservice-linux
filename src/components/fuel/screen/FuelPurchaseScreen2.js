@@ -6,29 +6,26 @@ import Button from "../../shared/button/Button";
 import MPosService from "../../../services/MPosService";
 import mPosHelper from "../../../helpers/mPosHelper";
 import Toast from "../../shared/toast/Toast";
-import { setLoading } from "../../../store/actions";
 import "./FuelPurchaseScreen2.scss";
 
 
 class FuelPurchaseScreen2 extends React.Component {
 
   onSubmit = () => {
-    this.props.dispatch(setLoading(true));
     MPosService.getDispenserStatus(this.props.number, {
+      context: this.props,
       notifyDisabled: true,
       onSuccess: (data) => {
-        this.props.dispatch(setLoading(false));
         mPosHelper.handleGetStatus(data, {
-          setFuel: this.props.setFuel,
-          onUp: () => {
-            this.props.setScreen(3);
+          onUp: (fuelData) => {
+            this.props.setFuel(fuelData, () => {
+              this.props.setScreen(3);
+            })
           },
           onDown: () => {
             Toast('Вставте пистолет в бак и повторите операцию');
           }
         });
-      }, onError: () => {
-        this.props.dispatch(setLoading(false));
       }
     })
   };
