@@ -33,7 +33,10 @@ class FuelPurchase extends Component {
       checkId: null,
       amount: null,
       terminalStatus: null
-    }
+    };
+
+    this.timerStatus = null;
+    this.timerTerminal = null;
   }
 
   setScreen = (value, ...args) => {
@@ -76,11 +79,23 @@ class FuelPurchase extends Component {
     this.setState({terminalStatus: value}, ...args)
   };
 
+  componentWillUnmount() {
+    this.timerStatus && clearTimeout(this.timerStatus);
+    this.stopTerminalStatus()
+  }
+
+  stopTerminalStatus(){
+    this.timerTerminal && clearTimeout(this.timerTerminal);
+  }
+
   checkProcess(){
     MPosService.getDispenserStatus(this.state.number, {
       loading: false,
       onSuccess: (data) => {
         const result = mPosHelper.handleSpillProcess(data);
+        if(result.is_ended || result.status_int === MPosService.CONST.ORDER_PROCESS){
+          this.stopTerminalStatus()
+        }
         if (result.is_ended){
             this.setSpilled({status: 'success', ...result});
             this.setScreen(4);
@@ -88,8 +103,7 @@ class FuelPurchase extends Component {
             this.setShowModal(false);
         }else{
           this.setSpilled(result);
-
-          setTimeout(() => {
+          this.timerStatus = setTimeout(() => {
             this.checkProcess()
           }, 500)
         }
@@ -111,7 +125,7 @@ class FuelPurchase extends Component {
           this.setTerminalStatus(null);
         }
         if(this.state.checkId){
-          setTimeout(() => {
+          this.timerTerminal = setTimeout(() => {
             this.checkTerminalStatus()
           }, 1000)
         }
