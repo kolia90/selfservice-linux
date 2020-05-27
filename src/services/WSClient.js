@@ -4,7 +4,7 @@ class WSClient{
   constructor(url, params){
     this.params = params || {};
     this.name = this.params.name || 'WS';
-    this.timeout = this.params.timeout || 3;
+    this.timeout = this.params.timeout || 5;
     this.retry = this.params.retry || 1;
 
     this.handler = this.params.handler || null;
@@ -18,6 +18,7 @@ class WSClient{
     this.blocked = false;
     this.ready = false;
     this.id = null;
+    this.force = false;
   }
 
   getTime(){
@@ -38,9 +39,14 @@ class WSClient{
     this.ws.onclose = () => {
       console.log(`${this.name} client disconnected`, this.getTime());
 
-      setTimeout(() => {
+      if(this.force){
+        this.force = false;
         this.initWs();
-      }, this.retry * 1000);
+      }else{
+        setTimeout(() => {
+          this.initWs();
+        }, this.retry * 1000);
+      }
       this.ready = false;
     };
 
@@ -63,42 +69,60 @@ class WSClient{
     };
   }
 
-  run(data, callback, timeout){
+  reconnect(){
+    this.force = true;
+    this.ws.close();
+  }
+
+  addToQueue(data, callback, timeout_callback, params){
+    this.queue.push({
+      data: data,
+      callback: callback,
+      timeout_callback: timeout_callback,
+      params: params
+    });
+  }
+
+  run(data, callback, timeout_callback, params){
+    if(this.ws.readyState !== WebSocket.OPEN){
+      this.addToQueue(data, callback, timeout_callback, params);
+      return;
+    }
+
     this.blocked = true;
     this.callback = callback || null;
 
     this.ws.send(JSON.stringify(data));
     console.log(`Send to ${this.name}`, this.getTime(), data);
 
+    let timeout = (params && params.timeout) ? params.timeout : this.timeout;
+
     this.id = setTimeout(() => {
       try {
         console.log(`Request ${this.name} timeout`);
-        typeof timeout == 'function' && timeout();
+        this.reconnect();
+        timeout_callback && timeout_callback();
       }catch (e) {}
       this.blocked = false;
       this.next()
-    },this.timeout * 1000)
+    },timeout * 1000)
   }
 
   next(){
     const item = this.queue.shift();
-    item && this.run(item.data, item.callback, item.timeout)
+    item && this.run(item.data, item.callback, item.timeout_callback, item.params)
   }
 
-  process (data, callback, timeout) {
+  process (data, callback, timeout_callback, params) {
     if (!this.blocked && this.ready && this.ws.readyState === WebSocket.OPEN) {
-      this.run(data, callback, timeout);
+      this.run(data, callback, timeout_callback, params);
     } else {
-      this.queue.push({
-        data: data,
-        callback: callback,
-        timeout: timeout,
-      })
+      this.addToQueue(data, callback, timeout_callback, params);
     }
   }
 
-  send(data, callback, timeout){
-    this.process(data, callback, timeout);
+  send(data, callback, timeout, params){
+    this.process(data, callback, timeout, params);
   }
 }
 

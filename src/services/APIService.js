@@ -1,5 +1,6 @@
 import axios from "axios";
 import Toast from "../components/shared/toast/Toast";
+import {setLoading} from "../store/actions";
 
 const config = require('../settings/config');
 
@@ -42,10 +43,24 @@ class APIService {
     return msg
   }
 
+  static setLoading(config, value){
+    if(!config || config.loading === false || config.loading === null) return;
+    try{
+      config.context && config.context.dispatch(setLoading(value))
+    }catch (e) {}
+  }
+
   static process(promise, config){
+    this.setLoading(config, true);
     promise.then((response) => {
+      if(config.loadingOnSuccess !== false) {
+        this.setLoading(config, false);
+      }
       config && config.onSuccess && config.onSuccess(response)
     }).catch((e) => {
+      if(config.loadingOnError !== false) {
+        this.setLoading(config, false);
+      }
       config && config.onError && config.onError(e);
       !(config && config.notifyDisabled) && Toast((config && config.onErrorMessage) || (
           (e.response && this.getErrorMessage(e.response.data)) || 'Сталася помилка :('

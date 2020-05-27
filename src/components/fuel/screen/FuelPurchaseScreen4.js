@@ -7,7 +7,7 @@ import Button from "../../shared/button/Button";
 import Order from "../../shared/order/Order";
 import "./FuelPurchaseScreen4.scss";
 
-const FuelPurchaseScreen4 = ({ order, spilled, history }) => {
+const FuelPurchaseScreen4 = ({ order, spilled, checkId, history }) => {
   const title = (spilled.status === 'error') ? 'Извините, произошла ошибка!' : 'Спасибо, ваш заказ принят!';
 
   return (
@@ -15,7 +15,7 @@ const FuelPurchaseScreen4 = ({ order, spilled, history }) => {
       <H2 text={title} />
       <H1 text="Не забудьте забрать ваш чек." />
 
-      <Order order={order} spilled={spilled} />
+      <Order order={order} spilled={spilled} checkId={checkId} />
 
       <div className="wrapper-button two">
         <Button

@@ -2,7 +2,7 @@ import React from "react";
 import { DateTime } from "luxon"
 import "./Order.scss";
 
-const Order = ({order, spilled}) => {
+const Order = ({order, spilled, checkId}) => {
 
   const statusName = (spilled.status === 'error') ? 'Ошибка' : 'Заказ получен';
   // const time = DateTime.fromISO(order.created).toFormat('HH:mm');
@@ -11,7 +11,7 @@ const Order = ({order, spilled}) => {
   return (
     <div className="order-block">
       <div>
-        <span className="order-number">Заказ № {order.id || '------'}</span>
+        <span className="order-number">Заказ № {checkId || '------'}</span>
         <span className="float-r order-payment-status">Оплачен</span>
       </div>
       <div>
@@ -28,7 +28,7 @@ const Order = ({order, spilled}) => {
               <td className="text-aling-l primary">
                   <div className="single">{order.fuel && order.fuel.name}</div>
               </td>
-              <td className="text-aling-c primary bold">{order.volume}</td>
+              <td className="text-aling-c primary bold">{spilled.give_volume}</td>
               <td className="text-aling-r primary bold">{order.fuel.price} грн</td>
             </tr>
           </tbody>
@@ -36,7 +36,7 @@ const Order = ({order, spilled}) => {
         <div className="separator" />
         <div className="wrapper-order-total">
           <div className="float-l primary">Итого</div>
-          <div className="float-r primary bold">{order.amount} грн</div>
+          <div className="float-r primary bold">{spilled.give_amount} грн</div>
         </div>
         <div className="separator" />
         <div className="wrapper-order-status">

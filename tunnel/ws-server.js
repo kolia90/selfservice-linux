@@ -10,6 +10,9 @@ const wssMPos = new WebSocket.Server({ noServer: true });
 const wssSelfCash = new WebSocket.Server({ noServer: true });
 const wssCash = new WebSocket.Server({ noServer: true });
 
+const wssSelfBank = new WebSocket.Server({ noServer: true });
+const wssBank = new WebSocket.Server({ noServer: true });
+
 const port = argv.port || 8080;
 console.log('Port: ', port);
 
@@ -24,6 +27,22 @@ wssSelfMPos.on('connection', function connection(ws) {
 wssMPos.on('connection', function connection(ws) {
   ws.on('message', function (data) {
     wssSelfMPos.clients.forEach(function (client) {
+      if (client.readyState === WebSocket.OPEN) client.send(data);
+    });
+  });
+});
+
+wssSelfBank.on('connection', function connection(ws) {
+  ws.on('message', function (data) {
+    wssBank.clients.forEach(function (client) {
+      if (client.readyState === WebSocket.OPEN) client.send(data);
+    });
+  });
+});
+
+wssBank.on('connection', function connection(ws) {
+  ws.on('message', function (data) {
+    wssSelfBank.clients.forEach(function (client) {
       if (client.readyState === WebSocket.OPEN) client.send(data);
     });
   });
@@ -63,6 +82,14 @@ wsServer.on('upgrade', function upgrade(request, socket, head) {
   } else if (pathname === '/tunnel/cash') {
     wssCash.handleUpgrade(request, socket, head, function done(ws) {
       wssCash.emit('connection', ws, request);
+    });
+  } else if (pathname === '/tunnel/self-bank') {
+    wssSelfBank.handleUpgrade(request, socket, head, function done(ws) {
+      wssSelfBank.emit('connection', ws, request);
+    });
+  } else if (pathname === '/tunnel/bank') {
+    wssBank.handleUpgrade(request, socket, head, function done(ws) {
+      wssBank.emit('connection', ws, request);
     });
   } else {
     socket.destroy();

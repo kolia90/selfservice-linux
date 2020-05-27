@@ -109,6 +109,7 @@ class FuelPurchaseScreen3 extends React.Component {
     isPay && this.pay();
 
     APIService.getFuelByShort(this.tank['FuelShortName'],{
+      loading: false,
       notifyDisabled: true,
       onSuccess: (response) => {
         this.setState({

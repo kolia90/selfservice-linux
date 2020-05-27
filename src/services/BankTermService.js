@@ -5,28 +5,24 @@ const constants = require('./constants');
 const config = require('../settings/config');
 
 
-export class CashService {
+export class BankTermService {
   static _client = null;
 
   CONST = {
     TRUE: 1,
-    FALSE: 0,
-
-    STATUS_NOT_READY: 0,
-    STATUS_CLOSED: 1,
-    STATUS_OPEN: 2,
+    FALSE: 0
   };
 
   getClient = () => {
-    if(CashService._client === null){
-      CashService._client = new WSClient(config.cashWsUrl, {name: 'Cash', ...this.clientParams})
+    if(BankTermService._client === null){
+      BankTermService._client = new WSClient(config.bankTermWsUrl, {name: 'Term', ...this.clientParams})
     }
-    return CashService._client;
+    return BankTermService._client;
   };
 
   static default(params){
-    window.cash = new CashService(params);
-    return new CashService(params)
+    window.bank = new BankTermService(params);
+    return new BankTermService(params)
   }
 
   constructor(params){
@@ -60,32 +56,14 @@ export class CashService {
     this.getClient().send(data, this.getHandler(params), this.getTimeout(params));
   };
 
-  /* Cash methods */
+  /* Terminal methods */
 
   getStatus(params){
     this.send({
-      Command: constants.CA_GET_STATUS,
+      Command: constants.BT_GET_COMMAND_STATUS,
     }, params)
   }
 
-  start(max_sum, params){
-    this.send({
-      Command: constants.CA_START,
-      MaxSum: max_sum
-    }, params)
-  }
-
-  stop(params){
-    this.send({
-      Command: constants.CA_STOP,
-    }, params)
-  }
-
-  clear(params){
-    this.send({
-      Command: constants.CA_CLEAR,
-    }, params)
-  }
 }
 
-export default CashService.default()
+export default BankTermService.default()

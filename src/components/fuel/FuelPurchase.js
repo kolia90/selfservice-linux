@@ -10,10 +10,10 @@ import FuelPurchaseModal from "./FuelPurchaseModal";
 import FuelStep from "./FuelStep";
 import MPosService from "../../services/MPosService";
 import mPosHelper from "../../helpers/mPosHelper";
-import {setLoading} from "../../store/actions";
 import Checkout from "../checkout/Checkout";
 import pay_const from "../checkout/constants";
 import APIService from "../../services/APIService";
+import BankTermService from "../../services/BankTermService";
 import constants from "./constants";
 
 Modal.setAppElement("#root");
@@ -22,7 +22,6 @@ class FuelPurchase extends Component {
 
   constructor(props) {
     super(props);
-    this.ws = null;
     this.state = {
       screen: 1,
       showModal: false,
@@ -31,7 +30,9 @@ class FuelPurchase extends Component {
       order: null,
       spilled: {},
       finished: false,
-      amount: null
+      checkId: null,
+      amount: null,
+      terminalStatus: null
     }
   }
 
@@ -67,6 +68,14 @@ class FuelPurchase extends Component {
     this.setState({amount: value}, ...args)
   };
 
+  setCheckId = (value, ...args) => {
+    this.setState({checkId: value}, ...args)
+  };
+
+  setTerminalStatus = (value, ...args) => {
+    this.setState({terminalStatus: value}, ...args)
+  };
+
   checkProcess(){
     MPosService.getDispenserStatus(this.state.number, {
       loading: false,
@@ -88,6 +97,28 @@ class FuelPurchase extends Component {
     })
   }
 
+  checkTerminalStatus(){
+    BankTermService.getStatus({
+      loading: false,
+      onSuccess: (data) => {
+        const commandExist = (data['CommandExist'] === BankTermService.CONST.TRUE);
+        if(commandExist){
+          this.setTerminalStatus({
+            command: data['CommandName'],
+            status: data['StatusText'],
+          });
+        }else{
+          this.setTerminalStatus(null);
+        }
+        if(this.state.checkId){
+          setTimeout(() => {
+            this.checkTerminalStatus()
+          }, 1000)
+        }
+      }
+    })
+  }
+
   pay = (amount) => {
     this.setAmount(amount, () => {
       this.setScreen(5)
@@ -98,18 +129,21 @@ class FuelPurchase extends Component {
     MPosService.getBasketData({
       context: this.props,
       onSuccess: (data) => {
-        // TODO: check
         const sum = data.FuelData.TotalSum;
+        const checkId = data.MPosCheckId;
 
-        MPosService.fiscalCheck(data, sum, {
-          context: this.props,
-          onSuccess: (data) => {
-            // START check process
-            this.checkProcess()
-          },
-          onError: () => {},
-          onTimeout: () => {}
-        })
+        this.setCheckId(checkId, () => {
+          MPosService.fiscalCheck(data, sum, {
+            context: this.props,
+            onSuccess: (data) => {
+              // START check process
+              this.checkProcess();
+              this.checkTerminalStatus();
+            },
+            onError: () => {},
+            onTimeout: () => {}
+          })
+        });
       },
       onError: () => {},
       onTimeout: () => {}
@@ -127,8 +161,9 @@ class FuelPurchase extends Component {
       (this.state.order.by === constants.by.FULL_TANK) && (orderData['full_tank'] = true);
     }
 
-    this.props.dispatch(setLoading(true));
     APIService.setFuelOrder(orderData, {
+      context: this.props,
+      loadingOnSuccess: false,
       onSuccess: (response) => {
         let checkoutData = {
           order: response.id,
@@ -144,17 +179,12 @@ class FuelPurchase extends Component {
 
         APIService.checkoutOrder(checkoutData, this.props.user.token, {
           onSuccess: (response) => {
-            this.props.dispatch(setLoading(false));
             this.setScreen(4);
           },
-          onError: () => {
-            this.props.dispatch(setLoading(false));
-          }
+          onError: () => {}
         });
       },
-      onError: () => {
-        this.props.dispatch(setLoading(false));
-      }
+      onError: () => {}
     });
 
     MPosService.basketClear()
@@ -198,7 +228,7 @@ class FuelPurchase extends Component {
           )}
           {this.state.screen === 4 && (
               <FuelStep setScreen={this.setScreen} screen={this.state.screen} title={'Топливо оплачено'} navPrev={() => {this.setScreen(1)}}>
-                <FuelPurchaseScreen4 order={this.state.order} spilled={this.state.spilled} />
+                <FuelPurchaseScreen4 order={this.state.order} spilled={this.state.spilled} checkId={this.state.checkId} />
               </FuelStep>
           )}
           {this.state.screen === 5 && (
@@ -212,7 +242,7 @@ class FuelPurchase extends Component {
                   isOpen={this.state.showModal}
                   onRequestClose={() => this.setShowModal(false)}
               >
-                <FuelPurchaseModal order={this.state.order} spilled={this.state.spilled} />
+                <FuelPurchaseModal order={this.state.order} spilled={this.state.spilled} terminalStatus={this.state.terminalStatus} />
               </Modal>
           )}
         </>

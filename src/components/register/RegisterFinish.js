@@ -8,7 +8,6 @@ import H2 from "../shared/h2/H2";
 import Button from "../shared/button/Button";
 import Logo from "../shared/logo/Logo";
 import routes from "../../constants/routes";
-import {setLoading} from "../../store/actions";
 import APIService from "../../services/APIService";
 import "./RegisterFinish.scss";
 
@@ -30,12 +29,10 @@ class RegisterFinish extends Component {
 
   componentDidMount = () => {
     if(!this.props.user) return;
-    this.props.dispatch(setLoading(true));
 
     APIService.getLevel(this.props.user.token, {
+      context: this.props,
       onSuccess: (response) => {
-        this.props.dispatch(setLoading(false));
-
         this.setState({
           number: formatStringByPattern('9999 9999 9999 9999', response.data.number),
           balance:  response.data.balance
@@ -43,9 +40,7 @@ class RegisterFinish extends Component {
 
         this.generateBarCode(response.data.number)
 
-      }, onError: () => {
-        this.props.dispatch(setLoading(false));
-      }
+      }, onError: () => {}
     });
   };
 

@@ -5,8 +5,20 @@ import Rectangle from "../shared/rectangle/Rectangle";
 import Header from "../shared/header/Header";
 import { withRouter } from "react-router-dom";
 import H1 from "../shared/h1/H1";
+import MPosService from "../../services/MPosService";
+import Toast from "../shared/toast/Toast";
 
 const Service = ({ history }) => {
+
+  MPosService.checkConnect({
+    onError: () => {
+      Toast('Внутренняя ошибка. Позовите оператора');
+    },
+    onTimeout: () => {
+      Toast('Ошибка связи с кассой');
+    }
+  });
+
   return (
     <div>
       <Header />

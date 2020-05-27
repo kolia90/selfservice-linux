@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import routes from "../../constants/routes";
 import RegisterStep from "./RegisterStep";
 import APIService from "../../services/APIService";
-import { setLoading } from "../../store/actions";
 
 
 class RegisterStepProfile extends Component {
@@ -20,18 +19,14 @@ class RegisterStepProfile extends Component {
   }
 
   onSubmit = (value) => {
-    this.props.dispatch(setLoading(true));
-
     let params = {};
     params[this.props.attr] = value;
 
     APIService.registerProfile(params, this.props.user.token, {
+      context: this.props,
       onSuccess: (response) => {
-        this.props.dispatch(setLoading(false));
         this.props.history.push(this.props.next)
-      }, onError: () => {
-        this.props.dispatch(setLoading(false));
-      }
+      }, onError: () => {}
     })
   };
 

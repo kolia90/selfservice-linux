@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import H1 from "../../shared/h1/H1";
 import Button from "../../shared/button/Button";
@@ -33,9 +34,10 @@ class CheckoutCash extends React.Component {
 
   componentDidMount() {
     CashService.getStatus({
+      context: this.props,
       onSuccess: (data) => {
         const status = parseInt(data['Status']);
-        if (status === 0){
+        if (status === CashService.CONST.STATUS_NOT_READY){
           Toast('Устройство не готово')
         } else {
           this.setState({
@@ -56,7 +58,7 @@ class CheckoutCash extends React.Component {
     CashService.getStatus({
       onSuccess: (data) => {
         const status = parseInt(data['Status']);
-        if (status === 1){
+        if (status === CashService.CONST.STATUS_CLOSED){
           this.setIsReady()
         }
       },
@@ -79,8 +81,9 @@ class CheckoutCash extends React.Component {
 
   startCashProcess = () => {
     CashService.start(this.state.amount, {
+      loading: false,
       onSuccess: (data) => {
-        if(parseInt(data['SumReady']) === 1){
+        if(parseInt(data['SumReady']) === CashService.CONST.TRUE){
           this.setIsReady()
         }else{
           this.startCheckStatus()
@@ -133,6 +136,9 @@ class CheckoutCash extends React.Component {
             <Button title="Готово" disabled={!this.state.ready} onClick={() => {
               this.stopCashProcess();
             }} />
+            <Button title="Принудительно" onClick={() => {
+              this.props.onFinish();
+            }} />
           </div>
         </div>
     );
@@ -144,4 +150,4 @@ CheckoutCash.propTypes = {
   onFinish : PropTypes.func.isRequired,
 };
 
-export default withRouter(CheckoutCash);
+export default connect()(withRouter(CheckoutCash));

@@ -3,6 +3,7 @@ module.exports = {
 
   mPosWsUrl: 'ws://127.0.0.1:8000/mpos', // url for websocket mPos
   cashWsUrl: 'ws://127.0.0.1:8000/cash', // url for websocket Cash
+  bankTermWsUrl: 'ws://127.0.0.1:8000/bankterm', // url for websocket Cash
 
   apiUrl: 'http://socar.themakeapp.com', // socar API backend
   apiKey: '29b9f4af-844c-4525-b8ae-ce125f13c3bd', // key for socar API backend

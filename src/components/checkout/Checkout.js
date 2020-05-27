@@ -8,7 +8,6 @@ import CheckoutRest from "./screen/CheckoutRest";
 import constants from "./constants";
 import CheckoutCash from "./screen/CheckoutCash";
 import MPosService from "../../services/MPosService";
-import {setLoading} from "../../store/actions";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import Toast from "../shared/toast/Toast";
@@ -42,16 +41,15 @@ class Checkout extends React.Component {
   processCheckout = () => {
     const isByCard = (this.state.payType === constants.pay_types.CARD);
 
-    // FIXME: сначало запрос на установить тип оплаты
-    this.complete();
-    return;
-
     if(isByCard && this.state.cardData.type !== constants.cards.TERMINAL){
       this.complete()
     }else{
       const basketPayType = isByCard ? MPosService.CONST.PAY_TYPE_CARD : MPosService.CONST.PAY_TYPE_MONEY;
 
-      MPosService.setBasketParams(null, basketPayType, {
+      this.complete();
+      return;
+
+      MPosService.setBasketParams(this.props.levelNumber, basketPayType, {
         context: this.props,
         onSuccess: (data) => {
           this.complete()
@@ -156,7 +154,8 @@ Checkout.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.userState
+  user: state.userState,
+  levelNumber: state.levelState
 });
 
 export default connect(mapStateToProps)(withRouter(Checkout));

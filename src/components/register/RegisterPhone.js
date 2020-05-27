@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import routes from "../../constants/routes";
 import { withRouter } from "react-router-dom";
 import RegisterStep from "./RegisterStep";
-import { setLoading } from "../../store/actions";
 import APIService from "../../services/APIService";
 
 
@@ -18,21 +17,17 @@ class RegisterPhone extends Component {
 
   onSubmit = (value) => {
     let phone = `+38${value}`;
-    this.props.dispatch(setLoading(true));
 
     APIService.registerPhone(phone, {
+      context: this.props,
       onSuccess: (response) => {
-        this.props.dispatch(setLoading(false));
-
         this.props.history.push({
           pathname: `${routes.REGISTER_CODE}`,
           data: {
             phone: phone
           }
         })
-      }, onError: () => {
-        this.props.dispatch(setLoading(false));
-      }
+      }, onError: () => {}
     })
   };
 

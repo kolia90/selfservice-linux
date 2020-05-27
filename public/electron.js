@@ -13,6 +13,7 @@ log.info('App starting...');
 // TODO: temp proxy scripts
 require('../tunnel/ws-mpos');
 require('../tunnel/ws-cash');
+require('../tunnel/ws-bank');
 // TODO: End temp proxy scripts
 
 

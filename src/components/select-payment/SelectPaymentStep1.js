@@ -21,6 +21,7 @@ class SelectPaymentStep1 extends React.Component{
 
   componentDidMount() {
     APIService.getLevel(this.props.user.token, {
+      loading: false,
       onSuccess: (response) => {
         this.setState({
           level: {
@@ -32,6 +33,7 @@ class SelectPaymentStep1 extends React.Component{
     });
 
     APIService.getCards(this.props.user.token, {
+      context: this.props,
       onSuccess: (response) => {
         this.setState({
           cards: response.data.results || []

@@ -33,8 +33,8 @@ export class MPosService {
     TRUE: 1,
     FALSE: 0,
 
-    PAY_TYPE_MONEY: 0,
-    PAY_TYPE_CARD: 1,
+    PAY_TYPE_MONEY: 1,
+    PAY_TYPE_CARD: 2,
 
     CHECK_NONE: 0,
     CHECK_PRINT_QUEUE: 1,
@@ -42,15 +42,16 @@ export class MPosService {
     CHECK_COMPLETED: 3,
   };
 
-  static default(config){
-    return new MPosService(config)
+  static default(params){
+    window.mpos = new MPosService(params);
+    return new MPosService(params)
   }
 
-  constructor(config){
-    config = config || {};
-    this.operatorId = config.operatorId || '1001';
-    this.lang = this.LANG_MAP[config.lang] || this.LANG_MAP.ru;
-    this.clientParams = config.clientParams;
+  constructor(params){
+    params = params || {};
+    this.operatorId = params.operatorId || '1001';
+    this.lang = this.LANG_MAP[params.lang] || this.LANG_MAP.ru;
+    this.clientParams = params.clientParams;
   }
 
   configure(operatorId, lang){
@@ -67,7 +68,7 @@ export class MPosService {
   }
 
   setLoading(params, value){
-    if(params.loading === false || params.loading === null) return;
+    if(!params || params.loading === false || params.loading === null) return;
     try{
       params.context && params.context.dispatch(setLoading(value))
     }catch (e) {}
@@ -174,6 +175,24 @@ export class MPosService {
   copyCheck(data, sum, params){
     this.send({
       Command: constants.POS_COPY_CHECK,
+      OperatorId: this.operatorId,
+      Lang: this.lang
+    }, params);
+  }
+
+  getCheckStatus(check_id, params){
+    this.send({
+      Command: constants.POS_GET_CHECK_STATUS,
+      MPosCheckId: check_id,
+      OperatorId: this.operatorId,
+      Lang: this.lang
+    }, params);
+  }
+
+  shiftProc(proc_id, params){
+    this.send({
+      Command: constants.POS_SHIFT_PROC,
+      ShiftProcId: proc_id,
       OperatorId: this.operatorId,
       Lang: this.lang
     }, params);

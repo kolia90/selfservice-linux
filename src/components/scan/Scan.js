@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import "./Scan.scss";
 import Toast from "../shared/toast/Toast";
 import APIService from "../../services/APIService";
-import {setUserData, setLevelNumber, setLoading} from "../../store/actions";
+import {setUserData, setLevelNumber} from "../../store/actions";
 
 
 class Scan extends React.Component {
@@ -30,11 +30,10 @@ class Scan extends React.Component {
       typing: false,
     });
 
-    this.props.dispatch(setLoading(true));
 
     APIService.findByLevel(value, {
+      context: this.props,
       onSuccess: (response) => {
-        this.props.dispatch(setLoading(false));
         const data = response.data;
         this.props.dispatch(setLevelNumber(data.number));
         data.user_data && this.props.dispatch(setUserData({
@@ -43,9 +42,7 @@ class Scan extends React.Component {
         }));
 
         this.props.history.push(`${routes.SERVICE}`)
-      }, onError: () => {
-        this.props.dispatch(setLoading(false));
-      }
+      }, onError: () => {}
     })
   };
 
