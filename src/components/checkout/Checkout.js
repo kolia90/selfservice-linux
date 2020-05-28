@@ -46,8 +46,10 @@ class Checkout extends React.Component {
     }else{
       const basketPayType = isByCard ? MPosService.CONST.PAY_TYPE_CARD : MPosService.CONST.PAY_TYPE_MONEY;
 
-      this.complete();
-      return;
+      if (this.state.payType === constants.pay_types.CASH){
+        this.complete();
+        return
+      }
 
       MPosService.setBasketParams(this.props.levelNumber, basketPayType, {
         context: this.props,
