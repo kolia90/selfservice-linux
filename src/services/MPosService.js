@@ -34,7 +34,7 @@ export class MPosService {
     FALSE: 0,
 
     PAY_TYPE_MONEY: 1,
-    PAY_TYPE_CARD: 2,
+    PAY_TYPE_CARD: 5,
 
     ORDER_COMPLETED: 0,
     ORDER_PROCESS: 1,
@@ -143,7 +143,9 @@ export class MPosService {
     this.send({
       Command: constants.POS_BASKET_SET_PARAMS,
       ClientLoyaltyCard: level,
-      PayTypeId: pay_type
+      PayTypeId: pay_type,
+      OperatorId: this.operatorId,
+      Lang: this.lang
     }, params)
   }
 
@@ -211,4 +213,4 @@ export class MPosService {
 
 }
 
-export default MPosService.default({clientParams: {timeout: 5}})
+export default MPosService.default({clientParams: {timeout: 30}})
