@@ -12,7 +12,7 @@ const FuelTerminalModal = ({terminalStatus}) => {
   return (
     <div className="modal-window">
       <div className="wrapper-content terminal">
-        <H1 text="Вставьте платежную карту для оплаты и следуйте инструкицям терминала" />
+        <H1 text="Вставьте платежную карту для оплаты и следуйте инструкциям терминала" />
         <img src={require("../../images/checkout/insert-icon.svg")} alt="" />
 
         <div className="status">

@@ -17,14 +17,10 @@ const FuelPurchaseScreen4 = ({ order, spilled, checkId, history }) => {
 
       <Order order={order} spilled={spilled} checkId={checkId} />
 
-      <div className="wrapper-button two">
-        <Button
-          title="Закончить"
-          onClick={() => history.push(`${routes.HOME}`)}
-        />
+      <div className="wrapper-button">
         <Button
           title="На главную"
-          onClick={() => history.push(`${routes.SERVICE}`)}
+          onClick={() => history.push(`${routes.HOME}`)}
         />
       </div>
     </div>

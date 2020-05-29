@@ -132,7 +132,7 @@ class CheckoutCash extends React.Component {
             </div>
           </div>
 
-          <div className="wrapper-button">
+          <div className="wrapper-button two">
             <Button title="Готово" disabled={!this.state.ready} onClick={() => {
               this.stopCashProcess();
             }} />

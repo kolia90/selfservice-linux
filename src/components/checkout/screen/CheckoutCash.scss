@@ -22,6 +22,15 @@
     bottom: 30px;
     left: 50%;
     margin-left: -260px;
+
+    &.two{
+      display: table;
+      margin-left: -550px;
+
+      .button + .button{
+        margin-left: 60px;
+      }
+    }
   }
 
   .wrapper-toggle {

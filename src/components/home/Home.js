@@ -1,18 +1,22 @@
 // @flow
 import React, {Component} from "react";
-import { Link } from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import routes from "../../constants/routes";
 import "./Home.scss";
 import Header from "../shared/header/Header";
 import Slider from "../shared/slider/Slider";
 import APIService from "../../services/APIService";
+import {connect} from "react-redux";
+import {setLevelNumber} from "../../store/actions";
 
 
-export default class Home extends Component {
+class Home extends Component {
 
   state = { items: [] };
 
   componentDidMount() {
+    this.props.dispatch(setLevelNumber(null));
+
     APIService.getSlides({
       onSuccess: (response) => {
         response.data.results && this.setState({ items: response.data.results });
@@ -41,3 +45,5 @@ export default class Home extends Component {
     );
   }
 }
+
+export default connect()(withRouter(Home));

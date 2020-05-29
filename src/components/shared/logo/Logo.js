@@ -12,7 +12,7 @@ const Logo = ({ history }) => {
         alt="Socar"
         onClick={() => history.push("/")}
       />
-      <div className="version">v0.2.0</div>
+      <div className="version">v0.2.1</div>
     </div>
   );
 };
