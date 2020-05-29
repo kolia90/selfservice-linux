@@ -32,7 +32,7 @@ class FuelPurchaseScreen1 extends React.Component {
       context: this.props,
       onSuccess: (data) => {
         this.setState({
-          dispensers: data['Dispensers'],
+          dispensers: data['Dispensers'] || [],
           disabled: false,
         })
       }, onTimeout: () => {
