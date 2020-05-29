@@ -10,18 +10,12 @@ const FuelPurchaseModal = ({order, spilled, terminalStatus}) => {
   const volume = parseFloat(order.volume);
   const progress = Math.round((spilled.percent || 0) * dots / 100);
 
-  let title = 'Идёт заправка топливом';
-
-  if(terminalStatus && spilled.give_volume <= 0){
-    title = `${terminalStatus.command} - ${terminalStatus.status}`
-  }
-
   return (
     <div className="modal-window">
       <img src={require("../../images/fuel-purchase/ad-2.png")} alt="ad" />
       <div className="wrapper-content">
         <img src={require("../../images/fuel-purchase/group-13.svg")} alt="" />
-        <H1 text={title} />
+        <H1 text="Идёт заправка топливом" />
         <div className="wrapper-scale">
           <div className="wrapper-sum">
             <div className="sum float-l">{order.amount} грн</div>

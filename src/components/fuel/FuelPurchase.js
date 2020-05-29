@@ -15,6 +15,7 @@ import pay_const from "../checkout/constants";
 import APIService from "../../services/APIService";
 import BankTermService from "../../services/BankTermService";
 import constants from "./constants";
+import FuelTerminalModal from "./FuelTerminalModal";
 
 Modal.setAppElement("#root");
 
@@ -32,7 +33,8 @@ class FuelPurchase extends Component {
       finished: false,
       checkId: null,
       amount: null,
-      terminalStatus: null
+      terminalStatus: null,
+      payByTerminal: false
     };
 
     this.timerStatus = null;
@@ -77,6 +79,10 @@ class FuelPurchase extends Component {
 
   setTerminalStatus = (value, ...args) => {
     this.setState({terminalStatus: value}, ...args)
+  };
+
+  setPayByTerminal = (value, ...args) => {
+    this.setState({payByTerminal: value}, ...args)
   };
 
   componentWillUnmount() {
@@ -154,13 +160,21 @@ class FuelPurchase extends Component {
               this.checkProcess();
               this.checkTerminalStatus();
             },
-            onError: () => {},
-            onTimeout: () => {}
+            onError: () => {
+              this.setShowModal(false)
+            },
+            onTimeout: () => {
+              this.setShowModal(false)
+            }
           })
         });
       },
-      onError: () => {},
-      onTimeout: () => {}
+      onError: () => {
+        this.setShowModal(false)
+      },
+      onTimeout: () => {
+        this.setShowModal(false)
+      }
     })
   };
 
@@ -205,6 +219,10 @@ class FuelPurchase extends Component {
   };
 
   handleComplete = (payType, cardData, confirmPin, restType) => {
+    if(payType === pay_const.pay_types.CARD && cardData.type === pay_const.cards.TERMINAL) {
+      this.setPayByTerminal(true);
+    }
+
     if(payType === pay_const.pay_types.CARD && cardData.type !== pay_const.cards.TERMINAL) {
       this.finishByBackend(cardData, confirmPin)
     }else {
@@ -256,7 +274,11 @@ class FuelPurchase extends Component {
                   isOpen={this.state.showModal}
                   onRequestClose={() => this.setShowModal(false)}
               >
-                <FuelPurchaseModal order={this.state.order} spilled={this.state.spilled} terminalStatus={this.state.terminalStatus} />
+                {(this.state.payByTerminal && (!this.state.spilled || !this.state.spilled.give_volume)) ? (
+                    <FuelTerminalModal terminalStatus={this.state.terminalStatus} />
+                ) : (
+                    <FuelPurchaseModal order={this.state.order} spilled={this.state.spilled} terminalStatus={this.state.terminalStatus} />
+                )}
               </Modal>
           )}
         </>

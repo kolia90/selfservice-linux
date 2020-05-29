@@ -35,7 +35,7 @@ class Scan extends React.Component {
       context: this.props,
       onSuccess: (response) => {
         const data = response.data;
-        this.props.dispatch(setLevelNumber(data.number));
+        this.props.dispatch(setLevelNumber(value));
         data.user_data && this.props.dispatch(setUserData({
           token: data.user_data.auth_token,
           data: data.user_data.user

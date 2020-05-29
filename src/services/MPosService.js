@@ -9,7 +9,13 @@ const config = require('../settings/config');
 export class MPosService {
   static _client = null;
 
-  handlerMessage = (message) => {};
+  handlerMessage = (message) => {
+    if(message['ResultCode'] === 270){
+      let needProc = message['NeedShiftProcId'];
+      Toast("Попробуйте снова через несколько секунд");
+      needProc && this.shiftProc(needProc);
+    }
+  };
 
   getClient = () => {
     if(MPosService._client === null){
