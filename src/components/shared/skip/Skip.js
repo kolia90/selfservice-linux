@@ -1,10 +1,17 @@
 import React from "react";
 import "./Skip.scss";
+import MultiLang from "../../../MultiLang";
 
 const Skip = ({ text, onSkip }) => {
   return (
     <div className="skip" onClick={onSkip}>
-      Пропустить
+      <MultiLang>
+        {{
+          uk: "Пропустити",
+          ru: "Пропустить",
+          en: "Skip"
+        }}
+      </MultiLang>
     </div>
   );
 };

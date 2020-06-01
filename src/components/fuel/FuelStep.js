@@ -3,6 +3,7 @@ import Header from "../shared/header/Header";
 import { withRouter } from "react-router-dom";
 import PreviousPage from "../shared/previous-page/PreviousPage";
 import "./FuelStep.scss";
+import MultiLang from "../../MultiLang";
 
 class FuelStep extends React.Component {
 
@@ -23,7 +24,15 @@ class FuelStep extends React.Component {
         <>
           <Header
               left={<PreviousPage onClick={() => this.navPrev()} />}
-              center={<div>{this.props.title || 'Покупка топлива'}</div>}
+              center={<div>{this.props.title || (
+                  <MultiLang>
+                    {{
+                      uk: "Покупка пального",
+                      ru: "Покупка топлива",
+                      en: "Buy the fuel"
+                    }}
+                  </MultiLang>
+              )}</div>}
               right={null}
           />
           <div className="wrapper-fuel-purchase" data-tid="container">

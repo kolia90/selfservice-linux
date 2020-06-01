@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../shared/header/Header";
 import { withRouter } from "react-router-dom";
 import PreviousPage from "../shared/previous-page/PreviousPage";
+import MultiLang from "../../MultiLang";
 
 class CheckoutStep extends React.Component {
 
@@ -18,7 +19,15 @@ class CheckoutStep extends React.Component {
         <>
           <Header
               left={<PreviousPage onClick={() => this.navPrev()} />}
-              center={<div>{this.props.title || 'Выберите способ оплаты'}</div>}
+              center={<div>{this.props.title || (
+                  <MultiLang>
+                    {{
+                      uk: "Виберіть спосіб оплати",
+                      ru: "Выберите способ оплаты",
+                      en: "Choose payment type"
+                    }}
+                  </MultiLang>
+              )}</div>}
               right={null}
           />
           <div className="wrapper-checkout">{this.props.children}</div>

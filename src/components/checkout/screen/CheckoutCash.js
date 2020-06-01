@@ -7,6 +7,7 @@ import Button from "../../shared/button/Button";
 import CashService from "../../../services/CashService";
 import Toast from "../../shared/toast/Toast";
 import "./CheckoutCash.scss";
+import MultiLang from "../../../MultiLang";
 
 
 class CheckoutCash extends React.Component {
@@ -29,7 +30,15 @@ class CheckoutCash extends React.Component {
   };
 
   handleTimeout = () => {
-    Toast('Ошибка связи с купюроприемником')
+    Toast(
+        <MultiLang>
+          {{
+            uk: "Помилка зв'язку з купюроприймачем",
+            ru: "Ошибка связи с купюроприемником",
+            en: "Communication error with the bill acceptor"
+          }}
+        </MultiLang>
+    )
   };
 
   componentDidMount() {
@@ -38,7 +47,15 @@ class CheckoutCash extends React.Component {
       onSuccess: (data) => {
         const status = parseInt(data['Status']);
         if (status === CashService.CONST.STATUS_NOT_READY){
-          Toast('Устройство не готово')
+          Toast(
+              <MultiLang>
+                {{
+                  uk: "Пристрій не готовий",
+                  ru: "Устройство не готово",
+                  en: "Device is not ready"
+                }}
+              </MultiLang>
+          )
         } else {
           this.setState({
             sum: parseInt(data['Sum']) || 0
@@ -109,7 +126,15 @@ class CheckoutCash extends React.Component {
   render() {
     return (
         <div className="wrapper-cash-process">
-          <H1 text="Внесите наличные средства в купюроприемник" />
+          <H1 text={
+            <MultiLang>
+              {{
+                uk: "Внесіть готівку в купюроприймач",
+                ru: "Внесите наличные средства в купюроприемник",
+                en: "Deposit cash in the bill acceptor"
+              }}
+            </MultiLang>
+          } />
 
           <div className="wrapper-img-cash-process">
             <img
@@ -120,20 +145,54 @@ class CheckoutCash extends React.Component {
 
             <div className="wrapper-toggle">
               <div className="wrapper-fuel">
-                <h4 className="float-l">Внесено</h4>
-                <h4 className="float-r">{this.state.sum} грн</h4>
+                <h4 className="float-l">
+                  <MultiLang>
+                    {{
+                      uk: "Внесено",
+                      ru: "Внесено",
+                      en: "Has"
+                    }}
+                  </MultiLang>
+                </h4>
+                <h4 className="float-r">{this.state.sum} <MultiLang>
+                  {{
+                    uk: "грн",
+                    ru: "грн",
+                    en: "uah"
+                  }}
+                </MultiLang></h4>
                 <div className="clearfix" />
               </div>
               <div className="wrapper-sum">
-                <h4 className="float-l">Остаток</h4>
-                <h4 className="float-r">{this.getNeedAmount()} грн</h4>
+                <h4 className="float-l">
+                  <MultiLang>
+                    {{
+                      uk: "Залишилось",
+                      ru: "Осталось",
+                      en: "Need"
+                    }}
+                  </MultiLang>
+                </h4>
+                <h4 className="float-r">{this.getNeedAmount()} <MultiLang>
+                  {{
+                    uk: "грн",
+                    ru: "грн",
+                    en: "uah"
+                  }}
+                </MultiLang></h4>
                 <div className="clearfix" />
               </div>
             </div>
           </div>
 
           <div className="wrapper-button two">
-            <Button title="Готово" disabled={!this.state.ready} onClick={() => {
+            <Button title={<MultiLang>
+              {{
+                uk: "Готово",
+                ru: "Готово",
+                en: "Done"
+              }}
+            </MultiLang>} disabled={!this.state.ready} onClick={() => {
               this.stopCashProcess();
             }} />
             <Button title="Принудительно" onClick={() => {

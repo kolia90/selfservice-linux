@@ -16,6 +16,7 @@ import APIService from "../../services/APIService";
 import BankTermService from "../../services/BankTermService";
 import constants from "./constants";
 import FuelTerminalModal from "./FuelTerminalModal";
+import MultiLang from "../../MultiLang";
 
 Modal.setAppElement("#root");
 
@@ -259,7 +260,15 @@ class FuelPurchase extends Component {
               </FuelStep>
           )}
           {this.state.screen === 4 && (
-              <FuelStep setScreen={this.setScreen} screen={this.state.screen} title={'Топливо оплачено'} navPrev={() => {this.setScreen(1)}}>
+              <FuelStep setScreen={this.setScreen} screen={this.state.screen} title={(
+                <MultiLang>
+                  {{
+                    uk: "Пальне оплачено",
+                    ru: "Топливо оплачено",
+                    en: "Fuel paid"
+                }}
+                </MultiLang>
+              )} navPrev={() => {this.setScreen(1)}}>
                 <FuelPurchaseScreen4 order={this.state.order} spilled={this.state.spilled} checkId={this.state.checkId} />
               </FuelStep>
           )}

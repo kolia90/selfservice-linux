@@ -7,6 +7,7 @@ import MPosService from "../../../services/MPosService";
 import mPosHelper from "../../../helpers/mPosHelper";
 import Toast from "../../shared/toast/Toast";
 import "./FuelPurchaseScreen2.scss";
+import MultiLang from "../../../MultiLang";
 
 
 class FuelPurchaseScreen2 extends React.Component {
@@ -23,7 +24,15 @@ class FuelPurchaseScreen2 extends React.Component {
             })
           },
           onDown: () => {
-            Toast('Вставте пистолет в бак и повторите операцию');
+            Toast(
+                <MultiLang>
+                  {{
+                    uk: "Вставте пістолет в бак і повторіть операцію",
+                    ru: "Вставте пистолет в бак и повторите операцию",
+                    en: "Insert the gun into the tank and repeat the operation"
+                  }}
+                </MultiLang>
+            );
           }
         });
       }
@@ -38,16 +47,31 @@ class FuelPurchaseScreen2 extends React.Component {
           </div>
 
           <div className="wrapper-h2">
-            <H2 text="Убедитесь, что заправочный пистолет вставлен в горловину бака вашего автомобиля" />
+            <H2 text={
+              <MultiLang>
+                {{
+                  uk: "Переконайтесь, що запровочний пістолет вставлений в горловину вашого баку автомобіля",
+                  ru: "Убедитесь, что заправочный пистолет вставлен в горловину бака вашего автомобиля",
+                  en: "Make sure the gun is inserted into yours car tank"
+                }}
+              </MultiLang>
+            } />
           </div>
 
           <div className="wrapper-button">
-            <Button title="Далее" onClick={this.onSubmit} />
+            <Button title={
+              <MultiLang>
+                {{
+                  uk: "Дальше",
+                  ru: "Далее",
+                  en: "Next"
+                }}
+              </MultiLang>
+            } onClick={this.onSubmit} />
           </div>
         </div>
     );
   }
 }
-
 
 export default connect()(withRouter(FuelPurchaseScreen2));

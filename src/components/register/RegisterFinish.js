@@ -10,6 +10,7 @@ import Logo from "../shared/logo/Logo";
 import routes from "../../constants/routes";
 import APIService from "../../services/APIService";
 import "./RegisterFinish.scss";
+import MultiLang from "../../MultiLang";
 
 
 class RegisterFinish extends Component {
@@ -57,11 +58,27 @@ class RegisterFinish extends Component {
   render() {
     return (
         <>
-          <Header center={<div>ЗАВЕРШЕНИЕ</div>} right={null} />
+          <Header center={<div>
+            <MultiLang>
+              {{
+                uk: "Завершення",
+                ru: "Завершение",
+                en: "Finish"
+              }}
+            </MultiLang>
+          </div>} right={null} />
           <div className="wrapper-register-finish">
             <div className="level-card">
               <div className="wrapper-header">
-                <div className="float-l name">LEVEL card</div>
+                <div className="float-l name">
+                  <MultiLang>
+                    {{
+                      uk: "LEVEL card",
+                      ru: "LEVEL card",
+                      en: "LEVEL card"
+                    }}
+                  </MultiLang>
+                </div>
                 <div className="float-r">
                   <Logo />
                 </div>
@@ -73,12 +90,28 @@ class RegisterFinish extends Component {
               </div>
               <div className="wrapper-balance">
                 <div className="balance">
-                  Баланс: <span>{this.state.balance} гривен</span>
+                  <span>
+                    <MultiLang>
+                      {{
+                        uk: `Баланс: ${this.state.balance} гривень`,
+                        ru: `Баланс: ${this.state.balance} гривен`,
+                        en: `Balance: ${this.state.balance} uah`
+                      }}
+                    </MultiLang>
+                  </span>
                 </div>
               </div>
             </div>
             <div>
-              <H2 text="Вам сгенерирована виртуальная карта LEVEL! Она доступна вам в мобильном приложении." />
+              <H2 text={
+                <MultiLang>
+                  {{
+                    uk: "Вам згенерована віртуальна карта LEVEL! Вона доступна вам в мобільному додатку.",
+                    ru: "Вам сгенерирована виртуальная карта LEVEL! Она доступна вам в мобильном приложении.",
+                    en: "A LEVEL virtual card has been generated for you! It is available to you in the mobile application."
+                  }}
+                </MultiLang>
+              } />
             </div>
             <div className="wrapper-mobile-app">
               <div className="float-l">
@@ -96,7 +129,15 @@ class RegisterFinish extends Component {
             </div>
             <div className="clearfix" />
             <Button
-                title="Начать использование"
+                title={
+                  <MultiLang>
+                    {{
+                      uk: "Почати використання",
+                      ru: "Начать использование",
+                      en: "Start use"
+                    }}
+                  </MultiLang>
+                }
                 onClick={() => this.props.history.push(`${routes.SERVICE}`)}
             />
           </div>

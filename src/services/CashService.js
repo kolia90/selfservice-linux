@@ -57,7 +57,7 @@ export class CashService {
 
   send = (data, params) => {
     this.setLoading(params, true);
-    this.getClient().send(data, this.getHandler(params), this.getTimeout(params));
+    this.getClient().send(data, this.getHandler(params), this.getTimeout(params), params);
   };
 
   /* Cash methods */

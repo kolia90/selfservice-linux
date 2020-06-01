@@ -7,15 +7,33 @@ import { withRouter } from "react-router-dom";
 import H1 from "../shared/h1/H1";
 import MPosService from "../../services/MPosService";
 import Toast from "../shared/toast/Toast";
+import MultiLang from "../../MultiLang";
+import Timer from "../shared/timer/Timer";
 
 const Service = ({ history }) => {
 
   MPosService.checkConnect({
     onError: () => {
-      Toast('Внутренняя ошибка. Позовите оператора');
+      Toast(
+          <MultiLang>
+            {{
+              uk: "Виникла помилка. Спробуйте пізніше",
+              ru: "Виникла ошибка. Попробуйте пізніше",
+              en: "An error occurred. Try later"
+            }}
+          </MultiLang>
+      );
     },
     onTimeout: () => {
-      Toast('Ошибка связи с кассой');
+      Toast(
+          <MultiLang>
+            {{
+              uk: "Помилка зв'язку з касою",
+              ru: "Ошибка связи с кассой",
+              en: "Connecting with MPOS error"
+            }}
+          </MultiLang>
+      );
     }
   });
 
@@ -23,7 +41,15 @@ const Service = ({ history }) => {
     <div>
       <Header />
       <div className="wrapper-service" data-tid="container">
-        <H1 text="Выберите услугу" />
+        <H1 text={(
+            <MultiLang>
+              {{
+                uk: "Виберіть послугу",
+                ru: "Выберите услугу",
+                en: "Select service"
+              }}
+            </MultiLang>
+        )} />
         <div>
           <div
             className="d-inline"
@@ -37,7 +63,15 @@ const Service = ({ history }) => {
                 src={require("../../images/service/group-6.svg")}
                 alt="Refuel car"
               />
-              <h3>Заправить автомобиль</h3>
+              <h3>
+                <MultiLang>
+                  {{
+                    uk: "Заправити автомобіль",
+                    ru: "Заправить автомобиль",
+                    en: "Refuel a car"
+                  }}
+                </MultiLang>
+              </h3>
             </Rectangle>
           </div>
           <div
@@ -52,11 +86,21 @@ const Service = ({ history }) => {
                 src={require("../../images/service/menu-icon-buta.svg")}
                 alt="Menu buta"
               />
-              <h3>Заправиться самому</h3>
+              <h3>
+                <MultiLang>
+                  {{
+                    uk: "Заправитись самому",
+                    ru: "Заправиться самому",
+                    en: "Refuel yourself"
+                  }}
+                </MultiLang>
+              </h3>
             </Rectangle>
           </div>
         </div>
       </div>
+
+      <Timer/>
     </div>
   );
 };

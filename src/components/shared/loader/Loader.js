@@ -25,7 +25,4 @@ const mapStateToProps = state => ({
   visible: state.loadingState
 });
 
-
-export default connect(
-    mapStateToProps,
-)(withRouter(Loader))
+export default connect(mapStateToProps)(withRouter(Loader))

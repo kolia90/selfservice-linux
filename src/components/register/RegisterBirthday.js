@@ -3,6 +3,8 @@ import { DateTime } from 'luxon'
 import { withRouter } from "react-router-dom";
 import RegisterStepProfile from "./RegisterStepProfile";
 import routes from "../../constants/routes";
+import translation from "../../services/translation";
+import {connect} from "react-redux";
 
 
 class RegisterBirthday extends Component {
@@ -26,7 +28,13 @@ class RegisterBirthday extends Component {
   validator = value => {
     let d = this.parseDate(value, this.formatInputDate);
     if (!d.getDate()){
-      throw Error('Введите правильную дату');
+      throw Error(
+          translation({
+            uk: "Введіть правильную дату",
+            ru: "Введите правильную дату",
+            en: "Enter a valid date"
+          }, this.props.language)
+      );
     }
     return this.formatDate(d, this.formatServerDate)
   };
@@ -41,7 +49,13 @@ class RegisterBirthday extends Component {
         validator={this.validator}
         clear={this.clear}
         attr={'birthday'}
-        title={'Введите дату рождения'}
+        title={
+          translation({
+            uk: "Введіть дату народження",
+            ru: "Введите дату рождения",
+            en: "Enter the date of birth"
+          }, this.props.language)
+        }
         next={`${routes.REGISTER_CITY}`}
         mask="s9/v9/l999"
         formatChars={{
@@ -58,5 +72,8 @@ class RegisterBirthday extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  language: state.languageState,
+});
 
-export default withRouter(RegisterBirthday)
+export default connect(mapStateToProps)(withRouter(RegisterBirthday))

@@ -8,6 +8,7 @@ import "./Scan.scss";
 import Toast from "../shared/toast/Toast";
 import APIService from "../../services/APIService";
 import {setUserData, setLevelNumber} from "../../store/actions";
+import MultiLang from "../../MultiLang";
 
 
 class Scan extends React.Component {
@@ -74,7 +75,13 @@ class Scan extends React.Component {
 
     if (changedTyping && this.state.typing){
       this.id = setTimeout(() => {
-        Toast('Просканируйте LEVEL карту');
+        Toast(<MultiLang>
+          {{
+            uk: "Проскануйте LEVEL карту",
+            ru: "Просканируйте LEVEL карту",
+            en: "Please scan LEVEL card"
+          }}
+        </MultiLang>);
         this.setState({
           value: null,
           typing: false,
@@ -87,7 +94,15 @@ class Scan extends React.Component {
     return (
         <div>
           <Header
-              center={<div>СКАНИРОВАНИЕ</div>}
+              center={<div>
+                <MultiLang>
+                  {{
+                    uk: "Сканування",
+                    ru: "Сканирование",
+                    en: "Scan"
+                  }}
+                </MultiLang>
+              </div>}
               right={<Skip onSkip={() => this.props.history.push(`${routes.SERVICE}`)} />}
           />
           <div className="scan">

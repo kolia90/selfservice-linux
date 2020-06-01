@@ -5,13 +5,22 @@ import Rectangle from "../shared/rectangle/Rectangle";
 import Header from "../shared/header/Header";
 import { withRouter } from "react-router-dom";
 import H1 from "../shared/h1/H1";
+import MultiLang from "../../MultiLang";
 
 const OfferCard = ({ history }) => {
   return (
     <div>
       <Header />
       <div className="wrapper-offer-card">
-        <H1 text="Хотите зарегистрироваться и получить карту level?" />
+        <H1 text={(
+            <MultiLang>
+              {{
+                uk: "Бажаєте зареєструватися і отримати карту level?",
+                ru: "Хотите зарегистрироваться и получить карту level?",
+                en: "Do you want registration and retrieve level card?"
+              }}
+            </MultiLang>
+        )} />
         <div>
           <div
             className="d-inline"
@@ -20,7 +29,15 @@ const OfferCard = ({ history }) => {
             }}
           >
             <Rectangle>
-              <h3>Да</h3>
+              <h3>
+                <MultiLang>
+                  {{
+                    uk: "Так",
+                    ru: "Да",
+                    en: "Yes"
+                  }}
+                </MultiLang>
+              </h3>
             </Rectangle>
           </div>
           <div
@@ -30,7 +47,15 @@ const OfferCard = ({ history }) => {
             }}
           >
             <Rectangle>
-              <h3>Нет</h3>
+              <h3>
+                <MultiLang>
+                  {{
+                    uk: "Ні",
+                    ru: "Нет",
+                    en: "No"
+                  }}
+                </MultiLang>
+              </h3>
             </Rectangle>
           </div>
         </div>

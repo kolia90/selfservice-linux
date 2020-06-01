@@ -13,6 +13,7 @@ import Toast from "../shared/toast/Toast";
 import { setDataValue } from '../../store/actions'
 import "./Register.scss";
 import "../shared/input/Input.scss";
+import MultiLang from "../../MultiLang";
 
 
 class RegisterStep extends Component {
@@ -129,7 +130,15 @@ class RegisterStep extends Component {
           </div>
 
           <div className="wrapper-button">
-            <Button title={this.props.submit || 'Далее'} onClick={this.onSubmit} />
+            <Button title={this.props.submit || (
+                <MultiLang>
+                  {{
+                    uk: "Дальше",
+                    ru: "Далее",
+                    en: "Next"
+                  }}
+                </MultiLang>
+            )} onClick={this.onSubmit} />
           </div>
 
           <div className="wrapper-keyboard">
@@ -150,15 +159,15 @@ RegisterStep.propTypes = {
   onSkip : PropTypes.func.isRequired,
   validator : PropTypes.func,
   clear : PropTypes.func,
-  title : PropTypes.string,
-  label : PropTypes.string,
+  title : PropTypes.any,
+  label : PropTypes.any,
   mask : PropTypes.string,
   maskChar : PropTypes.string,
   formatChars : PropTypes.object,
   placeholder : PropTypes.string,
   maxLength : PropTypes.number,
   inputSize : PropTypes.number,
-  messageEmpty : PropTypes.string,
+  messageEmpty : PropTypes.any,
   preInput : PropTypes.node,
   inputWrapClassName : PropTypes.string,
   showProcess : PropTypes.bool,

@@ -4,12 +4,21 @@ import H1 from "../../shared/h1/H1";
 import Rectangle from "../../shared/rectangle/Rectangle";
 import "./CheckoutPayType.scss";
 import constants from "../constants";
+import MultiLang from "../../../MultiLang";
+import {connect} from "react-redux";
+import Toast from "../../shared/toast/Toast";
 
 
-const CheckoutPayType = ({ history, onSelectType }) => {
+const CheckoutPayType = ({ onSelectType, levelNumber }) => {
   return (
       <div className="checkout-choose">
-        <H1 text="Выберите формат оплаты" />
+        <H1 text={<MultiLang>
+          {{
+            uk: "Виберіть форму оплати",
+            ru: "Выберите формат оплаты",
+            en: "Choose payment type"
+          }}
+        </MultiLang>} />
         <div>
           <div
               className="wrapper-rectangle d-inline"
@@ -23,12 +32,34 @@ const CheckoutPayType = ({ history, onSelectType }) => {
                     alt="card"
                 />
               </div>
-              <h3>Оплачу картой</h3>
+              <h3>
+                <MultiLang>
+                  {{
+                    uk: "Оплачу картою",
+                    ru: "Оплачу картой",
+                    en: "Pay by card"
+                  }}
+                </MultiLang>
+              </h3>
             </Rectangle>
           </div>
           <div
               className="d-inline"
-              onClick={() => {onSelectType(constants.pay_types.CASH)}}
+              onClick={() => {
+                if(levelNumber){
+                  onSelectType(constants.pay_types.CASH)
+                }else{
+                  Toast(
+                      <MultiLang>
+                        {{
+                          uk: "Цей метод оплати доступний тільки з LEVEL картою",
+                          ru: "Этот метод оплаты доступен только с LEVEL картой",
+                          en: "This payment method is only available with LEVEL card"
+                        }}
+                      </MultiLang>
+                  )
+                }
+              }}
           >
             <Rectangle>
               <div>
@@ -38,7 +69,15 @@ const CheckoutPayType = ({ history, onSelectType }) => {
                     alt="card"
                 />
               </div>
-              <h3>Плачу наличными</h3>
+              <h3>
+                <MultiLang>
+                  {{
+                    uk: "Оплачу готівкою",
+                    ru: "Плачу наличными",
+                    en: "Pay by cash"
+                  }}
+                </MultiLang>
+              </h3>
             </Rectangle>
           </div>
         </div>
@@ -46,4 +85,8 @@ const CheckoutPayType = ({ history, onSelectType }) => {
   );
 };
 
-export default withRouter(CheckoutPayType);
+const mapStateToProps = state => ({
+  levelNumber: state.levelState
+});
+
+export default connect(mapStateToProps)(withRouter(CheckoutPayType))

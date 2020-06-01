@@ -1,26 +1,66 @@
 import React from "react";
 import { DateTime } from "luxon"
 import "./Order.scss";
+import MultiLang from "../../../MultiLang";
 
 const Order = ({order, spilled, checkId}) => {
 
-  const statusName = (spilled.status === 'error') ? 'Ошибка' : 'Заказ получен';
   // const time = DateTime.fromISO(order.created).toFormat('HH:mm');
   const time = DateTime.local().toFormat('HH:mm');
 
   return (
     <div className="order-block">
       <div>
-        <span className="order-number">Заказ № {checkId || '------'}</span>
-        <span className="float-r order-payment-status">Оплачен</span>
+        <span className="order-number">
+          <MultiLang>
+            {{
+              uk: `Заказ № ${checkId || '------'}`,
+              ru: `Замовлення № ${checkId || '------'}`,
+              en: `Order № ${checkId || '------'}`
+            }}
+          </MultiLang>
+        </span>
+        <span className="float-r order-payment-status">
+          <MultiLang>
+            {{
+              uk: "Оплачено",
+              ru: "Оплачен",
+              en: "Paid"
+            }}
+          </MultiLang>
+        </span>
       </div>
       <div>
         <table>
           <thead>
             <tr>
-              <th className="text-aling-l">Топливо</th>
-              <th className="text-aling-c">Литры</th>
-              <th className="text-aling-r">Цена</th>
+              <th className="text-aling-l">
+                <MultiLang>
+                  {{
+                    uk: "Пальне",
+                    ru: "Топливо",
+                    en: "Fuel"
+                  }}
+                </MultiLang>
+              </th>
+              <th className="text-aling-c">
+                <MultiLang>
+                  {{
+                    uk: "Літри",
+                    ru: "Литры",
+                    en: "Volume"
+                  }}
+                </MultiLang>
+              </th>
+              <th className="text-aling-r">
+                <MultiLang>
+                  {{
+                    uk: "Ціна",
+                    ru: "Цена",
+                    en: "Price"
+                  }}
+                </MultiLang>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -35,20 +75,52 @@ const Order = ({order, spilled, checkId}) => {
         </table>
         <div className="separator" />
         <div className="wrapper-order-total">
-          <div className="float-l primary">Итого</div>
+          <div className="float-l primary">
+            <MultiLang>
+              {{
+                uk: "Всього",
+                ru: "Итого",
+                en: "Total"
+              }}
+            </MultiLang>
+          </div>
           <div className="float-r primary bold">{spilled.give_amount} грн</div>
         </div>
         <div className="separator" />
         <div className="wrapper-order-status">
           <div>
-            <div className="float-l primary">Время оформления заказа</div>
+            <div className="float-l primary">
+              <MultiLang>
+                {{
+                  uk: "Час оформлення замовлення",
+                  ru: "Время оформления заказа",
+                  en: "Ordering time"
+                }}
+              </MultiLang>
+            </div>
             <div className="float-r primary bold">{time}</div>
             <div className="clearfix" />
           </div>
           <div className="status">
             <div className="float-l primary">Статус</div>
             <div className={'float-r order-status' + ((spilled.status === 'error') ? ' error' : '')}>
-              {statusName}
+              {(spilled.status === 'error') ? (
+                <MultiLang>
+                  {{
+                    uk: "Помилка",
+                    ru: "Ошибка",
+                    en: "Error"
+                  }}
+                </MultiLang>
+              ) : (
+                <MultiLang>
+                  {{
+                    uk: "Заказ отримано",
+                    ru: "Заказ получен",
+                    en: "Success"
+                  }}
+                </MultiLang>
+              )}
             </div>
             <div className="clearfix" />
           </div>

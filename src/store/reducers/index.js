@@ -3,6 +3,8 @@ import dataState from './data'
 import loadingState from './loading'
 import userState from './user'
 import levelState from './level'
+import languageState from './language'
+import keyboardState from './keyboard'
 
 
 export default combineReducers({
@@ -10,4 +12,6 @@ export default combineReducers({
   loadingState,
   userState,
   levelState,
+  languageState,
+  keyboardState,
 })

@@ -8,6 +8,7 @@ import Slider from "../shared/slider/Slider";
 import APIService from "../../services/APIService";
 import {connect} from "react-redux";
 import {setLevelNumber} from "../../store/actions";
+import MultiLang from "../../MultiLang";
 
 
 class Home extends Component {
@@ -16,12 +17,22 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.dispatch(setLevelNumber(null));
+    this.updateSlider(this.props.language)
+  }
 
+  updateSlider(language) {
     APIService.getSlides({
+      language: language,
       onSuccess: (response) => {
         response.data.results && this.setState({ items: response.data.results });
       }
     })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.language !== nextProps.language) {
+      this.updateSlider(nextProps.language)
+    }
   }
 
   render(){
@@ -38,7 +49,13 @@ class Home extends Component {
 
         <div className="footer-home">
           <Link className="link" to={routes.CHECK_CARD}>
-            Коснитесь чтобы активировать
+            <MultiLang>
+              {{
+                uk: "Торкніться щоб активувати",
+                ru: "Коснитесь чтобы активировать",
+                en: "Touch for activation"
+              }}
+            </MultiLang>
           </Link>
         </div>
       </div>
@@ -46,4 +63,7 @@ class Home extends Component {
   }
 }
 
-export default connect()(withRouter(Home));
+const mapStateToProps = state => ({
+  language: state.languageState,
+});
+export default connect(mapStateToProps)(withRouter(Home));

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import RegisterStepProfile from "./RegisterStepProfile";
 import routes from "../../constants/routes";
+import {connect} from "react-redux";
+import translation from "../../services/translation";
 
 
 class RegisterEmail extends Component {
@@ -10,7 +12,13 @@ class RegisterEmail extends Component {
     return (
       <RegisterStepProfile
         attr={'email'}
-        title={'Введите ваш e-mail'}
+        title={
+          translation({
+            uk: "Введіть ваш e-mail",
+            ru: "Введите ваш e-mail",
+            en: "Enter your email"
+          }, this.props.language)
+        }
         placeholder={'egor9881@mail.com'}
         maxLength={25}
         next={`${routes.REGISTER_FINISH}`}
@@ -21,4 +29,8 @@ class RegisterEmail extends Component {
   }
 }
 
-export default withRouter(RegisterEmail)
+const mapStateToProps = state => ({
+  language: state.languageState,
+});
+
+export default connect(mapStateToProps)(withRouter(RegisterEmail))

@@ -13,7 +13,6 @@ class RegisterStepProfile extends Component {
     super(props);
 
     if(!this.props.user){
-      console.log('User not found');
       this.props.history.push(`${routes.HOME}`)
     }
   }

@@ -8,6 +8,7 @@ import "./FuelPurchaseScreen1.scss";
 import MPosService from "../../../services/MPosService";
 import mPosHelper from "../../../helpers/mPosHelper";
 import Toast from "../../shared/toast/Toast";
+import MultiLang from "../../../MultiLang";
 
 
 class FuelPurchaseScreen1 extends React.Component {
@@ -36,7 +37,15 @@ class FuelPurchaseScreen1 extends React.Component {
           disabled: false,
         })
       }, onTimeout: () => {
-        Toast("Сервер не отвечает")
+        Toast(
+            <MultiLang>
+              {{
+                uk: "Сервер не відповідає",
+                ru: "Сервер не отвечает",
+                en: "Server timeout"
+              }}
+            </MultiLang>
+        )
       }
     })
   }
@@ -59,7 +68,15 @@ class FuelPurchaseScreen1 extends React.Component {
       }, onError: () => {
         this.props.setScreen(2);
       }, onTimeout: () => {
-        Toast("Сервер не отвечает")
+        Toast(
+            <MultiLang>
+              {{
+                uk: "Сервер не відповідає",
+                ru: "Сервер не отвечает",
+                en: "Server timeout"
+              }}
+            </MultiLang>
+        )
       }
     })
   };
@@ -75,7 +92,15 @@ class FuelPurchaseScreen1 extends React.Component {
   render() {
     return (
       <div className="wrapper-screen-1">
-        <H2 text="Нажимайте на стрелочки чтобы выбрать номер вашей колонки" />
+        <H2 text={
+          <MultiLang>
+            {{
+              uk: "Нажимайте на стрілочки щоб вибрати номер вашої колонки",
+              ru: "Нажимайте на стрелочки чтобы выбрать номер вашей колонки",
+              en: "Click on the arrows to select your column number"
+            }}
+          </MultiLang>
+        } />
         <div className={`wrapper-slick-slider ${this.state.disabled ? 'disabled': ''}`}>
           <Carousel
             value={this.state.activeValue}
@@ -118,7 +143,15 @@ class FuelPurchaseScreen1 extends React.Component {
         </div>
         <div className="wrapper-button">
           <Button
-            title="Далее"
+            title={
+              <MultiLang>
+                {{
+                  uk: "Дальше",
+                  ru: "Далее",
+                  en: "Next"
+                }}
+              </MultiLang>
+            }
             disabled={this.state.disabled}
             onClick={this.onSubmit}
           />

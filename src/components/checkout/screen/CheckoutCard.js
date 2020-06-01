@@ -8,6 +8,7 @@ import {withRouter} from "react-router";
 import APIService from "../../../services/APIService";
 import CardTerminal from "../card/CardTerminal";
 import constants from "../constants";
+import MultiLang from "../../../MultiLang";
 
 
 class CheckoutCard extends React.Component{
@@ -22,6 +23,8 @@ class CheckoutCard extends React.Component{
 
   initCards = () => {
     APIService.getLevel(this.props.user.token, {
+      loading: false,
+      context: this.props,
       onSuccess: (response) => {
         this.setState({
           level: {
@@ -30,7 +33,15 @@ class CheckoutCard extends React.Component{
           }
         })
       },
-      onErrorMessage: 'Ошибка получения бонусной карты'
+      onErrorMessage: (
+        <MultiLang>
+          {{
+            uk: "Помилка отримання бонусної карти",
+            ru: "Ошибка получения бонусной карты",
+            en: "Error getting bonus card"
+          }}
+        </MultiLang>
+      )
     });
 
     APIService.getCards(this.props.user.token, {
@@ -39,7 +50,15 @@ class CheckoutCard extends React.Component{
           cards: response.data.results || []
         })
       },
-      onErrorMessage: 'Ошибка получения списка платежных карт'
+      onErrorMessage: (
+          <MultiLang>
+            {{
+              uk: "Помилка отримання платіжних карт",
+              ru: "Ошибка получения списка платежных карт",
+              en: "Error getting payment cards"
+            }}
+          </MultiLang>
+      )
     })
   };
 
@@ -88,7 +107,10 @@ class CheckoutCard extends React.Component{
   }
 }
 
-const mapStateToProps = state => ({user: state.userState});
+const mapStateToProps = state => ({
+  user: state.userState,
+  language: state.languageState,
+});
 
 export default connect(
     mapStateToProps,

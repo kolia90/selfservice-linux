@@ -10,6 +10,7 @@ import Keyboard from "../../shared/keyboard/Keyboard";
 import CardTerminal from "../card/CardTerminal";
 import Toast from "../../shared/toast/Toast";
 import constants from "../constants";
+import MultiLang from "../../../MultiLang";
 
 
 const CheckoutCardConfirm = ({ cardData, onConfirm }) => {
@@ -33,7 +34,15 @@ const CheckoutCardConfirm = ({ cardData, onConfirm }) => {
 
   const handleButton = () => {
     if (pin.length < 4){
-      Toast("Введите корректный PIN")
+      Toast(
+        <MultiLang>
+          {{
+            uk: "Введіть корректний PIN",
+            ru: "Введите корректный PIN",
+            en: "Please enter correct PIN"
+          }}
+        </MultiLang>
+      )
     }else{
       onConfirm && onConfirm(pin)
     }
@@ -54,7 +63,15 @@ const CheckoutCardConfirm = ({ cardData, onConfirm }) => {
             <CardVisa styles={styles} onSelect={null} number={cardData.number} />
         )}
         <div className={styles.wrapper}>
-          <H2 text="Введите PIN-код" />
+          <H2 text={
+            <MultiLang>
+              {{
+                uk: "Введіть PIN-код",
+                ru: "Введите PIN-код",
+                en: "Enter PIN-code"
+              }}
+            </MultiLang>
+          } />
           <div className={styles.wrapperInput}>
             <InputMask
                 mask="s s s s"
@@ -65,7 +82,15 @@ const CheckoutCardConfirm = ({ cardData, onConfirm }) => {
             />
           </div>
           <div className={styles.wrapperButton}>
-            <Button title="Далее" onClick={handleButton} />
+            <Button title={
+              <MultiLang>
+                {{
+                  uk: "Дальше",
+                  ru: "Далее",
+                  en: "Next"
+                }}
+              </MultiLang>
+            } onClick={handleButton} />
           </div>
           <div className={styles.wrapperKeyboard}>
             <Keyboard onChange={input => handlePin(input)} onRef={r => setKeyboardRef(r)} />

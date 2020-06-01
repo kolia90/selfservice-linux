@@ -1,6 +1,7 @@
 import Toast from "../components/shared/toast/Toast";
 import WSClient from "./WSClient";
 import {setLoading} from "../store/actions";
+import translation from "./translation";
 
 const constants = require('./constants');
 const config = require('../settings/config');
@@ -9,11 +10,17 @@ const config = require('../settings/config');
 export class MPosService {
   static _client = null;
 
-  handlerMessage = (message) => {
+  handlerMessage = (message, context) => {
     if(message['ResultCode'] === 270){
       let needProc = message['NeedShiftProcId'];
-      Toast("Попробуйте снова через несколько секунд");
-      needProc && this.shiftProc(needProc);
+      Toast(translation({
+        uk: 'Спробуйте трохи пізніше',
+        ru: 'Попробуйте немного позже',
+        en: 'Please try again later'
+      }, context ? context.language : null));
+      needProc && this.shiftProc(needProc, {
+        notifyDisabled: true
+      });
     }
   };
 
@@ -100,7 +107,11 @@ export class MPosService {
       }else{
         params && params.onError && params.onError(data);
         !(params && params.notifyDisabled) && Toast((params && params.onErrorMessage) || (
-            data['ResultMessage'] || 'Сталася помилка :('
+            data['ResultMessage'] || translation({
+              uk: 'Сталася помилка :(',
+              ru: 'Произошла ошибка :(',
+              en: 'An error has occurred :('
+            }, config.context ? config.context.language : null)
         ));
       }
     }
@@ -115,7 +126,7 @@ export class MPosService {
 
   send = (data, params) => {
     this.setLoading(params, true);
-    this.getClient().send(data, this.getHandler(params), this.getTimeout(params));
+    this.getClient().send(data, this.getHandler(params), this.getTimeout(params), params);
   };
 
   /* MPOS methods */

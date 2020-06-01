@@ -1,28 +1,40 @@
 
 export const Actions = {
-  SET_DATA_VALUE: 'SET_DATA_VALUE',
-  SET_USER_DATA: 'SET_USER_DATA',
-  SET_LOADING_VALUE: 'SET_LOADING_VALUE',
-  SET_LEVEL_NUMBER: 'SET_LEVEL_NUMBER',
+  DATA_VALUE: 'DATA_VALUE',
+  USER_DATA: 'USER_DATA',
+  LOADING_VALUE: 'LOADING_VALUE',
+  LEVEL_NUMBER: 'LEVEL_NUMBER',
+  LANGUAGE: 'LANGUAGE',
+  KEYBOARD: 'KEYBOARD',
 };
 
 
 export const setDataValue = value => ({
-  type: Actions.SET_DATA_VALUE,
+  type: Actions.DATA_VALUE,
   value
 });
 
 export const setUserData = value => ({
-  type: Actions.SET_USER_DATA,
+  type: Actions.USER_DATA,
   value
 });
 
 export const setLoading = value => ({
-  type: Actions.SET_LOADING_VALUE,
+  type: Actions.LOADING_VALUE,
   value
 });
 
 export const setLevelNumber = value => ({
-  type: Actions.SET_LEVEL_NUMBER,
+  type: Actions.LEVEL_NUMBER,
+  value
+});
+
+export const setLanguage = value => ({
+  type: Actions.LANGUAGE,
+  value
+});
+
+export const setKeyboard = value => ({
+  type: Actions.KEYBOARD,
   value
 });

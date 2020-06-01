@@ -4,13 +4,20 @@ import routes from "../../constants/routes";
 import { withRouter } from "react-router-dom";
 import RegisterStep from "./RegisterStep";
 import APIService from "../../services/APIService";
+import translation from "../../services/translation";
 
 
 class RegisterPhone extends Component {
 
   validator = (value) => {
     if (value.length < 10){
-      throw Error('Введите корректный номер телефона')
+      throw Error(
+          translation({
+            uk: "Введіть коректний номер телефону",
+            ru: "Введите корректный номер телефона",
+            en: "Enter а valid phone number"
+          }, this.props.language)
+      );
     }
     return value
   };
@@ -44,9 +51,27 @@ class RegisterPhone extends Component {
             onSubmit={this.onSubmit}
             onSkip={this.onSkip}
             validator={this.validator}
-            title={'Регистрация'}
-            label={'Ваш номер телефона'}
-            messageEmpty={'Введите номер телефона'}
+            title={
+              translation({
+                uk: "Реєстрація",
+                ru: "Регистрация",
+                en: "Registration"
+              }, this.props.language)
+            }
+            label={
+              translation({
+                uk: "Ваш номер телефону",
+                ru: "Ваш номер телефона",
+                en: "Your phone number"
+              }, this.props.language)
+            }
+            messageEmpty={
+              translation({
+                uk: "Введіть номер телефону",
+                ru: "Введите номер телефона",
+                en: "Enter your phone number"
+              }, this.props.language)
+            }
             mask="999 999 99 99"
             clearNumber={true}
             preInput={
@@ -66,10 +91,8 @@ class RegisterPhone extends Component {
 
 
 const mapStateToProps = state => ({
-  dataState: state.dataState
+  dataState: state.dataState,
+  language: state.languageState,
 });
 
-
-export default connect(
-    mapStateToProps,
-)(withRouter(RegisterPhone))
+export default connect(mapStateToProps)(withRouter(RegisterPhone))

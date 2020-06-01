@@ -8,6 +8,7 @@ class WSClient{
     this.retry = this.params.retry || 1;
 
     this.handler = this.params.handler || null;
+    this.context = null;
 
     this.ws = null;
     this.url = url;
@@ -62,7 +63,7 @@ class WSClient{
       clearTimeout(this.id);
 
       try {
-        this.handler && this.handler(data);
+        this.handler && this.handler(data, this.context);
       }catch (e) {}
 
       this.next();
@@ -91,6 +92,8 @@ class WSClient{
 
     this.blocked = true;
     this.callback = callback || null;
+
+    this.context = (params && params.context) ? params.context : null;
 
     this.ws.send(JSON.stringify(data));
     console.log(`Send to ${this.name}`, this.getTime(), data);

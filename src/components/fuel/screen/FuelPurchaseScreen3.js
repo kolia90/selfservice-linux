@@ -8,6 +8,7 @@ import MPosService from "../../../services/MPosService";
 import "./FuelPurchaseScreen3.scss";
 import constants from '../constants'
 import APIService from "../../../services/APIService";
+import MultiLang from "../../../MultiLang";
 
 const config = require('../../../settings/config');
 
@@ -122,15 +123,31 @@ class FuelPurchaseScreen3 extends React.Component {
   render() {
     return (
         <div className="wrapper-screen-3">
-          <H2 text="Выберите параметр топливо/сумма и потяните ползунок до необходимых значений" />
+          <H2 text={
+            <MultiLang>
+              {{
+                uk: "Виберіть параметр топливо/сума і потягніть повзунок до необхідних значень",
+                ru: "Выберите параметр топливо/сумма и потяните ползунок до необходимых значений",
+                en: "Select the fuel/amount option and drag the slider to the desired values"
+              }}
+            </MultiLang>
+          } />
 
           <div className="wrapper-img">
             <div className="img">
               <img className="fuel-logo" src={this.state.logo} alt="" />
               <ConfirmAlert
                   onConfirm={this.submitFull}
-                  message={'Заправить до полного бака?'}
-                  btnYes={'Наливай'}
+                  message={{
+                    uk: "Заправити повний бак?",
+                    ru: "Заправить до полного бака?",
+                    en: "Fill a full tank?"
+                  }}
+                  btnYes={{
+                    uk: "Наливай",
+                    ru: "Наливай",
+                    en: "Yes"
+                  }}
                   wrapperClassName={'big'}
                   className={'full-tank'}>
                 <div>
@@ -138,11 +155,25 @@ class FuelPurchaseScreen3 extends React.Component {
                       src={require("../../../images/fuel-purchase/group-6.svg")}
                       alt=""
                   />
-                  Заправить полный бак
+                  <MultiLang>
+                    {{
+                      uk: "Заправити повний бак",
+                      ru: "Заправить полный бак",
+                      en: "Fill a full tank"
+                    }}
+                  </MultiLang>
                 </div>
               </ConfirmAlert>
             </div>
-            <H2 text={`Цена: ${this.price} грн/л`} />
+            <H2 text={
+              <MultiLang>
+                {{
+                  uk: `Ціна: ${this.price} грн/л`,
+                  ru: `Цена: ${this.price} грн/л`,
+                  en: `Price: ${this.price} uah/l`
+                }}
+              </MultiLang>
+            } />
           </div>
 
           <div className="wrapper-description">
@@ -152,7 +183,15 @@ class FuelPurchaseScreen3 extends React.Component {
                   this.setActiveTab(1);
                 }}
             >
-              <H2 text="Количество топлива" />
+              <H2 text={
+                <MultiLang>
+                  {{
+                    uk: "Кількість пального",
+                    ru: "Количество топлива",
+                    en: "Fuel volume"
+                  }}
+                </MultiLang>
+              } />
               <div className="float-r">{this.state.volume} л</div>
             </div>
             <div
@@ -161,7 +200,15 @@ class FuelPurchaseScreen3 extends React.Component {
                   this.setActiveTab(2);
                 }}
             >
-              <H2 text="Сумма" />
+              <H2 text={
+                <MultiLang>
+                  {{
+                    uk: "Сума",
+                    ru: "Сумма",
+                    en: "Amount"
+                  }}
+                </MultiLang>
+              } />
               <div className="float-r">{this.state.sum} грн</div>
             </div>
           </div>
@@ -242,7 +289,15 @@ class FuelPurchaseScreen3 extends React.Component {
 
           <div className="wrapper-button">
             <Button
-                title="Оплатить и заправить"
+                title={
+                  <MultiLang>
+                    {{
+                      uk: "Оплатити і заправити",
+                      ru: "Оплатить и заправить",
+                      en: "Pay and refuel"
+                    }}
+                  </MultiLang>
+                }
                 onClick={this.submitVariable}
             />
           </div>
@@ -251,4 +306,7 @@ class FuelPurchaseScreen3 extends React.Component {
   }
 }
 
-export default connect()(withRouter(FuelPurchaseScreen3));
+const mapStateToProps = state => ({
+  language: state.languageState,
+});
+export default connect(mapStateToProps)(withRouter(FuelPurchaseScreen3));

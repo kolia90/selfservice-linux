@@ -1,32 +1,43 @@
 import axios from "axios";
 import Toast from "../components/shared/toast/Toast";
 import {setLoading} from "../store/actions";
+import translation from "./translation";
 
 const config = require('../settings/config');
 
 class APIService {
 
-  static self_client = () => {
+  static self_client = (params) => {
+    let headers = {
+      'Authorization': `Self ${config.apiKey}`
+    };
+    if(params.language) headers['Accept-Language'] = params.language;
+
     return axios.create({
       baseURL: config.apiUrl,
-      headers: {
-        'Authorization': `Self ${config.apiKey}`
-      }
+      headers: headers
     });
   };
 
-  static client = () => {
+  static client = (params) => {
+    let headers = null;
+    if(params.language) headers['Accept-Language'] = params.language;
+
     return axios.create({
-      baseURL: config.apiUrl
+      baseURL: config.apiUrl,
+      headers: headers
     });
   };
 
-  static user_client = (auth_token) => {
+  static user_client = (auth_token, params) => {
+    let headers = {
+      'Authorization': `Token ${auth_token}`
+    };
+    if(params.language) headers['Accept-Language'] = params.language;
+
     return axios.create({
       baseURL: config.apiUrl,
-      headers: {
-        'Authorization': `Token ${auth_token}`
-      }
+      headers: headers
     });
   };
 
@@ -63,19 +74,23 @@ class APIService {
       }
       config && config.onError && config.onError(e);
       !(config && config.notifyDisabled) && Toast((config && config.onErrorMessage) || (
-          (e.response && this.getErrorMessage(e.response.data)) || 'Сталася помилка :('
+          (e.response && this.getErrorMessage(e.response.data)) || translation({
+            uk: 'Сталася помилка :(',
+            ru: 'Произошла ошибка :(',
+            en: 'An error has occurred :('
+          }, config.context ? config.context.language : null)
       ));
     });
   }
 
   static registerPhone(phone, ...args){
-    return this.process(this.client().post('/account/register', {
+    return this.process(this.client(...args).post('/account/register', {
       phone: phone
     }), ...args)
   }
 
   static registerConfirm(phone, code, ...args){
-    return this.process(this.client().post('/account/activate', {
+    return this.process(this.client(...args).post('/account/activate', {
       phone: phone,
       code: code,
     }), ...args)
@@ -85,46 +100,46 @@ class APIService {
 
   static registerProfile(params, auth_token, ...args){
     return this.process(
-        this.user_client(auth_token).patch('/account/profile',  params), ...args)
+        this.user_client(auth_token, ...args).patch('/account/profile',  params), ...args)
   }
 
   static getLevel(auth_token, ...args){
-    return this.process(this.user_client(auth_token).get('/bonus/balance'), ...args)
+    return this.process(this.user_client(auth_token, ...args).get('/bonus/balance'), ...args)
   }
 
   static getCards(auth_token, ...args){
-    return this.process(this.user_client(auth_token).get('/wayforpay/wallet/cards'), ...args)
+    return this.process(this.user_client(auth_token, ...args).get('/wayforpay/wallet/cards'), ...args)
   }
 
   static checkoutOrder(params, auth_token, ...args){
-    return this.process(this.user_client(auth_token).post('/wayforpay/payments/checkout', params), ...args)
+    return this.process(this.user_client(auth_token, ...args).post('/wayforpay/payments/checkout', params), ...args)
   }
 
   /* SELF-Service methods */
 
   static getSlides(...args){
-    return this.process(this.self_client().get('/selfservice/slider'), ...args)
+    return this.process(this.self_client(...args).get('/selfservice/slider'), ...args)
   }
 
   static findByLevel(number, ...args){
-    return this.process(this.self_client().post('/selfservice/level/find', {
+    return this.process(this.self_client(...args).post('/selfservice/level/find', {
       number: number
     }), ...args)
   }
 
   static setFuelOrder(params, ...args){
-    return this.process(this.self_client().post('/selfservice/fuel/order', params), ...args)
+    return this.process(this.self_client(...args).post('/selfservice/fuel/order', params), ...args)
   }
 
   static confirmOrder(order_id, paid_by, ...args){
-    return this.process(this.self_client().post('/selfservice/orders/confirm', {
+    return this.process(this.self_client(...args).post('/selfservice/orders/confirm', {
       order: order_id,
       paid_by: paid_by
     }), ...args)
   }
 
   static getFuelByShort(short_name, ...args){
-    return this.process(this.self_client().post('/selfservice/fuel/info', {short_name}), ...args)
+    return this.process(this.self_client(...args).post('/selfservice/fuel/info', {short_name}), ...args)
   }
 
 }

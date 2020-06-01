@@ -2,6 +2,7 @@ import React from "react";
 import H2 from "../shared/h2/H2";
 import H1 from "../shared/h1/H1";
 import "./FuelPurchaseModal.scss";
+import MultiLang from "../../MultiLang";
 
 const FuelPurchaseModal = ({order, spilled, terminalStatus}) => {
   const dots = 16;
@@ -15,7 +16,13 @@ const FuelPurchaseModal = ({order, spilled, terminalStatus}) => {
       <img src={require("../../images/fuel-purchase/ad-2.png")} alt="ad" />
       <div className="wrapper-content">
         <img src={require("../../images/fuel-purchase/group-13.svg")} alt="" />
-        <H1 text="Идёт заправка топливом" />
+        <H1 text={<MultiLang>
+          {{
+            uk: "Йде заправка пальним",
+            ru: "Идёт заправка топливом",
+            en: "Refueling process"
+          }}
+        </MultiLang>} />
         <div className="wrapper-scale">
           <div className="wrapper-sum">
             <div className="sum float-l">{order.amount} грн</div>
@@ -33,7 +40,13 @@ const FuelPurchaseModal = ({order, spilled, terminalStatus}) => {
           <div className="volume total">{volume} л</div>
         </div>
         <div className="line" />
-        <H2 text="Дождитесь окончания процесса и не покидайте место заправки." />
+        <H2 text={<MultiLang>
+          {{
+            uk: "Дочекайтеся завершення процесу і не покидайте місце заправки",
+            ru: "Дождитесь окончания процесса и не покидайте место заправки.",
+            en: "Wait for the process to complete and do not leave the refueling point"
+          }}
+        </MultiLang>} />
       </div>
     </div>
   );

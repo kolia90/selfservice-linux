@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import RegisterStep from "./RegisterStep";
 import {setLevelNumber, setUserData} from "../../store/actions";
 import APIService from "../../services/APIService";
+import translation from "../../services/translation";
 
 
 class RegisterCode extends Component {
@@ -23,7 +24,13 @@ class RegisterCode extends Component {
 
   validator = (value) => {
     if (value.length < 6){
-      throw Error('Код должен состоять из 6 символов')
+      throw Error(
+          translation({
+            uk: "Код повинен складатися з 6 символів",
+            ru: "Код должен состоять из 6 символов",
+            en: "The code need contain 6 symbols"
+          }, this.props.language)
+      )
     }
     return value
   };
@@ -53,9 +60,27 @@ class RegisterCode extends Component {
         onSubmit={this.onSubmit}
         onSkip={this.onSkip}
         validator={this.validator}
-        title={'Регистрация'}
-        label={'Введите пароль из SMS'}
-        messageEmpty={'Вы не ввели пароль'}
+        title={
+          translation({
+            uk: "Реєстрація",
+            ru: "Регистрация",
+            en: "Registration"
+          }, this.props.language)
+        }
+        label={
+          translation({
+            uk: "Введіть пароль з SMS",
+            ru: "Введите пароль из SMS",
+            en: "Enter the password from SMS"
+          }, this.props.language)
+        }
+        messageEmpty={
+          translation({
+            uk: "Ви не ввели код",
+            ru: "Вы не ввели код",
+            en: "You don`t enter the code"
+          }, this.props.language)
+        }
         mask="9 9 9 9 9 9"
         clearNumber={true}
         maskChar="-"
@@ -66,5 +91,8 @@ class RegisterCode extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  language: state.languageState,
+});
 
-export default connect()(withRouter(RegisterCode))
+export default connect(mapStateToProps)(withRouter(RegisterCode))

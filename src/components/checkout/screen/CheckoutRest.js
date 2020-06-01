@@ -4,12 +4,19 @@ import H1 from "../../shared/h1/H1";
 import "./CheckoutRest.scss";
 import Rectangle from "../../shared/rectangle/Rectangle";
 import constants from "../constants";
+import MultiLang from "../../../MultiLang";
 
 const CheckoutRest = ({ onSelectRest }) => {
 
   return (
       <div className="wrapper-screen-6">
-        <H1 text="Как желаете получить сдачу?" />
+        <H1 text={<MultiLang>
+          {{
+            uk: "Як бажаєте отримати здачу?",
+            ru: "Как желаете получить сдачу?",
+            en: "How do you want to get rest?"
+          }}
+        </MultiLang>} />
         <div>
           <div
               className="d-inline"
@@ -25,7 +32,15 @@ const CheckoutRest = ({ onSelectRest }) => {
                     alt="card"
                 />
               </div>
-              <h3>На карту level</h3>
+              <h3>
+                <MultiLang>
+                  {{
+                    uk: "На карту level",
+                    ru: "На карту level",
+                    en: "On level card"
+                  }}
+                </MultiLang>
+              </h3>
             </Rectangle>
           </div>
           <div
@@ -42,7 +57,15 @@ const CheckoutRest = ({ onSelectRest }) => {
                     alt="card"
                 />
               </div>
-              <h3>Кассовый ваучер</h3>
+              <h3>
+                <MultiLang>
+                  {{
+                    uk: "Касовий ваучер",
+                    ru: "Кассовый ваучер",
+                    en: "Cash voucher "
+                  }}
+                </MultiLang>
+              </h3>
             </Rectangle>
           </div>
         </div>

@@ -11,6 +11,7 @@ import MPosService from "../../services/MPosService";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import Toast from "../shared/toast/Toast";
+import MultiLang from "../../MultiLang";
 
 class Checkout extends React.Component {
 
@@ -50,7 +51,15 @@ class Checkout extends React.Component {
         onSuccess: (data) => {
           this.complete()
         }, onTimeout: () => {
-          Toast("Сервер не отвечает")
+          Toast(
+              <MultiLang>
+                {{
+                  uk: "Сервер не відповідає",
+                  ru: "Сервер не отвечает",
+                  en: "Server timeout"
+                }}
+              </MultiLang>
+          )
         }
       });
     }
@@ -113,7 +122,13 @@ class Checkout extends React.Component {
     return (
       <>
       {this.state.currentStep === constants.steps.PAY_TYPE && (
-          <CheckoutStep title="Форма оплаты">
+          <CheckoutStep title={<MultiLang>
+            {{
+              uk: "Форма оплати",
+              ru: "Форма оплаты",
+              en: "Type of payment"
+            }}
+          </MultiLang>}>
             <CheckoutPayType onSelectType={this.handlePayType} />
           </CheckoutStep>
       )}
@@ -135,7 +150,13 @@ class Checkout extends React.Component {
           </CheckoutStep>
       )}
       {this.state.currentStep === constants.steps.CASH && (
-          <CheckoutStep title="Внесение наличных" navPrev={() => {this.setCurrentStep(constants.steps.REST_TYPE)}}>
+          <CheckoutStep title={<MultiLang>
+            {{
+              uk: "Внесення готівки",
+              ru: "Внесение наличных",
+              en: "Adding cash"
+            }}
+          </MultiLang>} navPrev={() => {this.setCurrentStep(constants.steps.REST_TYPE)}}>
             <CheckoutCash onFinish={this.handleFinishCash} amount={this.props.amount} />
           </CheckoutStep>
       )}
