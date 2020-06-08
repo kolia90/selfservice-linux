@@ -21,5 +21,6 @@
   "PAYMENT_CHECK_CATALOG": "/payment-check-catalog",
   "PAYMENT_CASH": "/payment-cash",
   "CASH_PROCESS": "/cash-process",
-  "CHECKOUT": "/checkout"
+  "CHECKOUT": "/checkout",
+  "SYSTEM_MENU": "/system-menu"
 }

@@ -9,6 +9,7 @@ import APIService from "../../services/APIService";
 import {connect} from "react-redux";
 import {setLevelNumber} from "../../store/actions";
 import MultiLang from "../../MultiLang";
+import Zreport from "../zreport/Zreport";
 
 
 class Home extends Component {
@@ -53,11 +54,13 @@ class Home extends Component {
               {{
                 uk: "Торкніться щоб активувати",
                 ru: "Коснитесь чтобы активировать",
-                en: "Touch for activation"
+                en: "Touch for activate"
               }}
             </MultiLang>
           </Link>
         </div>
+
+        <Zreport/>
       </div>
     );
   }

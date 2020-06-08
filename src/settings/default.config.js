@@ -10,6 +10,8 @@ module.exports = {
 
   fullTankVolume: 65,
 
+  systemPassword: 'socar',
+
   // TODO: потрібно буде використати для нотифікацій про оплату
   wsUrl: 'ws://socar.themakeapp.com:8002',
   wsAPIKey: '29b9f4af-844c-4525-b8ae-ce125f13c3bd',

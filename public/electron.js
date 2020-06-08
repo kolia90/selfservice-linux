@@ -66,8 +66,8 @@ function sendStatusToWindow(text) {
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 600,
+    width: 1200,
+    height: 700,
     // show: false,
     // minimizable: false,
     // closable: false,

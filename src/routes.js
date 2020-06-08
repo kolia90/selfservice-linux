@@ -25,6 +25,7 @@ import PaymentCheckCatalogPage from "./containers/PaymentCheckCatalogPage";
 import PaymentCashPage from "./containers/PaymentCashPage";
 import CashProcessPage from "./containers/CashProcessPage";
 import CheckoutPage from "./containers/CheckoutPage";
+import SystemMenuPage from "./containers/SystemMenuPage";
 import Loader from "./components/shared/loader/Loader";
 
 export default () => (
@@ -53,6 +54,7 @@ export default () => (
       <Route path={routes.PAYMENT_CHECK_CATALOG} component={PaymentCheckCatalogPage} />
       <Route path={routes.CASH_PROCESS} component={CashProcessPage} />
       <Route path={routes.CHECKOUT} component={CheckoutPage} />
+      <Route path={routes.SYSTEM_MENU} component={SystemMenuPage} />
     </Switch>
     <Loader />
   </HashRouter>

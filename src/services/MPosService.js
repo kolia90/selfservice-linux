@@ -64,6 +64,11 @@ export class MPosService {
     CHECK_PRINT_QUEUE: 1,
     CHECK_IN_PROCESS: 2,
     CHECK_COMPLETED: 3,
+
+    PROC_CONTINUE: 1,
+    PROC_Z_REPORT: 2,
+    PROC_CLOSE: 3,
+    PROC_OPEN_NEW: 4,
   };
 
   static default(params){
