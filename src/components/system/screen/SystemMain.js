@@ -6,6 +6,7 @@ import MultiLang from "../../../MultiLang";
 import './SystemMain.scss'
 import MPosService from "../../../services/MPosService";
 import Toast from "../../shared/toast/Toast";
+import ConfirmAlert from "../../shared/confirm-alert/ConfirmAlert";
 
 
 class SystemMain extends React.Component{
@@ -34,15 +35,17 @@ class SystemMain extends React.Component{
     return (
         <div className="container">
           <div className="wrapper-main">
-            <Button title={
-              <MultiLang>
-                {{
-                  uk: "Z-звіт",
-                  ru: "Z-отчет",
-                  en: "Z-report"
-                }}
-              </MultiLang>
-            } onClick={this.handleZReport} />
+            <ConfirmAlert onConfirm={this.handleZReport}>
+              <Button title={
+                <MultiLang>
+                  {{
+                    uk: "Z-звіт",
+                    ru: "Z-отчет",
+                    en: "Z-report"
+                  }}
+                </MultiLang>
+              } />
+            </ConfirmAlert>
           </div>
         </div>
     );

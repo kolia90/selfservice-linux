@@ -148,9 +148,8 @@ class FuelPurchaseScreen3 extends React.Component {
                     ru: "Наливай",
                     en: "Yes"
                   }}
-                  wrapperClassName={'big'}
-                  className={'full-tank'}>
-                <div>
+                  className={'full-tank'}
+              >
                   <img
                       src={require("../../../images/fuel-purchase/group-6.svg")}
                       alt=""
@@ -162,7 +161,6 @@ class FuelPurchaseScreen3 extends React.Component {
                       en: "Fill a full tank"
                     }}
                   </MultiLang>
-                </div>
               </ConfirmAlert>
             </div>
             <H2 text={

@@ -7,7 +7,6 @@ import Button from "../../shared/button/Button";
 import MultiLang from "../../../MultiLang";
 import './SystemPassword.scss'
 import Toast from "../../shared/toast/Toast";
-import {setDataValue} from "../../../store/actions";
 const config = require('../../../settings/config');
 
 
