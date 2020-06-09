@@ -13,6 +13,8 @@ import Timer from "../shared/timer/Timer";
 const Service = ({ history }) => {
 
   MPosService.checkConnect({
+    loading: false,
+    timeout: 3,
     onError: () => {
       Toast(
           <MultiLang>

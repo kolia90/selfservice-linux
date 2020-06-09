@@ -2,12 +2,12 @@ import Toast from "../components/shared/toast/Toast";
 import WSClient from "./WSClient";
 import {setLoading} from "../store/actions";
 import translation from "./translation";
-
+import BaseWsService from "./BaseWsService";
 const constants = require('./constants');
 const config = require('../settings/config');
 
 
-export class MPosService {
+export class MPosService extends BaseWsService{
   static _client = null;
 
   handlerMessage = (message, context) => {
@@ -77,10 +77,10 @@ export class MPosService {
   }
 
   constructor(params){
+    super(params);
     params = params || {};
     this.operatorId = params.operatorId || '1001';
     this.lang = this.LANG_MAP[params.lang] || this.LANG_MAP.ru;
-    this.clientParams = params.clientParams;
   }
 
   configure(operatorId, lang){
@@ -97,7 +97,7 @@ export class MPosService {
   }
 
   setLoading(params, value){
-    if(!params || params.loading === false || params.loading === null) return;
+    if(!params || params.loading === false) return;
     try{
       params.context && params.context.dispatch(setLoading(value))
     }catch (e) {}
@@ -116,22 +116,10 @@ export class MPosService {
               uk: 'Сталася помилка :(',
               ru: 'Произошла ошибка :(',
               en: 'An error has occurred :('
-            }, config.context ? config.context.language : null)
+            }, params.context ? params.context.language : null)
         ));
       }
     }
-  };
-
-  getTimeout = (params) => {
-    return () => {
-      this.setLoading(params, false);
-      params && params.onTimeout && params.onTimeout();
-    }
-  };
-
-  send = (data, params) => {
-    this.setLoading(params, true);
-    this.getClient().send(data, this.getHandler(params), this.getTimeout(params), params);
   };
 
   /* MPOS methods */

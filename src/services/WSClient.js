@@ -75,23 +75,27 @@ class WSClient{
     this.ws.close();
   }
 
-  addToQueue(data, callback, timeout_callback, params){
+  isOpen() {
+    return this.ws.readyState === WebSocket.OPEN
+  }
+
+  addToQueue(data, onSuccess, onTimeout, options){
     this.queue.push({
       data: data,
-      callback: callback,
-      timeout_callback: timeout_callback,
-      params: params
+      onSuccess: onSuccess,
+      onTimeout: onTimeout,
+      options: options
     });
   }
 
-  run(data, callback, timeout_callback, params){
+  run(data, onSuccess, onTimeout, params){
     if(this.ws.readyState !== WebSocket.OPEN){
-      this.addToQueue(data, callback, timeout_callback, params);
+      this.addToQueue(data, onSuccess, onTimeout, params);
       return;
     }
 
     this.blocked = true;
-    this.callback = callback || null;
+    this.callback = onSuccess || null;
 
     this.context = (params && params.context) ? params.context : null;
 
@@ -104,7 +108,7 @@ class WSClient{
       try {
         console.log(`Request ${this.name} timeout`);
         this.reconnect();
-        timeout_callback && timeout_callback();
+        onTimeout && onTimeout();
       }catch (e) {}
       this.blocked = false;
       this.next()
@@ -113,19 +117,38 @@ class WSClient{
 
   next(){
     const item = this.queue.shift();
-    item && this.run(item.data, item.callback, item.timeout_callback, item.params)
+    item && this.run(item.data, item.onSuccess, item.onTimeout, item.options)
   }
 
-  process (data, callback, timeout_callback, params) {
-    if (!this.blocked && this.ready && this.ws.readyState === WebSocket.OPEN) {
-      this.run(data, callback, timeout_callback, params);
+  process(data, params) {
+    const onSuccess = params['onSuccess'] || null;
+    const onTimeout = params['onTimeout'] || null;
+    const options = params['options'] || null;
+
+    if (!this.blocked && this.ready) {
+      this.run(data, onSuccess, onTimeout, options);
     } else {
-      this.addToQueue(data, callback, timeout_callback, params);
+      this.addToQueue(data, onSuccess, onTimeout, options);
     }
   }
 
-  send(data, callback, timeout, params){
-    this.process(data, callback, timeout, params);
+  checkAndProcess(data, params) {
+    if(this.isOpen()){
+      this.process(data, params)
+    }else {
+      const onError = params['onError'] || null;
+      setTimeout(() => {
+        if(this.isOpen()){
+          this.process(data, params)
+        }else{
+          onError && onError()
+        }
+      }, params.connectTimeout || 1000)
+    }
+  }
+
+  send(data, params){
+    this.checkAndProcess(data, params);
   }
 }
 

@@ -13,7 +13,7 @@ class SystemMain extends React.Component{
 
   handleZReport = () => {
     MPosService.shiftProc(MPosService.CONST.PROC_Z_REPORT, {
-      timeout: 5,
+      timeout: 60,
       loading: true,
       context: this.props,
       onTimeout: () => {
