@@ -54,7 +54,7 @@ class Logo extends Component {
           alt="Socar"
           onClick={this.handleClick}
         />
-        <div className="version">v0.2.2</div>
+        <div className="version">v0.2.3</div>
       </div>
     );
   }
