@@ -42,9 +42,9 @@ export class BaseWsService {
       }else{
         if(!(params && params.notifyNoConnectDisabled)){
           Toast(translation({
-            uk: 'Немає зв\'язку',
-            ru: 'Нет связи с кассой',
-            en: 'No connection with MPOS'
+            uk: "Немає зв'язку",
+            ru: "Нет связи с кассой",
+            en: "No connection with MPOS"
           }, params.context ? params.context.language : null))
         }
       }
@@ -55,10 +55,10 @@ export class BaseWsService {
     this.setLoading(params, true);
     this.getClient().send(
         data, {
-          'onSuccess': this.getHandler(params),
-          'onTimeout': this.getTimeout(params),
-          'onError': this.getNotConnection(params),
-          'options': params,
+          onSuccess: this.getHandler(params),
+          onTimeout: this.getTimeout(params),
+          onError: this.getNotConnection(params),
+          options: params,
         }
     );
   };
