@@ -11,6 +11,8 @@ module.exports = {
   fullTankVolume: 65,
 
   systemPassword: 'socar',
+  zReportStart: '23:00:00',
+  zReportEnd: null,
 
   // TODO: потрібно буде використати для нотифікацій про оплату
   wsUrl: 'ws://socar.themakeapp.com:8002',

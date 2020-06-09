@@ -8,6 +8,8 @@ import MPosService from "../../services/MPosService";
 import "./Zreport.scss";
 import MultiLang from "../../MultiLang";
 import Header from "../shared/header/Header";
+const config = require('../../settings/config');
+
 
 class Zreport extends Component {
 
@@ -15,8 +17,8 @@ class Zreport extends Component {
     STORAGE_KEY: 'z-report',
     DATE_FORMAT: 'dd.MM.yyyy',
     REGEX: /(\d{1,2})\:(\d{1,2})\:(\d{1,2})/,
-    START_TIME: '23:50:00',
-    END_TIME: null,
+    START_TIME: config.zReportStart,
+    END_TIME: config.zReportEnd,
   };
 
   constructor(props){
