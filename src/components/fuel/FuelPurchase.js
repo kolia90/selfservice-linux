@@ -104,10 +104,12 @@ class FuelPurchase extends Component {
           this.stopTerminalStatus()
         }
         if (result.is_ended){
-            this.setSpilled({status: 'success', ...result});
-            this.setScreen(4);
-            this.setFinished(true);
-            this.setShowModal(false);
+          this.setState({
+            spilled: {status: 'success', ...result},
+            screen: 4,
+            finished: true,
+            showModal: false
+          });
         }else{
           this.setSpilled(result);
           this.timerStatus = setTimeout(() => {

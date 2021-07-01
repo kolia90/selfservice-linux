@@ -1,7 +1,7 @@
 {
   "name": "socar-selfservice",
   "description": "Socar selfservice application",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",
